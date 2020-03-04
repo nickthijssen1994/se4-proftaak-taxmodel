@@ -12,7 +12,7 @@ namespace proftaakTests
         [Test]
         public void Test1()
         {
-            Assert.Pass();
+            Assert.AreEqual("Hello", "Hello");
         }
     }
 }
