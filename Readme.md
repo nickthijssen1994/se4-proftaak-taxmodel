@@ -10,7 +10,13 @@ When the feature is complete, merge the branch with develop.
 Then merge the develop branch with the testing branch.
 When all tests pass, request a merge with the master branch.
 
+[More Info On Git Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+
 # Code Guidelines
+
+## C#
+
+## Angular
 
 # Frontend
 
