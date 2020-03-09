@@ -11,9 +11,9 @@ Just as with the source code, commit names and descriptions should be in English
 
 Give commits detailed names and descriptions that explain what changed, was added or removed.
 
-Good example: `Fixed login form not showing error message when invalid email-adress is entered.`
-Bad example: `Login form fix.`
-Very bad example: `lolXD`
+- Good example: `Fixed login form not showing error message when invalid email-adress is entered.`
+- Bad example: `Login form fix.`
+- Very bad example: `lolXD`
 
 ## Branching
 
@@ -31,16 +31,33 @@ When all tests pass, request a merge with the master branch.
 - All code and comments are writen in English, no exceptions.
 - When naming directories and/or other files, don't use spaces. Use `-` or `_`. Using spaces can cause issues with CI/CD systems.
 - Don't use abbreviations and give classes, methods and variables names that immediatly make clear what they are or do.
+- Images and other assets should be in lowercase and use `-` or `_` between words instead of spaces.
+- When multiple files exists from the same image, but in different resolutions, add `-small` or `-medium`.
+- When working with logos, especially when they are square, add the resolution to it's name, for example `main-logo-512`.
 
 ## C#
 
-[C# Code Conventions](https://github.com/ktaranov/naming-convention/blob/master/C%23%20Coding%20Standards%20and%20Naming%20Conventions.md)
+See [C# Code Conventions](https://github.com/ktaranov/naming-convention/blob/master/C%23%20Coding%20Standards%20and%20Naming%20Conventions.md) for class, variable and method naming conventions.
 
-- See above link for class, variable and method naming conventions.
+## Angular, HTML, CSS and TypeScript
 
-## Angular
+### Material Design
 
-# Frontend
+All attributes should use Angular Material for their design.
+
+More Info: [Angular Material](https://material.angular.io/components/categories).
+
+### Localization
+
+The Angular i18n attribute marks translatable content. Place it on every element tag whose fixed text is to be translated.
+
+Example: `<h1 i18n>Hello i18n!</h1>`
+
+More Info: [Angular Internationalization](https://angular.io/guide/i18n).
+
+# Backend Configurtion
+
+# Frontend Configuration
 
 The frontend Angular code can be found in de ClientApp directory.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
@@ -64,17 +81,3 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Material Design
-
-All attributes should use Angular Material for their design.
-
-More Info: [Angular Material](https://material.angular.io/components/categories).
-
-## Localization
-
-The Angular i18n attribute marks translatable content. Place it on every element tag whose fixed text is to be translated.
-
-Example: `<h1 i18n>Hello i18n!</h1>`
-
-More Info: [Angular Internationalization](https://angular.io/guide/i18n).
