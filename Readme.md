@@ -1,6 +1,17 @@
 # Proftaak SE4 TaxModel
 Angular Frontend and .NET Core Backend Project for Software Semester 4 2020.
 
+# Git Guidelines
+
+When starting working on a feature, create a feature branch based on the develop branch.
+Name the new feature branch according to what the feature is, for example `feature-login`.
+The branch should be named as in the example, so lowercase and `-` between seperate words.
+When the feature is complete, merge the branch with develop.
+Then merge the develop branch with the testing branch.
+When all tests pass, request a merge with the master branch.
+
+# Code Guidelines
+
 # Frontend
 
 The frontend Angular code can be found in de ClientApp directory.
