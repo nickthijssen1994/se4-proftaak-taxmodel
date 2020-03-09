@@ -3,6 +3,20 @@ Angular Frontend and .NET Core Backend Project for Software Semester 4 2020.
 
 # Git Guidelines
 
+## Commits
+
+In general, commit often and keep changes small. Don't change to many files and/or lines at the same time. This will prevent merge conflicts and other issues.
+
+Just as with the source code, commit names and descriptions should be in English.
+
+Give commits detailed names and descriptions that explain what changed, was added or removed.
+
+Good example: `Fixed login form not showing error message when invalid email-adress is entered.`
+Bad example: `Login form fix.`
+Very bad example: `lolXD`
+
+## Branching
+
 When starting working on a feature, create a feature branch based on the develop branch.
 Name the new feature branch according to what the feature is, for example `feature-login`.
 The branch should be named as in the example, so lowercase and `-` between seperate words.
@@ -14,7 +28,15 @@ When all tests pass, request a merge with the master branch.
 
 # Code Guidelines
 
+- All code and comments are writen in English, no exceptions.
+- When naming directories and/or other files, don't use spaces. Use `-` or `_`. Using spaces can cause issues with CI/CD systems.
+- Don't use abbreviations and give classes, methods and variables names that immediatly make clear what they are or do.
+
 ## C#
+
+[C# Code Conventions](https://github.com/ktaranov/naming-convention/blob/master/C%23%20Coding%20Standards%20and%20Naming%20Conventions.md)
+
+- See above link for class, variable and method naming conventions.
 
 ## Angular
 
