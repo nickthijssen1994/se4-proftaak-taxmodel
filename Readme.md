@@ -35,6 +35,16 @@ When all tests pass, request a merge with the master branch.
 - When multiple files exists from the same image, but in different resolutions, add `-small` or `-medium`.
 - When working with logos, especially when they are square, add the resolution to it's name, for example `main-logo-512`.
 
+# Docker
+
+## Angular Dockerfile
+`docker build -t frontend-proftaak-image .`
+`docker run --name frontend-proftaak-container -d -p 8888:80 frontend-proftaak-image`
+
+## .NET Core Dockerfile
+`docker build -t backend-proftaak-image .`
+`docker run -it --rm -p 5000:80 --name backend-proftaak-container backend-proftaak-image`
+
 ## C#
 
 See [C# Code Conventions](https://github.com/ktaranov/naming-convention/blob/master/C%23%20Coding%20Standards%20and%20Naming%20Conventions.md) for class, variable and method naming conventions.
@@ -59,7 +69,6 @@ More Info: [Angular Internationalization](https://angular.io/guide/i18n).
 
 # Frontend Configuration
 
-The frontend Angular code can be found in de ClientApp directory.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
 
 ## Development server
