@@ -4,15 +4,17 @@ const resource = "/afspraken"
 
 export default {
   // post(token) {
-  //   let config = {
-  //     headers: {Authorization: `Bearer ${token}`}
-  //   };
-  //   return Repository.post(`${resource}`, config);
+  //   return Repository.post(`${resource}`, {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`
+  //     }
+  //   });
   // }
   getById(id, token) {
-    let config = {
-      headers: {Authorization: `Bearer ${token}`}
-    };
-    return Repository.get(`${resource}/{id}`, config);
+    return Repository.get(`${resource}/{id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
   }
 }
