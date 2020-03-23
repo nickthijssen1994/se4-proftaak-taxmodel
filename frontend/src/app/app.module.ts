@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AccountComponent } from './account/account.component';
+// import { AccountComponent } from './account/account.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AccountComponent
+    AppComponent
+    // AccountComponent
   ],
   imports: [
     BrowserModule,

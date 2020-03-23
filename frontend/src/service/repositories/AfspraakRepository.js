@@ -1,6 +1,6 @@
-import Repository from "@/service/Repository";
+import Repository from "../Repository";
 
-const resource = "/afspraken"
+const resource = "/afspraken";
 
 export default {
   // post(token) {
