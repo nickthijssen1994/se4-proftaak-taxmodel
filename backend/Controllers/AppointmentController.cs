@@ -22,7 +22,7 @@ namespace backend.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Appointment>> GetAppointments()
         {
-            return _repo.Get().ToList();
+            return _repo.Get(null, null, a => a.Organiser).ToList();
 
         }
 

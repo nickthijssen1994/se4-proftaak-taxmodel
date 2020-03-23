@@ -9,5 +9,7 @@ namespace backend.Models
     {
         public long Id { get; set; }
         public string Name { get; set; }
+        //public ICollection<Appointment> Appointments { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }
