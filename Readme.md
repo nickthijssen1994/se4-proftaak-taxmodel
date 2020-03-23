@@ -1,38 +1,70 @@
 # Proftaak SE4 TaxModel
 Angular Frontend and .NET Core Backend Project for Software Semester 4 2020.
 
-# Frontend
+# Git Guidelines
 
-The frontend Angular code can be found in de ClientApp directory.
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
+## Commits
 
-## Development server
+In general, commit often and keep changes small. Don't change to many files and/or lines at the same time. This will prevent merge conflicts and other issues.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Just as with the source code, commit names and descriptions should be in English.
 
-## Code scaffolding
+Give commits detailed names and descriptions that explain what changed, was added or removed.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Good example: `Fixed login form not showing error message when invalid email-adress is entered.`
+- Bad example: `Login form fix.`
+- Very bad example: `lolXD`
 
-## Build
+## Branching
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+When starting working on a feature, create a feature branch based on the develop branch.
+Name the new feature branch according to what the feature is, for example `feature-login`.
+The branch should be named as in the example, so lowercase and `-` between seperate words.
+When the feature is complete, merge the branch with develop.
+When all tests pass, request a merge with the master branch.
 
-## Running unit tests
+[More Info On Git Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Code Guidelines
 
-## Running end-to-end tests
+- All code and comments are writen in English, no exceptions.
+- When naming directories and/or other files, don't use spaces. Use `-` or `_`. Using spaces can cause issues with CI/CD systems.
+- Don't use abbreviations and give classes, methods and variables names that immediatly make clear what they are or do.
+- Images and other assets should be in lowercase and use `-` or `_` between words instead of spaces.
+- When multiple files exists from the same image, but in different resolutions, add `-small` or `-medium`.
+- When working with logos, especially when they are square, add the resolution to it's name, for example `main-logo-512`.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+# Docker
 
-## Material Design
+Do not change the Dockerfiles, they are used by the CI/CD server.
+
+## Angular Dockerfile
+
+Build Image
+`docker build -t frontend-proftaak-image .`
+Run Image
+`docker run --name frontend-proftaak-container -d -p 8888:80 frontend-proftaak-image`
+
+## .NET Core Dockerfile
+
+Build Image
+`docker build -t backend-proftaak-image .`
+Run Image
+`docker run --name backend-proftaak-container -d -p 5000:80 backend-proftaak-image`
+
+## C#
+
+See [C# Code Conventions](https://github.com/ktaranov/naming-convention/blob/master/C%23%20Coding%20Standards%20and%20Naming%20Conventions.md) for class, variable and method naming conventions.
+
+## Angular, HTML, CSS and TypeScript
+
+### Material Design
 
 All attributes should use Angular Material for their design.
 
 More Info: [Angular Material](https://material.angular.io/components/categories).
 
-## Localization
+### Localization
 
 The Angular i18n attribute marks translatable content. Place it on every element tag whose fixed text is to be translated.
 
