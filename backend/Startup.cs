@@ -30,8 +30,8 @@ namespace backend
         {
             services.AddDbContext<MySqlContext>(options =>
             {
-                options.UseMySql(Configuration.GetConnectionString("LocalConnection"));
-                options.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole();}));
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole(); }));
             });
 
             services.AddTransient<AppointmentRepository>();
@@ -52,10 +52,7 @@ namespace backend
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }
