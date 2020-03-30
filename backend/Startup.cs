@@ -6,8 +6,6 @@ using backend.DAL;
 using backend.DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,7 +28,8 @@ namespace backend
         {
             services.AddDbContext<MySqlContext>(options =>
             {
-                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+                // options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseInMemoryDatabase("InMemoryDatabase");
                 options.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole(); }));
             });
 
