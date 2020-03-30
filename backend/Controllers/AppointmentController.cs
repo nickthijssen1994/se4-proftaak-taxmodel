@@ -14,6 +14,7 @@ namespace backend.Controllers
     public class AppointmentController : ControllerBase
     {
         AppointmentRepository _repo;
+
         public AppointmentController(AppointmentRepository repo)
         {
             _repo = repo;
@@ -23,7 +24,6 @@ namespace backend.Controllers
         public ActionResult<IEnumerable<Appointment>> GetAppointments()
         {
             return _repo.Get(null, null, a => a.Organiser).ToList();
-
         }
 
         [HttpGet("{id}")]
@@ -36,7 +36,8 @@ namespace backend.Controllers
                 return NotFound();
             }
 
-            return appointment; ;
+            return appointment;
+            ;
         }
 
         [HttpPut("{id}")]
@@ -74,7 +75,7 @@ namespace backend.Controllers
             _repo.Insert(appointment);
             _repo.Save();
 
-            return CreatedAtAction("Succesfully created the appointment.", new { id = appointment.Id }, appointment);
+            return CreatedAtAction($"Succesfully created the appointment.", new {id = appointment.Id}, appointment);
         }
 
         [HttpDelete("{id}")]
