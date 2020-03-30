@@ -28,8 +28,8 @@ namespace backend
         {
             services.AddDbContext<MySqlContext>(options =>
             {
-                // options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
-                options.UseInMemoryDatabase("InMemoryDatabase");
+                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+                //options.UseInMemoryDatabase("InMemoryDatabase");
                 options.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole(); }));
             });
 
