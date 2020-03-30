@@ -1,8 +1,8 @@
 // Repository.js
 import axios from "axios";
 
-const baseDomain = "http://localhost:8090";
-const baseURL = `${baseDomain}/api/v1`;
+const baseDomain = "https://localhost:44355/";
+// const baseURL = `${baseDomain}/api/v1`;
 
 export default axios.create({
   //60 sec timeout
@@ -14,7 +14,7 @@ export default axios.create({
   //cap the maximum content length we'll accept to 50MBs, just in case
   maxContentLength: 50 * 1000 * 1000,
 
-  baseURL,
+  // baseURL,
 
   // Set validatstatus so axios accepts all status codes.
   validateStatus: function (status) {

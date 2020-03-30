@@ -1,6 +1,6 @@
 import Repository from "../Repository";
 
-const resource = "/afspraken";
+const resource = "/controller";
 
 export default {
   // post(token) {
@@ -10,11 +10,7 @@ export default {
   //     }
   //   });
   // }
-  getById(id, token) {
-    return Repository.get(`${resource}/{id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+  getAll() {
+    return Repository.get(`${resource}`);
   }
 }

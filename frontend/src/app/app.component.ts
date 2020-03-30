@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import TestRepository from '../service/repositories/TestRepository';
+import AfspraakRepository from '../service/repositories/AfspraakRepository';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'frontend';
 
   async getRandom() {
-    const response = await TestRepository.getRandom();
-    this.data = response.data.name;
+    const response = await AfspraakRepository.getAll();
+    console.log(response);
   }
 }
