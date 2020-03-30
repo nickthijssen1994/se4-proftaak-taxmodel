@@ -10,9 +10,10 @@ namespace backend.DAL.Repositories
     public interface IRepository<TEntity> where TEntity : class
     {
         DbSet<TEntity> Set { get; set; }
-        IEnumerable<TEntity> Get(
+        IEnumerable<TEntity> Get<TProperty>(
             Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null);
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            Expression<Func<TEntity, TProperty>> includes = null);
         TEntity GetByID(object id);
         void Insert(TEntity entity);
         void DeleteById(object id);

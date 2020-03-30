@@ -18,9 +18,10 @@ namespace backend.DAL.Repositories
             Set = context.Set<TEntity>();
         }
 
-        public virtual IEnumerable<TEntity> Get(
+        public virtual IEnumerable<TEntity> Get<TProperty>(
             Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null)
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, 
+            Expression<Func<TEntity, TProperty>> includes = null)
         {
             IQueryable<TEntity> query = Set;
 
@@ -28,7 +29,15 @@ namespace backend.DAL.Repositories
             {
                 query = query.Where(filter);
             }
+            if(includes != null)
+            {
+                if(orderBy != null)
+                {
+                    return orderBy(query.Include(includes));
+                }
 
+                return query.Include(includes);
+            }
             if (orderBy != null)
             {
                 return orderBy(query).ToList();
@@ -36,7 +45,7 @@ namespace backend.DAL.Repositories
             else
             {
                 return query.ToList();
-            }
+            }   
         }
 
         public virtual TEntity GetByID(object id)
