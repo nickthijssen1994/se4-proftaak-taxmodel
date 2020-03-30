@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace backend.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("taxbreak/api/[controller]")]
     public class AppointmentController : ControllerBase
     {
         AppointmentRepository _repo;

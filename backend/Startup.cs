@@ -28,11 +28,12 @@ namespace backend
         {
             services.AddDbContext<MySqlContext>(options =>
             {
-                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
                 //options.UseInMemoryDatabase("InMemoryDatabase");
                 options.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole(); }));
             });
 
+            services.AddTransient<ExampleRepository>();
             services.AddTransient<AppointmentRepository>();
             services.AddControllers();
         }
@@ -45,6 +46,8 @@ namespace backend
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors();
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();
