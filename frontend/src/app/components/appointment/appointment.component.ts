@@ -25,4 +25,12 @@ export class AppointmentComponent implements OnInit {
       .subscribe(appointment => this.appointment = appointment);
   }
 
+  update(): void {
+    this.appointmentTestService.updateAppointment(this.appointment).subscribe(() => this.goBack());
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
+
 }
