@@ -1,55 +1,32 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-</head>
-<body ng-app="form-example2">
-<div contentEditable="true" ngModel="content" ng-app="createAppointmentApp" ng-controller="taxmodelController" value="test title">
+<div *ngIf="appointment">
 
-  <label><b>title: </b></label>
-  <input type="text" #title id = "title" ngModel="title"><br>
+  <label><b>title:</b>
+    <input [(ngModel)]="appointment.title" placeholder="title"/>
+  </label>
 
   <label><b>beginDate: </b></label>
-  <input type="date" placeholder="beginDate" ngModel="beginDate" required><br>
+  <input [(ngModel)]="appointment.beginDate" placeholder="beginDate"/>
 
   <label><b>endDate: </b></label>
-  <input type="date" placeholder="endDate" ngModel="endDate" required><br>
+  <input [(ngModel)]="appointment.endDate" placeholder="endDate"/>
 
   <label><b>type: </b></label>
-  <select type="combobox" ngModel="type">
+  <select type="combobox" [(ngModel)]="appointment.type">
     <option value="private">Private</option>
     <option value="public">Public</option>
   </select><br>
 
   <label><b>number of people: </b></label>
-  <input type="number" min="0" max="20" step="1" ng-model="size"/><br>
+  <input [(ngModel)]="appointment.size" placeholder="endDate"/>
 
-  <label><b>Location: </b></label>
-  <input type="string" min="1" max="20" ng-model="location"/><br>
+  <label><b>location:</b>
+    <input [(ngModel)]="appointment.location" placeholder="location"/>
+  </label>
 
   <div class="clearfix">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <button type="submit" class="createbtn">create</button>
-  </div>
-
-  <div id="check-info" style="alignment: center"><br>
-    {{title.value + ", " + beginDate + ", " +  endDate + ", " +  type+ ", " +  size + ", " +  location}}
+    <button class="delete" title="delete hero"
+            (click)="add(appointment)">x</button>
   </div>
 </div>
-
-<script>
-  var app = angular.module('createAppointmentApp', []);
-  app.controller('taxmodelController', function($appointment) {
-
-    title.value= "afspraak maken";
-    $appointment.beginDate.setDate(30-3-2020);
-    $appointment.endDate.get();
-    $appointment.type.get();
-    $appointment.size.get();
-    $appointment.location.get();
-  });
-</script>
-</body>
-</html>
 
 

@@ -12,6 +12,7 @@ import { AppointmentComponent } from './components/appointment/appointment.compo
 import { CreateAppointmentComponent } from './components/create-appointment/create-appointment.component';
 import {RouterModule} from '@angular/router';
 import { AppointmentListComponent } from './components/appointment-list/appointment-list.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -28,8 +29,9 @@ import { AppointmentListComponent } from './components/appointment-list/appointm
     RouterModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+      InMemoryDataService, {dataEncapsulation: false}
+    ),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

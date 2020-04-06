@@ -6,4 +6,6 @@ export interface Appointment {
   beginDate: Date;
   endDate: Date;
   organiser: Account;
+  type: string;
+  size: number;
 }
