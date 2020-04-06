@@ -1,10 +1,9 @@
-import {Order} from './Order';
-
-export class Appointment {
-  beginDate: Date;
-  endDate: Date;
+export interface Appointment {
+  id: number;
+  title: string;
   description: string;
   location: string;
+  beginDate: Date;
+  endDate: Date;
   organiser: Account;
-  title: string;
 }

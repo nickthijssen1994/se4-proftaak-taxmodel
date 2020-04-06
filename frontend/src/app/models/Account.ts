@@ -1,4 +1,4 @@
-export class Account {
+export interface Account {
   name: string;
   id: bigint;
 }
