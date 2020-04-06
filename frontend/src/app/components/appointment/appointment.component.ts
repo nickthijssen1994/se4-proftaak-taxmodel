@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Appointment} from '../../models/Appointment';
+import {ActivatedRoute} from '@angular/router';
+import {AppointmentTestService} from '../../services/appointment-test.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-appointment',
@@ -7,20 +11,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppointmentComponent implements OnInit {
 
-  beginDate: Date;
-  endDate: Date;
-  description: string;
-  location: string;
-  organiser: Account;
-  title: string;
-  type: boolean;
-  size: number;
+  @Input() appointment: Appointment;
 
-  constructor() {
-    this.title = 'test title';
-  }
+  constructor(private route: ActivatedRoute, private appointmentTestService: AppointmentTestService) { }
 
   ngOnInit(): void {
+    this.getAppointment();
+  }
+
+  getAppointment(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.appointmentTestService.getAppointment(id)
+      .subscribe(appointment => this.appointment = appointment);
   }
 
 }

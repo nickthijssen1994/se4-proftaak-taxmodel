@@ -8,8 +8,8 @@
 </div>
 
 <div>
-  <ul class="appointments">
-    <li *ngFor="let appointment of appointments">
+  <mat-list role="list">
+    <mat-list-item *ngFor="let appointment of appointments">
       <a routerLink="/detail/{{appointment.id}}">
         <span class="badge">{{appointment.id}}</span>
         <span>{{appointment.title}}</span>
@@ -17,6 +17,6 @@
       <button (click)="delete(appointment)" class="delete"
               title="delete appointment">X
       </button>
-    </li>
-  </ul>
+    </mat-list-item>
+  </mat-list>
 </div>

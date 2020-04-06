@@ -14,6 +14,9 @@ import {RouterModule} from '@angular/router';
 import {AppointmentListComponent} from './components/appointment-list/appointment-list.component';
 import {FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import {MatListModule} from '@angular/material/list';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { AppRoutingModule } from './app-routing.module';
       InMemoryDataService, {dataEncapsulation: false}
     ),
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatListModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
