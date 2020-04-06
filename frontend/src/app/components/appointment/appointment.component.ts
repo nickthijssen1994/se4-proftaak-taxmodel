@@ -13,7 +13,7 @@ export class AppointmentComponent implements OnInit {
 
   @Input() appointment: Appointment;
 
-  constructor(private route: ActivatedRoute, private appointmentTestService: AppointmentTestService) { }
+  constructor(private route: ActivatedRoute, private appointmentTestService: AppointmentTestService,private location: Location) { }
 
   ngOnInit(): void {
     this.getAppointment();
