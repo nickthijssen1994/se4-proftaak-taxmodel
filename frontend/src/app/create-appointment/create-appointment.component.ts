@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-appointment',
-  templateUrl: './appointment.component.html',
-  styleUrls: ['./appointment.component.css']
+  selector: 'app-create-appointment',
+  templateUrl: './create-appointment.component.html',
+  styleUrls: ['./create-appointment.component.css']
 })
-export class AppointmentComponent implements OnInit {
+export class CreateAppointmentComponent implements OnInit {
 
   beginDate: Date;
   endDate: Date;
@@ -16,9 +16,7 @@ export class AppointmentComponent implements OnInit {
   type: boolean;
   size: number;
 
-  constructor() {
-    this.title = 'test title';
-  }
+  constructor() { }
 
   ngOnInit(): void {
   }

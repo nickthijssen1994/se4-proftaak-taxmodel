@@ -1,40 +1,9 @@
-<!DOCTYPE html>
-<html>
-<body>
 
-<form action="/action_page.php" style="border:1px solid #ccc">
-  <div class="container">
-    <h1>Create appointment</h1>
-    <p>Please fill in this form to create an appointment.</p>
-    <hr>
-    
-    <label><b>title: </b></label>
-    <input type="text" placeholder="title" name="title" required><br>
 
-    <label><b>beginDate: </b></label>
-    <input type="date" placeholder="beginDate" name="beginDate" required><br>
+<app-account>
 
-    <label><b>endDate: </b></label>
-    <input type="date" placeholder="endDate" name="endDate" required><br>
+</app-account>
+<!--
+<app-create-appointment></app-create-appointment>
+-->
 
-    <label><b>type: </b></label>
-    <select type="combobox">
-      <option value="private">Private</option>
-      <option value="public">Public</option>
-    </select><br>
-
-    <label><b>number of people: </b></label>
-    <input type="number" min="0" max="20" step="1"/><br>
-
-    <label><b>Location: </b></label>
-    <input type="string" min="1" max="20"/><br>
-
-    <div class="clearfix">
-      <button type="button" class="cancelbtn">Cancel</button>
-      <button type="submit" class="createbtn">create</button>
-    </div>
-  </div>
-</form>
-
-</body>
-</html>

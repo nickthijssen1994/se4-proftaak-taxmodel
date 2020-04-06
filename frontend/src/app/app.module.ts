@@ -6,17 +6,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccountComponent } from './account/account.component';
 import { OrderComponent } from './order/order.component';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { CreateAppointmentComponent } from './create-appointment/create-appointment.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
     AccountComponent,
     OrderComponent,
-    AppointmentComponent
+    AppointmentComponent,
+    CreateAppointmentComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
