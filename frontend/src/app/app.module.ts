@@ -30,6 +30,15 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     AppointmentComponent,
     CreateAppointmentComponent,
     AppointmentListComponent
+
+//import { AppComponent } from './app.component';
+//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { AccountComponent } from './account/account.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+    // AccountComponent
   ],
   imports: [
     BrowserModule,
