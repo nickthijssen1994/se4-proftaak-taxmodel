@@ -3,9 +3,9 @@ export interface Appointment {
   title: string;
   description: string;
   location: string;
+  type: string;
+  size: number;
   beginDate: Date;
   endDate: Date;
   organiser: Account;
-  type: string;
-  size: number;
 }

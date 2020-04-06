@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {InMemoryDbService} from 'angular-in-memory-web-api';
 import {Appointment} from '../models/Appointment';
 
@@ -9,8 +9,26 @@ export class InMemoryDataService implements InMemoryDbService {
 
   createDb() {
     const appointments = [
-      { id: 1, title: 'Test1', description: 'Test1', location: 'Test1'},
-      { id: 2, title: 'Test2', description: 'Test2', location: 'Test2'}
+      {
+        id: 1,
+        title: 'Lunch',
+        description: 'Test1',
+        location: 'Bagles',
+        type: 'Private',
+        size: 2,
+        beginDate: Date.now(),
+        endDate: Date.now()
+      },
+      {
+        id: 2,
+        title: 'Vergadering',
+        description: 'Test2',
+        location: 'Kantoor',
+        type: 'Public',
+        size: 5,
+        beginDate: Date.now(),
+        endDate: Date.now()
+      }
     ];
     return {appointments};
   }
