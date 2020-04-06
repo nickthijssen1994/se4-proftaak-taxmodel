@@ -30,15 +30,6 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     AppointmentComponent,
     CreateAppointmentComponent,
     AppointmentListComponent
-
-//import { AppComponent } from './app.component';
-//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { AccountComponent } from './account/account.component';
-
-@NgModule({
-  declarations: [
-    AppComponent
-    // AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -63,3 +54,34 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 })
 export class AppModule {
 }
+
+// import { AppComponent } from './app.component';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { AccountComponent } from './account/account.component';
+
+// @NgModule({
+//   declarations: [
+//     AppComponent
+//     // AccountComponent
+//   ],
+//   imports: [
+//     BrowserModule,
+//     BrowserAnimationsModule,
+//     RouterModule,
+//     HttpClientModule,
+//     FormsModule,
+//     AppRoutingModule,
+//     MatListModule,
+//     MatToolbarModule,
+//     MatButtonModule,
+//     MatInputModule,
+//     MatSelectModule,
+//     MatCardModule,
+//     MatDatepickerModule,
+//     AppModule,
+//   ],
+//   providers: [],
+//   bootstrap: [AppComponent]
+// })
+// export class AppModule {
+// }
