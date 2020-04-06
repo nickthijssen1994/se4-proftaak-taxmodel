@@ -1,33 +1,49 @@
 <div *ngIf="appointment">
   <h2>{{appointment.title}}</h2>
-  <div><span>ID: </span>{{appointment.id}}</div>
-  <label><b>title:</b>
-    <input [(ngModel)]="appointment.title" placeholder="title"/>
-  </label>
+  <div>
+    <span>ID: {{appointment.id}}</span>
+  </div>
 
-  <label><b>beginDate: </b></label>
-  <input [(ngModel)]="appointment.beginDate" placeholder="beginDate"/>
+  <div>
+    <label><b>title:</b>
+      <input [(ngModel)]="appointment.title" placeholder="title"/>
+    </label>
+  </div>
 
-  <label><b>endDate: </b></label>
-  <input [(ngModel)]="appointment.endDate" placeholder="endDate"/>
+  <div>
+    <label><b>beginDate: </b></label>
+    <input [(ngModel)]="appointment.beginDate" placeholder="beginDate"/>
+  </div>
 
-  <label><b>type: </b></label>
-  <select type="combobox" [(ngModel)]="appointment.type">
-    <option value="private">Private</option>
-    <option value="public">Public</option>
-  </select><br>
+  <div>
+    <label><b>endDate: </b></label>
+    <input [(ngModel)]="appointment.endDate" placeholder="endDate"/>
+  </div>
 
-  <label><b>number of people: </b></label>
-  <input [(ngModel)]="appointment.size" placeholder="endDate"/>
+  <div>
+    <label><b>type: </b></label>
+    <select [(ngModel)]="appointment.type" type="combobox">
+      <option value="private">Private</option>
+      <option value="public">Public</option>
+    </select><br>
+  </div>
 
-  <label><b>location:</b>
-    <input [(ngModel)]="appointment.location" placeholder="location"/>
-  </label>
+  <div>
+    <label><b>number of people: </b></label>
+    <input [(ngModel)]="appointment.size" placeholder="size"/>
+  </div>
+
+  <div>
+    <label><b>location:</b>
+      <input [(ngModel)]="appointment.location" placeholder="location"/>
+    </label>
+  </div>
 
   <div class="clearfix">
     <button (click)="update()">Update</button>
     <button (click)="add(appointment)">Add</button>
   </div>
+  
 </div>
 
 

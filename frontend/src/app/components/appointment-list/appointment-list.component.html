@@ -1,13 +1,22 @@
-
 <h2>Appointments</h2>
 
-<ul class="appointments">
-  <li *ngFor="let appointment of appointments">
+<div>
+  <label>Title:
+    <input #appointmentTitle/>
+  </label>
+  <button (click)="add(appointmentTitle.value); appointmentTitle.value=''">Add</button>
+</div>
 
-    <a routerLink="/detail/{{appointment.id}}">
-      <span class="badge">{{appointment.id}}</span>
-      <span>{{appointment.title}}</span>
-    </a>
-  </li>
-
-</ul>
+<div>
+  <ul class="appointments">
+    <li *ngFor="let appointment of appointments">
+      <a routerLink="/detail/{{appointment.id}}">
+        <span class="badge">{{appointment.id}}</span>
+        <span>{{appointment.title}}</span>
+      </a>
+      <button (click)="delete(appointment)" class="delete"
+              title="delete appointment">X
+      </button>
+    </li>
+  </ul>
+</div>
