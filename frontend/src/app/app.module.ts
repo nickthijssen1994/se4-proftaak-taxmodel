@@ -17,6 +17,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {MatButtonModule} from '@angular/material/button';
     AppRoutingModule,
     MatListModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
