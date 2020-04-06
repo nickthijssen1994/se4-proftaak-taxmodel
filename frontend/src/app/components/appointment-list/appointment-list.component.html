@@ -1,1 +1,13 @@
-<p>appointment-list works!</p>
+
+<h2>Appointments</h2>
+
+<ul class="appointments">
+  <li *ngFor="let appointment of appointments">
+
+    <a routerLink="/detail/{{appointment.id}}">
+      <span class="badge">{{appointment.id}}</span>
+      <span>{{appointment.title}}</span>
+    </a>
+  </li>
+
+</ul>

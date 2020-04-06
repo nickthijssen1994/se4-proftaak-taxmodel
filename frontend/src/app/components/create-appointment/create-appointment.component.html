@@ -1,5 +1,6 @@
 <div *ngIf="appointment">
-
+  <h2>{{appointment.title}}</h2>
+  <div><span>ID: </span>{{appointment.id}}</div>
   <label><b>title:</b>
     <input [(ngModel)]="appointment.title" placeholder="title"/>
   </label>
@@ -24,8 +25,8 @@
   </label>
 
   <div class="clearfix">
-    <button class="delete" title="delete hero"
-            (click)="add(appointment)">x</button>
+    <button (click)="update()">Update</button>
+    <button (click)="add(appointment)">Add</button>
   </div>
 </div>
 

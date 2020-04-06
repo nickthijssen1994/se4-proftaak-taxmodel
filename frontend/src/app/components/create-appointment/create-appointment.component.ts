@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Appointment } from '../../models/Appointment';
 import { AppointmentTestService} from '../../services/appointment-test.service';
+import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-create-appointment',
@@ -10,14 +12,29 @@ import { AppointmentTestService} from '../../services/appointment-test.service';
 export class CreateAppointmentComponent implements OnInit {
   @Input() appointment: Appointment;
 
-  constructor(private appointmentTestService: AppointmentTestService) { }
+  constructor(private route: ActivatedRoute, private appointmentTestService: AppointmentTestService,
+              private location: Location) { }
 
   ngOnInit(): void {
-    console.log(this.appointmentTestService.getAppointments());
+    this.getAppointment();
+  }
+
+  getAppointment(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.appointmentTestService.getAppointment(id)
+      .subscribe(appointment => this.appointment = appointment);
+  }
+
+  update(): void {
+    this.appointmentTestService.updateAppointment(this.appointment).subscribe(() => this.goBack());
   }
 
   add(appointment: Appointment): void {
     if (!appointment) {return; }
     this.appointmentTestService.addAppointment(appointment).subscribe();
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

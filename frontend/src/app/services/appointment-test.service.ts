@@ -14,7 +14,7 @@ export class AppointmentTestService {
     headers: this.headers,
   };
 
-  private appointmentsUrl = 'taxbreak/api/appointments';  // URL to web api
+  private appointmentsUrl = 'api/appointments';  // URL to web api
 
   constructor(private http: HttpClient) {
     this.headers = this.headers.set('Content-Type', 'application/json');
