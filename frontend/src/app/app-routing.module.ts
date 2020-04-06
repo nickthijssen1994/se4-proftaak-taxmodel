@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AppointmentListComponent} from './components/appointment-list/appointment-list.component';
-import {AppointmentComponent} from './components/appointment/appointment.component';
 import {CreateAppointmentComponent} from './components/create-appointment/create-appointment.component';
 
 const routes: Routes = [
-  { path: 'appointments', component: AppointmentListComponent },
+  {path: 'appointments', component: AppointmentListComponent},
   {path: 'detail/:id', component: CreateAppointmentComponent},
 ];
 
@@ -13,4 +12,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

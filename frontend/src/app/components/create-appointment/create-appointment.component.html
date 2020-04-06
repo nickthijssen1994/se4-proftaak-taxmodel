@@ -1,43 +1,45 @@
-<mat-card class="create-appointment-form">
+<mat-card class="create-appointment-form" *ngIf="appointment">
   <mat-card-header>
     <mat-card-title>Edit Appointment</mat-card-title>
     <mat-card-subtitle>ID: {{appointment.id}} Title: {{appointment.title}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <div *ngIf="appointment">
       <form>
         <mat-form-field class="create-appointment-form-full-width">
           <mat-label>Title</mat-label>
-          <input matInput [(ngModel)]="appointment.title" placeholder="title">
+          <input matInput [(ngModel)]="appointment.title" value="{{appointment.title}}">
+        </mat-form-field>
+        <mat-form-field class="create-appointment-form-full-width">
+          <mat-label>Description</mat-label>
+          <input matInput [(ngModel)]="appointment.description" value="{{appointment.description}}">
         </mat-form-field>
         <mat-form-field class="create-appointment-form-full-width">
           <mat-label>Begin Date</mat-label>
-          <input matInput [(ngModel)]="appointment.beginDate" placeholder="beginDate">
+          <input type="date" matInput [(ngModel)]="appointment.beginDate" value="{{appointment.beginDate}}">
         </mat-form-field>
         <mat-form-field class="create-appointment-form-full-width">
           <mat-label>End Date</mat-label>
-          <input matInput [(ngModel)]="appointment.endDate" placeholder="endDate">
+          <input type="date" matInput [(ngModel)]="appointment.endDate" value="{{appointment.endDate}}">
         </mat-form-field>
         <mat-form-field class="create-appointment-form-full-width">
           <mat-label>Type</mat-label>
-          <mat-select matNativeControl required [(ngModel)]="appointment.type" type="combobox">
+          <mat-select matNativeControl required [(ngModel)]="appointment.type">
             <mat-option value="private">Private</mat-option>
             <mat-option value="public">Public</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="create-appointment-form-full-width">
           <mat-label>Number Of People</mat-label>
-          <input matInput [(ngModel)]="appointment.size" placeholder="size">
+          <input type="number" matInput [(ngModel)]="appointment.size" value="{{appointment.size}}">
         </mat-form-field>
         <mat-form-field class="create-appointment-form-full-width">
           <mat-label>Location</mat-label>
-          <input matInput [(ngModel)]="appointment.location" placeholder="location">
+          <input matInput [(ngModel)]="appointment.location" value="{{appointment.location}}">
         </mat-form-field>
       </form>
-    </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button (click)="update(appointment)">Update</button>
-    <button mat-button (click)="add(appointment)">Add</button>
+    <button mat-button (click)="update()">Update</button>
+    <button mat-button (click)="goBack()">Back</button>
   </mat-card-actions>
 </mat-card>

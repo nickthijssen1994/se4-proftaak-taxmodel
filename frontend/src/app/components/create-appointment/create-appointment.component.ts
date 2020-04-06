@@ -25,13 +25,8 @@ export class CreateAppointmentComponent implements OnInit {
       .subscribe(appointment => this.appointment = appointment);
   }
 
-  update(appointment: Appointment): void {
+  update(): void {
     this.appointmentTestService.updateAppointment(this.appointment).subscribe(() => this.goBack());
-  }
-
-  add(appointment: Appointment): void {
-    if (!appointment) {return; }
-    this.appointmentTestService.addAppointment(appointment).subscribe();
   }
 
   goBack(): void {

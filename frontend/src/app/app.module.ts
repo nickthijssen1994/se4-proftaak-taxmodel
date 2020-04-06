@@ -20,6 +20,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -35,9 +36,6 @@ import {MatCardModule} from '@angular/material/card';
     BrowserAnimationsModule,
     RouterModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, {dataEncapsulation: false}
-    ),
     FormsModule,
     AppRoutingModule,
     MatListModule,
@@ -45,7 +43,11 @@ import {MatCardModule} from '@angular/material/card';
     MatButtonModule,
     MatInputModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, {dataEncapsulation: false}
+    ),
+    MatDatepickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
