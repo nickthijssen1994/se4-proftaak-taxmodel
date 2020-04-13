@@ -28,7 +28,7 @@ namespace backend.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Appointment> GetAppointmentById(int id)
+        public ActionResult<Appointment> GetAppointmentById(long id)
         {
             Appointment appointment = _repo.GetByID(id);
 
@@ -61,7 +61,7 @@ namespace backend.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult PutAppointment(int id, [FromForm] Appointment appointment)
+        public IActionResult PutAppointment(long id, [FromForm] Appointment appointment)
         {
             if (id != appointment.Id)
             {
@@ -99,7 +99,7 @@ namespace backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<Appointment> DeleteAppointment(int id)
+        public ActionResult<Appointment> DeleteAppointment(long id)
         {
             Appointment appointment = _repo.GetByID(id);
             if (appointment == null)
@@ -113,7 +113,7 @@ namespace backend.Controllers
             return appointment;
         }
 
-        private bool AppointmentExists(int id)
+        private bool AppointmentExists(long id)
         {
             return _repo.Set.Any(e => e.Id == id);
         }
