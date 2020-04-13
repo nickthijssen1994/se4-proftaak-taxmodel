@@ -9,8 +9,8 @@ namespace backend.Models
     {
         public long Id { get; set; }
         public string Title { get; set; }
-        public DateTime BeginTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public long BeginTime { get; set; }
+        public long EndTime { get; set; }
 
         public string Location { get; set; }
         public Account Organiser { get; set; }

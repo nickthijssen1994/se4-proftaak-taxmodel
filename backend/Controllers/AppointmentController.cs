@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace backend.Controllers
@@ -37,6 +38,26 @@ namespace backend.Controllers
             }
 
             return appointment; ;
+        }
+
+        [HttpGet("GetInTimeSpan")]
+        public ActionResult<IEnumerable<Appointment>> GetAppointmentsInTimeSpan([FromBody] long begin, long end)
+        {
+            if(end >= begin)
+            {
+                return BadRequest();
+            }
+
+            List<Appointment> appointments = _repo.Get<Appointment>(
+                a => a.BeginTime >= begin && a.EndTime <= end
+                ).ToList();
+
+            if (appointments == null)
+            {
+                return NotFound();
+            }
+
+            return appointments;
         }
 
         [HttpPut("{id}")]

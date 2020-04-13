@@ -10,6 +10,6 @@ namespace backend.DAL.Repositories
     {
         public AppointmentRepository(MySqlContext context) : base(context)
         {
-        }
+        }   
     }
 }
