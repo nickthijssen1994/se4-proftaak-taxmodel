@@ -44,9 +44,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatInputModule,
     MatSelectModule,
     MatCardModule,
-    // HttpClientInMemoryWebApiModule.forRoot(
-    //   InMemoryDataService, {dataEncapsulation: false}
-    // ),
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, {dataEncapsulation: false}
+    ),
     MatDatepickerModule,
   ],
   providers: [],
