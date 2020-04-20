@@ -1,7 +1,8 @@
 // Repository.js
 import axios from "axios";
+import {environment} from "../environments/environment";
 
-const baseDomain = "https://localhost:44355/";
+const baseDomain = environment.apiUrl;
 // const baseURL = `${baseDomain}/api/v1`;
 
 export default axios.create({
