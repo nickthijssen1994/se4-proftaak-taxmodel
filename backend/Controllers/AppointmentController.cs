@@ -1,4 +1,5 @@
-﻿using backend.DAL.Repositories;
+﻿using backend.Controllers.DTOs;
+using backend.DAL.Repositories;
 using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 namespace backend.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("taxbreak/api/[controller]")]
     public class AppointmentController : ControllerBase
     {
         AppointmentRepository _repo;
@@ -41,15 +42,15 @@ namespace backend.Controllers
         }
 
         [HttpGet("GetInTimeSpan")]
-        public ActionResult<IEnumerable<Appointment>> GetAppointmentsInTimeSpan([FromBody] long begin, long end)
+        public ActionResult<IEnumerable<Appointment>> GetAppointmentsInTimeSpan([FromBody] AppointmentByWeekDto dto)
         {
-            if(end >= begin)
+            if(dto.EndTime <= dto.BeginTime)
             {
                 return BadRequest();
             }
 
             List<Appointment> appointments = _repo.Get<Appointment>(
-                a => a.BeginTime >= begin && a.EndTime <= end
+                a => a.BeginTime >= dto.BeginTime && a.EndTime <= dto.EndTime
                 ).ToList();
 
             if (appointments == null)
@@ -95,7 +96,7 @@ namespace backend.Controllers
             _repo.Insert(appointment);
             _repo.Save();
 
-            return CreatedAtAction("Succesfully created the appointment.", new { id = appointment.Id }, appointment);
+            return CreatedAtAction("GetAppointmentById", new { id = appointment.Id }, appointment);
         }
 
         [HttpDelete("{id}")]
