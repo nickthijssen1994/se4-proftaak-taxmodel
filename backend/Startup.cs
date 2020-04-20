@@ -34,10 +34,10 @@ namespace backend
 			if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
 				services.AddDbContext<MySqlContext>(options =>
 				{
-					options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+					options.UseMySql(Configuration.GetConnectionString("ProductionDatabaseConnection"));
 					options.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole(); }));
 				});
-			else
+			else if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
 				services.AddDbContext<MySqlContext>(options =>
 				{
 					options.UseInMemoryDatabase("InMemoryDatabase");
