@@ -7,7 +7,7 @@ namespace backend.Controllers.DTOs
 {
     public class AppointmentByWeekDto
     {
-        public long BeginTime { get; set; }
-        public long EndTime { get; set; }
+        public DateTime BeginTime { get; set; }
+        public DateTime EndTime { get; set; }
     }
 }
