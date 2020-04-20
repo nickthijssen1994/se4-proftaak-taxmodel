@@ -8,9 +8,4 @@ import AfspraakRepository from '../repositories/repositories/AfspraakRepository'
 })
 export class AppComponent {
   title = 'TaxBreak';
-
-  async getRandom() {
-    const response = await AfspraakRepository.getAll();
-    console.log(response);
-  }
 }
