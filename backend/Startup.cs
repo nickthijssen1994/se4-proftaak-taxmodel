@@ -13,6 +13,9 @@ namespace backend
 {
 	public class Startup
 	{
+		readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+		
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
@@ -23,6 +26,16 @@ namespace backend
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddCors(options =>
+			{
+				options.AddPolicy(name: MyAllowSpecificOrigins,
+					builder =>
+					{
+						builder.WithOrigins("*");
+					});
+			});
+			
+			
 			if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
 				services.AddDbContext<MySqlContext>(options =>
 				{
@@ -46,7 +59,7 @@ namespace backend
 		{
 			if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
-			app.UseCors();
+			app.UseCors(MyAllowSpecificOrigins);
 
 			app.UseHttpsRedirection();
 
