@@ -15,7 +15,7 @@ export class AppointmentTestService {
     headers: this.headers,
   };
 
-  private appointmentsUrl = environment.apiUrl + '/appointments';  // URL to web api
+  private appointmentsUrl = environment.apiUrl + '/appointment';  // URL to web api
 
   constructor(private http: HttpClient) {
     this.headers = this.headers.set('Content-Type', 'application/json');
