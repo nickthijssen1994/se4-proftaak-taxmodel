@@ -15,7 +15,6 @@ namespace backend
 	{
 		readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-		
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
@@ -29,13 +28,9 @@ namespace backend
 			services.AddCors(options =>
 			{
 				options.AddPolicy(name: MyAllowSpecificOrigins,
-					builder =>
-					{
-						builder.WithOrigins("*");
-					});
+					builder => { builder.WithOrigins("*"); });
 			});
-			
-			
+
 			if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
 				services.AddDbContext<MySqlContext>(options =>
 				{
