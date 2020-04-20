@@ -1,0 +1,19 @@
+<form>
+  <h2>Add Appointment</h2>
+  <mat-form-field>
+    <mat-label>Title:</mat-label>
+    <input matInput #appointmentTitle/>
+  </mat-form-field>
+  <button mat-button (click)="add(appointmentTitle.value); appointmentTitle.value=''">Add</button>
+</form>
+
+<mat-list role="list">
+  <h2>Appointments</h2>
+  <mat-list-item *ngFor="let appointment of appointments">
+    <button mat-button routerLink="/detail/{{appointment.id}}">
+      <span>{{appointment.id}}</span>
+      <span>{{appointment.title}}</span>
+    </button>
+    <button mat-button (click)="delete(appointment)">X</button>
+  </mat-list-item>
+</mat-list>
