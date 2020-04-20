@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import AfspraakRepository from '../repositories/repositories/AfspraakRepository';
 
 @Component({
   selector: 'app-root',
