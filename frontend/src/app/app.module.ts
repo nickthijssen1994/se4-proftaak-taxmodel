@@ -24,6 +24,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
+    MatGridListModule,
     MatListModule,
     MatToolbarModule,
     MatButtonModule,

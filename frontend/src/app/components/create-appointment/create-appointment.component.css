@@ -1,11 +1,12 @@
 md-content.md-default-theme {
   background-color: #eee;
 }
+
 md-card {
   background-color: #fff;
 }
 
-.create-appointment-page-container{
+.create-appointment-page-container {
   display: flex;
   justify-content: center;
   padding-top: 75px;
