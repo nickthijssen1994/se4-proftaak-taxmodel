@@ -8,8 +8,10 @@
     <mat-list role="list">
       <mat-list-item *ngFor="let appointment of appointments">
         <button mat-button routerLink="/detail/{{appointment.id}}">
-          <span>{{appointment.id}}</span>
-          <span>{{appointment.title}}</span>
+          {{appointment.id}} -
+          {{appointment.title}} -
+          {{appointment.location}} -
+          {{appointment.description}}
         </button>
         <button mat-button (click)="delete(appointment)">X</button>
       </mat-list-item>
