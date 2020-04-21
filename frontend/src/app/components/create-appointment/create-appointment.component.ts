@@ -10,17 +10,29 @@ import {Location} from '@angular/common';
   styleUrls: ['./create-appointment.component.css']
 })
 export class CreateAppointmentComponent implements OnInit {
-  appointment: Appointment;
+  appointment: Appointment = {
+    id: null,
+    title: '',
+    description: '',
+    location: '',
+    type: null,
+    size: null,
+    beginDate: new Date(),
+    endDate: null,
+    organiser: null
+  };
   disabled = false;
 
   constructor(private route: ActivatedRoute, private appointmentTestService: AppointmentTestService,
               private location: Location) { }
 
   ngOnInit(): void {
+
   }
 
   onFormSubmit(): void {
-    console.log(this.appointment.title);
+    console.log(this.appointment);
+    this.appointmentTestService.addAppointment(this.appointment);
   }
 
   goBack(): void {
