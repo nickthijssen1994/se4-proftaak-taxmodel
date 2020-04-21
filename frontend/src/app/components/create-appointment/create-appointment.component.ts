@@ -3,8 +3,6 @@ import { Appointment } from '../../models/Appointment';
 import { AppointmentTestService} from '../../services/appointment-test.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
-import {AccountComponent} from '../account/account.component';
-import {log} from 'util';
 
 @Component({
   selector: 'app-create-appointment',
@@ -23,7 +21,6 @@ export class CreateAppointmentComponent implements OnInit {
 
   onFormSubmit(): void {
     console.log(this.appointment.title);
-     // this.appointmentTestService.addAppointment(this.appointment);
   }
 
   goBack(): void {
