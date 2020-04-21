@@ -1,9 +1,3 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
-
-import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AccountComponent} from './components/account/account.component';
 import {OrderComponent} from './components/order/order.component';
 import {AppointmentComponent} from './components/appointment/appointment.component';
@@ -25,6 +19,12 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import {FullCalendarModule} from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -54,7 +54,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatCardModule,
     MatDatepickerModule,
     MatCheckboxModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    HttpClientModule,
+    FullCalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
