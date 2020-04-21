@@ -58,12 +58,12 @@ namespace backend.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult<Appointment> PostAppointment([FromForm] Appointment appointment)
+		public ActionResult<Appointment> PostAppointment(Appointment appointment)
 		{
 			_repo.Insert(appointment);
 			_repo.Save();
 
-			return CreatedAtAction($"GetAppointmentById", new {id = appointment.Id}, appointment);
+			return appointment;
 		}
 
 		[HttpDelete("{id}")]
