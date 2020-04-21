@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import AfspraakRepository from '../repositories/repositories/AfspraakRepository';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +7,4 @@ import AfspraakRepository from '../repositories/repositories/AfspraakRepository'
 })
 export class AppComponent {
   title = 'TaxBreak';
-
-  async getRandom() {
-    const response = await AfspraakRepository.getAll();
-    console.log(response);
-  }
 }

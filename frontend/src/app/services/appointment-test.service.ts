@@ -2,6 +2,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Appointment} from '../models/Appointment';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AppointmentTestService {
     headers: this.headers,
   };
 
-  private appointmentsUrl = 'api/appointments';  // URL to web api
+  private appointmentsUrl = environment.apiUrl + '/appointment';  // URL to web api
 
   constructor(private http: HttpClient) {
     this.headers = this.headers.set('Content-Type', 'application/json');
