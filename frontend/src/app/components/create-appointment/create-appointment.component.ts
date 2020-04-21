@@ -33,7 +33,7 @@ export class CreateAppointmentComponent implements OnInit {
 
   onFormSubmit(): void {
     console.log(this.appointment);
-    this.appointmentTestService.addAppointment(this.appointment);
+    this.appointmentTestService.addAppointment(this.appointment).subscribe();
   }
 
   goBack(): void {

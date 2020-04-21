@@ -37,8 +37,8 @@ export class AppointmentTestService {
     return this.http.put(url, appointment, this.httpOptions);
   }
 
-  addAppointment(appointment: Appointment): Observable<Appointment> {
-    return this.http.post<Appointment>(this.appointmentsUrl, appointment, this.httpOptions);
+  addAppointment(appointment: Appointment): Observable<any> {
+    return this.http.post(this.appointmentsUrl, appointment, this.httpOptions);
   }
 
   deleteAppointment(appointment: Appointment | number): Observable<Appointment> {
