@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import { Appointment } from '../../models/Appointment';
-import { AppointmentTestService} from '../../services/appointment-test.service';
+import {Component, OnInit} from '@angular/core';
+import {Appointment} from '../../models/Appointment';
+import {AppointmentTestService} from '../../services/appointment-test.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 
@@ -14,7 +14,8 @@ export class CreateAppointmentComponent implements OnInit {
   disabled = false;
 
   constructor(private route: ActivatedRoute, private appointmentTestService: AppointmentTestService,
-              private location: Location) { }
+              private location: Location) {
+  }
 
   ngOnInit(): void {
   }

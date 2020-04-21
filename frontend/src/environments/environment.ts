@@ -5,5 +5,5 @@
 export const environment = {
   production: false,
   environmentName: 'Development',
-  apiUrl: 'http://localhost:5000/taxbreak/api'
+  apiUrl: 'http://nick-thijssen.nl:5000/taxbreak/api'
 };
