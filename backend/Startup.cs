@@ -28,7 +28,11 @@ namespace backend
 			services.AddCors(options =>
 			{
 				options.AddPolicy(name: MyAllowSpecificOrigins,
-					builder => { builder.WithOrigins("*"); });
+					builder =>
+					{
+						builder.WithOrigins("*").AllowAnyHeader()
+							.AllowAnyMethod();
+					});
 			});
 
 			if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
@@ -37,7 +41,7 @@ namespace backend
 					options.UseMySql(Configuration.GetConnectionString("ProductionDatabaseConnection"));
 					options.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole(); }));
 				});
-			else if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+			else if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
 				services.AddDbContext<MySqlContext>(options =>
 				{
 					options.UseInMemoryDatabase("InMemoryDatabase");
