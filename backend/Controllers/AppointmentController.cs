@@ -62,7 +62,7 @@ namespace backend.Controllers
 			_repo.Insert(appointment);
 			_repo.Save();
 
-			return CreatedAtAction($"Succesfully created the appointment.", new {id = appointment.Id}, appointment);
+			return CreatedAtAction($"GetAppointmentById", new {id = appointment.Id}, appointment);
 		}
 
 		[HttpDelete("{id}")]

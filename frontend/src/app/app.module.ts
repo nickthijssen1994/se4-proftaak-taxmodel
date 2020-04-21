@@ -9,7 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AccountComponent} from './components/account/account.component';
 import {OrderComponent} from './components/order/order.component';
 import {AppointmentComponent} from './components/appointment/appointment.component';
-import {CreateAppointmentComponent} from './components/create-appointment/create-appointment.component';
+import {EditAppointmentComponent} from './components/edit-appointment/edit-appointment.component';
 import {RouterModule} from '@angular/router';
 import {AppointmentListComponent} from './components/appointment-list/appointment-list.component';
 import {FormsModule} from '@angular/forms';
@@ -21,6 +21,12 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {CreateAppointmentComponent} from './components/create-appointment/create-appointment.component';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -28,6 +34,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     AccountComponent,
     OrderComponent,
     AppointmentComponent,
+    EditAppointmentComponent,
     CreateAppointmentComponent,
     AppointmentListComponent
   ],
@@ -42,12 +49,15 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatToolbarModule,
     MatButtonModule,
     MatInputModule,
+    MatDialogModule,
     MatSelectModule,
     MatCardModule,
     // HttpClientInMemoryWebApiModule.forRoot(
     //   InMemoryDataService, {dataEncapsulation: false}
     // ),
     MatDatepickerModule,
+    MatCheckboxModule,
+    NgxMaterialTimepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,6 +3,8 @@ import { Appointment } from '../../models/Appointment';
 import { AppointmentTestService} from '../../services/appointment-test.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
+import {AccountComponent} from '../account/account.component';
+import {log} from 'util';
 
 @Component({
   selector: 'app-create-appointment',
@@ -10,23 +12,18 @@ import {Location} from '@angular/common';
   styleUrls: ['./create-appointment.component.css']
 })
 export class CreateAppointmentComponent implements OnInit {
-  @Input() appointment: Appointment;
+  appointment: Appointment;
+  disabled = false;
 
   constructor(private route: ActivatedRoute, private appointmentTestService: AppointmentTestService,
               private location: Location) { }
 
   ngOnInit(): void {
-    this.getAppointment();
   }
 
-  getAppointment(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.appointmentTestService.getAppointment(id)
-      .subscribe(appointment => this.appointment = appointment);
-  }
-
-  update(): void {
-    this.appointmentTestService.updateAppointment(this.appointment).subscribe(() => this.goBack());
+  onFormSubmit(): void {
+    console.log(this.appointment.title);
+     // this.appointmentTestService.addAppointment(this.appointment);
   }
 
   goBack(): void {
