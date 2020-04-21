@@ -3,12 +3,14 @@ import {RouterModule, Routes} from '@angular/router';
 import {AppointmentListComponent} from './components/appointment-list/appointment-list.component';
 import {EditAppointmentComponent} from './components/edit-appointment/edit-appointment.component';
 import {CreateAppointmentComponent} from './components/create-appointment/create-appointment.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
-  {path: 'appointments', component: AppointmentListComponent, children: [
-      {path: 'create', component: CreateAppointmentComponent}
-    ]},
-  {path: 'detail/:id', component: EditAppointmentComponent}
+  {path: 'dashboard', component: DashboardComponent},
+  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+  {path: 'appointments', component: AppointmentListComponent},
+      {path: 'create', component: CreateAppointmentComponent},
+  {path: 'detail/:id', component: EditAppointmentComponent},
 ];
 
 @NgModule({
