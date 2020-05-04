@@ -1,6 +1,6 @@
-using backend.Controllers.DTOs;
 using backend.DAL.Repositories;
 using backend.Models;
+using backend.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -36,7 +36,31 @@ namespace backend.Controllers
 			;
 		}
 
-		[HttpPut("{id}")]
+        [HttpGet("GetInTimeSpan")]
+        public ActionResult<IEnumerable<Appointment>> GetAppointmentsInTimeSpan([FromBody] AppointmentByWeekDto dto)
+        {
+            if (dto != null || dto.EndTime != null || dto.BeginTime != null || dto.EndTime <= dto.BeginTime)
+            {
+                return BadRequest();
+            }
+
+            List<Appointment> appointments = _repo.Get<Appointment>(
+                a => a.BeginTime >= dto.BeginTime && a.EndTime <= dto.EndTime
+                ).ToList();
+
+            if (appointments == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return appointments;
+            }
+
+        }
+
+
+        [HttpPut("{id}")]
 		public IActionResult PutAppointment(int id, [FromForm] Appointment appointment)
 		{
 			if (id != appointment.Id) return BadRequest();
@@ -56,6 +80,8 @@ namespace backend.Controllers
 
 			return NoContent();
 		}
+
+
 
 		[HttpPost]
 		public ActionResult<Appointment> PostAppointment(Appointment appointment)

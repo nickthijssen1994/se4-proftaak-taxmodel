@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace backend.Controllers.DTOs
+namespace backend.Models.DTOs
 {
 	public class AppointmentByWeekDto
 	{
