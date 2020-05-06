@@ -2,9 +2,15 @@
 <div class="create-appointment-page-container">
   <form (ngSubmit)="onFormSubmit()" class="mat-custom-container" >
     <h3 mat-dialog-title> Create an appointment on 6-4-2020</h3>
-        <label for="title"> Title: </label>
+    <mat-form-field>
+        <mat-label for="title"> Title: </mat-label>
         <input matInput type="input" id="title" required [minlength]="4" [(ngModel)]="appointment.title" name="title" style="height: 3%">
-    <div class="time-picker-container">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label for="location"> Location: </mat-label>
+      <input matInput type="input" id="location" required [minlength]="4" [(ngModel)]="appointment.location" name="location" style="height: 3%">
+    </mat-form-field>
+      <div class="time-picker-container">
       <mat-label class="time-picker-text"> From: </mat-label>
       <div class="ngx-material-timepicker-example__form-group">
         <input class="time-picker-input" placeholder="12:00AM" aria-label="12hr format" required
@@ -28,16 +34,12 @@
         <input type="number" [disabled]="disabled" matInput  class="input" required [min]="2" [max]="999" [(ngModel)]="appointment.maxSize" name="max amount">
       </mat-form-field>
       <mat-form-field class="description">
-        <mat-label> Comment: </mat-label>
-        <textarea matInput  cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                  maxlength="250" cdkAutosizeMaxRows="5" class="input" [(ngModel)]="appointment.description" name="description"></textarea>
-      </mat-form-field>
-    </div>
-    <mat-checkbox [(ngModel)]="disabled" color="primary" name="private"> Private meeting </mat-checkbox>
-
-    <div class="alert alert-danger">
-      title must be at least 4 characters long.
-    </div>
+    <mat-label> Comment: </mat-label>
+    <textarea matInput  cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+              maxlength="250" cdkAutosizeMaxRows="5" class="input" [(ngModel)]="appointment.description" name="description"></textarea>
+  </mat-form-field>
+</div>
+    <mat-checkbox [(ngModel)]="appointment.type" [disabled]="disabled" color="primary" name="private"> Private meeting </mat-checkbox>
 
     <button mat-raised-button type="submit"> Pick one</button>
     <button mat-button (click)="goBack()">Back</button>

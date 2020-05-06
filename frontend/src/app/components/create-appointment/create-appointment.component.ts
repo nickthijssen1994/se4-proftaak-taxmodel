@@ -16,7 +16,7 @@ export class CreateAppointmentComponent implements OnInit {
     title: '',
     description: '',
     location: '',
-    type: null,
+    type: 'true',
     minSize: null,
     maxSize: null,
     beginDate: new Date(),
@@ -43,10 +43,89 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   validate(): boolean {
-     if (this.appointment.title === '') {
-       this.notificationService.open('titel niet ingevuld');
-       return false;
+
+    if (this.appointment.type.toString() === 'true') {
+      this.appointment.type = 'Private';
+    } else {
+      this.appointment.type = 'Public';
     }
-     return true;
+    if (this.appointment.title === '') {
+       this.notificationService.open('Title not filled', null, {
+         duration: 5000,
+       });
+       return false;
+     } else if (this.appointment.title.length <= 4) {
+       this.notificationService.open('Title can`t be smaller than 4 characters', null, {
+         duration: 5000,
+       });
+       return false;
+     } else if (this.appointment.title.length > 50) {
+       this.notificationService.open('Title can`t be greater than 50 characters', null, {
+         duration: 5000,
+       });
+       return false;
+     } else if (this.appointment.location.length <= 4) {
+       console.log(this.appointment.location.length);
+       this.notificationService.open('Location has to be greater than 4 characters', null, {
+         duration: 5000,
+       });
+       return false;
+     } else if (this.appointment.location.length > 250) {
+       this.notificationService.open('Location has to be smaller than 250 characters', null, {
+         duration: 5000,
+       });
+       return false;
+     } else if (this.appointment.minSize  < 2) {
+       this.notificationService.open('Appointment need more than 1 person', null, {
+         duration: 5000,
+       });
+       return false;
+     } else if (this.appointment.maxSize <= this.appointment.minSize) {
+       this.notificationService.open('Minimum people needs to be smaller than the maximum people', null, {
+         duration: 5000,
+       });
+       return false;
+     } else if (this.appointment.maxSize > 999) {
+       this.notificationService.open('Appointment maximum persons that can join is 999', null, {
+         duration: 5000,
+       });
+       return false;
+     } else if (!this.appointment.beginDate) {
+       this.notificationService.open('Appointment needs to be planned later than 10AM', null, {
+         duration: 5000,
+       });
+       return false;
+      }
+    // TODO tijd checken
+       // else if (this.appointment.beginDate.getHours() < 10) {
+     //   this.notificationService.open('Appointment needs to be planned later than 10AM', null, {
+     //     duration: 5000,
+     //   });
+     //   return false;
+     // } else if (this.appointment.beginDate.getHours() > 17) {
+     //   this.notificationService.open('Appointment needs to be planned before than 17PM', null, {
+     //     duration: 5000,
+     //   });
+     //   return false;
+     // }
+       else if (this.appointment.endDate < this.appointment.beginDate) {
+       this.notificationService.open('End Time of appointment has to be planned after begin time', null, {
+         duration: 5000,
+       });
+       return false;
+     } else if (this.appointment.description !== '') {
+      if (this.appointment.description.length <= 4) {
+         this.notificationService.open('Description has to be greater than 4 characters', null, {
+           duration: 5000,
+         });
+         return false;
+       } else if (this.appointment.description.length > 250) {
+         this.notificationService.open('Description has to be smaller than 250 characters', null, {
+           duration: 5000,
+         });
+         return false;
+       }
+     }
+    return true;
   }
 }
