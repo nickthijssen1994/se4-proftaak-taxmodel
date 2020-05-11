@@ -11,6 +11,7 @@ namespace backend.Models.DTOs
         public DateTime? BeginTime { get; set; }
         public DateTime? EndTime { get; set; }
         public string Location { get; set; }
+        public string Type { get; set; }
         public int MaxPeople { get; set; }
         public int MinPeople { get; set; }
         public Account Organiser { get; set; }
