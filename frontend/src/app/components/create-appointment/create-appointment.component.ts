@@ -35,6 +35,9 @@ export class CreateAppointmentComponent implements OnInit {
     if (this.validate()) {
       console.log(this.appointment);
       this.appointmentTestService.addAppointment(this.appointment).subscribe();
+      this.notificationService.open('Appointment created', null, {
+        duration: 5000,
+      });
      }
   }
 
@@ -95,20 +98,7 @@ export class CreateAppointmentComponent implements OnInit {
          duration: 5000,
        });
        return false;
-      }
-    // TODO tijd checken
-       // else if (this.appointment.beginDate.getHours() < 10) {
-     //   this.notificationService.open('Appointment needs to be planned later than 10AM', null, {
-     //     duration: 5000,
-     //   });
-     //   return false;
-     // } else if (this.appointment.beginDate.getHours() > 17) {
-     //   this.notificationService.open('Appointment needs to be planned before than 17PM', null, {
-     //     duration: 5000,
-     //   });
-     //   return false;
-     // }
-       else if (this.appointment.endDate < this.appointment.beginDate) {
+      } else if (this.appointment.endDate < this.appointment.beginDate) {
        this.notificationService.open('End Time of appointment has to be planned after begin time', null, {
          duration: 5000,
        });
