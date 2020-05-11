@@ -19,7 +19,9 @@ namespace backend.Models
         [Required]
         [MaxLength(250, ErrorMessage = "Location must be 32 characters or less."), MinLength(5, ErrorMessage = "Location must be at least 5 characters.")]
         public string Location { get; set; }
+        [Required]
         public int MinPeople { get; set; }
+        [Required]
         public int MaxPeople { get; set; }
         [Required]
         public Account Organiser { get; set; }
