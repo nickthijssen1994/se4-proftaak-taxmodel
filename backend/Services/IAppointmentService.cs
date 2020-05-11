@@ -9,7 +9,7 @@ namespace backend.Services
         IEnumerable<AppointmentDto> GetAll();
         void Create(CreateAppointmentDto dto);
         void Update(AppointmentDto dto);
-        void Delete();
+        void Delete(AppointmentDto  dto);
 
     }
 }

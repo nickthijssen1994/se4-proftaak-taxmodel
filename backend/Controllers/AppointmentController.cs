@@ -1,6 +1,7 @@
 using backend.DAL.Repositories;
 using backend.Models;
 using backend.Models.DTOs;
+using backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -13,33 +14,37 @@ namespace backend.Controllers
 	public class AppointmentController : ControllerBase
 	{
 		private readonly AppointmentRepository _repo;
+        private readonly IAppointmentService _service;
 
-		public AppointmentController(AppointmentRepository repo)
+		public AppointmentController(AppointmentRepository repo, IAppointmentService service)
 		{
 			_repo = repo;
+            _service = service;
 		}
 
 		[HttpGet]
-		public ActionResult<IEnumerable<Appointment>> GetAppointments()
+		public ActionResult<IEnumerable<AppointmentDto>> GetAppointments()
 		{
-			return _repo.Get(null, null, a => a.Organiser).ToList();
+            return _service.GetAll().ToList();
 		}
 
 		[HttpGet("{id}")]
-		public ActionResult<Appointment> GetAppointmentById(int id)
+		public ActionResult<AppointmentDto> GetAppointmentById(long id)
 		{
-			var appointment = _repo.GetByID(id);
+			var appointment = _service.GetById(id);
 
-			if (appointment == null) return NotFound();
+            if (appointment == null)
+            {
+                return NotFound();
+            }
 
 			return appointment;
-			;
 		}
 
         [HttpGet("GetInTimeSpan")]
         public ActionResult<IEnumerable<Appointment>> GetAppointmentsInTimeSpan([FromBody] AppointmentByWeekDto dto)
         {
-            if (dto != null || dto.EndTime != null || dto.BeginTime != null || dto.EndTime <= dto.BeginTime)
+            if (ModelState.IsValid || dto.EndTime <= dto.BeginTime)
             {
                 return BadRequest();
             }
@@ -61,22 +66,23 @@ namespace backend.Controllers
 
 
         [HttpPut("{id}")]
-		public IActionResult PutAppointment(int id, [FromForm] Appointment appointment)
+		public IActionResult PutAppointment(long id, [FromBody] AppointmentDto appointment)
 		{
-			if (id != appointment.Id) return BadRequest();
+            if (appointment == null || id != appointment.Id)
+            {
+                return BadRequest();
+            }
 
-			_repo.Update(appointment);
-
-			try
-			{
-				_repo.Save();
-			}
-			catch (DbUpdateConcurrencyException)
-			{
-				if (!AppointmentExists(id))
-					return NotFound();
-				throw;
-			}
+            try
+            {
+                _service.Update(appointment);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AppointmentExists(id))
+                    return NotFound();
+                throw;
+            }
 
 			return NoContent();
 		}
@@ -84,27 +90,33 @@ namespace backend.Controllers
 
 
 		[HttpPost]
-		public ActionResult<Appointment> PostAppointment(Appointment appointment)
+		public ActionResult<CreateAppointmentDto> PostAppointment(CreateAppointmentDto appointment)
 		{
-			_repo.Insert(appointment);
-			_repo.Save();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            _service.Create(appointment);
 
 			return appointment;
 		}
 
 		[HttpDelete("{id}")]
-		public ActionResult<Appointment> DeleteAppointment(int id)
+		public ActionResult<AppointmentDto> DeleteAppointment(long id)
 		{
-			var appointment = _repo.GetByID(id);
-			if (appointment == null) return NotFound();
+			var appointment = _service.GetById(id);
+            if (appointment == null)
+            {
+                return NotFound();
+            }
 
-			_repo.Delete(appointment);
-			_repo.Save();
+			_service.Delete(appointment);
 
 			return appointment;
 		}
 
-		private bool AppointmentExists(int id)
+		private bool AppointmentExists(long id)
 		{
 			return _repo.Set.Any(e => e.Id == id);
 		}

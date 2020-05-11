@@ -44,9 +44,11 @@ namespace backend.Services
             _repo.Save();
         }
 
-        public void Delete()
+        public void Delete(AppointmentDto dto)
         {
-
+            Appointment appointment = _mapper.Map<Appointment>(dto);
+            _repo.Delete(appointment);
+            _repo.Save();
         }
     }
 }

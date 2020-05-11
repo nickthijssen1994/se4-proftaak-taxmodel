@@ -16,7 +16,13 @@ namespace backend.DAL.Repositories
 			Set = context.Set<TEntity>();
 		}
 
-		public DbSet<TEntity> Set { get; set; }
+        public DbSet<TEntity> Set { get; set; }
+
+		public virtual IEnumerable<TEntity> Get<TProperty>()
+		{
+			IQueryable<TEntity> query = Set;
+			return query.ToList();
+		}
 
 		public virtual IEnumerable<TEntity> Get<TProperty>(
 			Expression<Func<TEntity, bool>> filter = null,
