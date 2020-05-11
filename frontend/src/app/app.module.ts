@@ -25,6 +25,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -54,10 +56,14 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatCardModule,
     MatDatepickerModule,
     MatCheckboxModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    MatSnackBarModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  entryComponents: [CreateAppointmentComponent],
+  bootstrap: [AppComponent],
+  providers: [
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+  ]
 })
 export class AppModule {
 }

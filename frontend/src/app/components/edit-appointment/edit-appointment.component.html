@@ -7,7 +7,7 @@
       <form>
         <mat-form-field class="create-appointment-form-full-width">
           <mat-label>Title</mat-label>
-          <input matInput [(ngModel)]="appointment.title" value="{{appointment.title}}">
+          <input matInput [(ngModel)]="appointment.title" value="{{appointment.title}}" class="form-control">
         </mat-form-field>
         <mat-form-field class="create-appointment-form-full-width">
           <mat-label>Description</mat-label>
@@ -29,8 +29,10 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field class="create-appointment-form-full-width">
-          <mat-label>Number Of People</mat-label>
-          <input type="number" matInput [(ngModel)]="appointment.size" value="{{appointment.size}}">
+          <mat-label>Minimum Number Of People</mat-label>
+          <input type="number" matInput [(ngModel)]="appointment.minSize" value="{{appointment.minSize}}"> <br>
+          <mat-label>Maximum Number Of People</mat-label>
+          <input type="number" matInput [(ngModel)]="appointment.maxSize" value="{{appointment.maxSize}}"> <br>
         </mat-form-field>
         <mat-form-field class="create-appointment-form-full-width">
           <mat-label>Location</mat-label>

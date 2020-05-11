@@ -29,8 +29,12 @@
   </div>
 
   <div>
-    <label><b>number of people: </b></label>
-    <input [(ngModel)]="appointment.size" placeholder="size"/>
+    <label><b>minimum number of people: </b></label>
+    <input [(ngModel)]="appointment.minSize" placeholder="minimum size"/>
+  </div><br>
+  <div>
+    <label><b>maximum number of people: </b></label>
+    <input [(ngModel)]="appointment.maxSize" placeholder="maximum size"/>
   </div>
 
   <div>
