@@ -24,14 +24,14 @@
         <ngx-material-timepicker #defaultPicker2></ngx-material-timepicker>
       </div>
     </div>
-    <div>
+      <div>
       <mat-form-field>
         <mat-label> minimal amount of people: </mat-label>
         <input type="number" [disabled]="disabled" matInput class="input" required [min]="2" [max]="999" [(ngModel)]="appointment.minSize" name="min amount" >
       </mat-form-field><br>
       <mat-form-field>
         <mat-label> Max amount of people: </mat-label>
-        <input type="number" [disabled]="disabled" matInput  class="input" required [min]="2" [max]="999" [(ngModel)]="appointment.maxSize" name="max amount">
+        <input type="number" [disabled]="disabled" matInput  class="input" [min]="2" [max]="999" [(ngModel)]="appointment.maxSize" name="max amount">
       </mat-form-field>
       <mat-form-field class="description">
     <mat-label> Comment: </mat-label>
