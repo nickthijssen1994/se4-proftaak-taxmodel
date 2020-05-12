@@ -8,7 +8,7 @@ namespace backend.DAL.Repositories
 {
 	public interface IRepository<TEntity> where TEntity : class
 	{
-		DbSet<TEntity> Set { get; set; }
+		DbSet<TEntity> SetEntity { get; set; }
 
 		IEnumerable<TEntity> GetEntities<TProperty>(
 			Expression<Func<TEntity, bool>> filter = null,

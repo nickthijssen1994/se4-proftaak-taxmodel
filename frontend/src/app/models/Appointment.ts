@@ -4,7 +4,8 @@ export interface Appointment {
   description: string;
   location: string;
   type: string;
-  size: number;
+  minPeople: number;
+  maxPeople: number;
   beginDate: Date;
   endDate: Date;
   organiser: Account;

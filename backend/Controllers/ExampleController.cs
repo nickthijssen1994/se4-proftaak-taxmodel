@@ -10,7 +10,7 @@ namespace backend.Controllers
 	[Route("taxbreak/api/[controller]")]
 	public class ExampleController : ControllerBase
 	{
-		protected readonly ExampleRepository _repo;
+		private readonly ExampleRepository _repo;
 
 		public ExampleController(ExampleRepository repo)
 		{
@@ -38,7 +38,7 @@ namespace backend.Controllers
 		}
 
 		[HttpPut("{id}")]
-		public ActionResult<Example> Update(string id, Example example)
+		public ActionResult<Example> Update(Example example)
 		{
 			_repo.UpdateEntity(example);
 			_repo.Save();

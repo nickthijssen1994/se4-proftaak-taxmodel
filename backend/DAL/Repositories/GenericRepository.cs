@@ -16,19 +16,19 @@ namespace backend.DAL.Repositories
             Set = context.Set<TEntity>();
 		}
 
-        public DbSet<TEntity> Set { get; set; }
+    public DbSet<TEntity> Set { get; set; }
 
 		public virtual IEnumerable<TEntity> GetEntities<TProperty>()
 		{
 			IQueryable<TEntity> query = Set;
 			return query.ToList();
 		}
-
+    
 		public virtual IEnumerable<TEntity> GetEntities<TProperty>(
 			Expression<Func<TEntity, bool>> filter = null,
 			Expression<Func<TEntity, TProperty>> includes = null)
 		{
-			IQueryable<TEntity> query = Set;
+			IQueryable<TEntity> query = SetEntity;
 
             if (filter != null)
             {
@@ -45,12 +45,12 @@ namespace backend.DAL.Repositories
 
 		public virtual TEntity GetEntityById(object id)
 		{
-			return Set.Find(id);
+			return SetEntity.Find(id);
 		}
 
 		public virtual void InsertEntity(TEntity entity)
 		{
-			Set.Add(entity);
+			SetEntity.Add(entity);
 		}
 
 		public virtual void DeleteEntityById(object id)
@@ -61,13 +61,13 @@ namespace backend.DAL.Repositories
 
 		public virtual void DeleteEntity(TEntity entityToDelete)
 		{
-			if (_context.Entry(entityToDelete).State == EntityState.Detached) Set.Attach(entityToDelete);
-			Set.Remove(entityToDelete);
+			if (_context.Entry(entityToDelete).State == EntityState.Detached) SetEntity.Attach(entityToDelete);
+			SetEntity.Remove(entityToDelete);
 		}
 
 		public virtual void UpdateEntity(TEntity entityToUpdate)
 		{
-			Set.Attach(entityToUpdate);
+			SetEntity.Attach(entityToUpdate);
 			_context.Entry(entityToUpdate).State = EntityState.Modified;
 		}
 
