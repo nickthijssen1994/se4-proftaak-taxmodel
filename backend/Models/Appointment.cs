@@ -25,7 +25,7 @@ namespace backend.Models
         public int MaxPeople { get; set; }
         //[Required]
         public Account Organiser { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public ICollection<Order> Orders { get;}
         [MaxLength(500, ErrorMessage = "Description must be 500 characters or less.")]
         public string Description { get; set; }
     }
