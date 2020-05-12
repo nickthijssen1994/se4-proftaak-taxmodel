@@ -26,7 +26,7 @@ export class EditAppointmentComponent implements OnInit {
   }
 
   update(): void {
-    this.appointmentTestService.updateAppointment(this.appointment).subscribe();
+    this.appointmentTestService.updateAppointment(this.appointment).subscribe(() => this.goBack());
   }
 
   goBack(): void {
