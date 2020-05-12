@@ -12,18 +12,18 @@ namespace backend.DAL.Repositories
 
 		public GenericRepository(MySqlContext context)
 		{
-			_context = context;
-			Set = context.Set<TEntity>();
+			_context = context ?? throw new ArgumentNullException(nameof(context));
+			SetEntity = context.Set<TEntity>();
 		}
 
-		public DbSet<TEntity> Set { get; set; }
+		public DbSet<TEntity> SetEntity { get; set; }
 
-		public virtual IEnumerable<TEntity> Get<TProperty>(
+		public virtual IEnumerable<TEntity> GetEntities<TProperty>(
 			Expression<Func<TEntity, bool>> filter = null,
 			Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
 			Expression<Func<TEntity, TProperty>> includes = null)
 		{
-			IQueryable<TEntity> query = Set;
+			IQueryable<TEntity> query = SetEntity;
 
 			if (filter != null) query = query.Where(filter);
 			if (includes != null)
@@ -38,31 +38,31 @@ namespace backend.DAL.Repositories
 			return query.ToList();
 		}
 
-		public virtual TEntity GetByID(object id)
+		public virtual TEntity GetEntityByID(object id)
 		{
-			return Set.Find(id);
+			return SetEntity.Find(id);
 		}
 
-		public virtual void Insert(TEntity entity)
+		public virtual void InsertEntity(TEntity entity)
 		{
-			Set.Add(entity);
+			SetEntity.Add(entity);
 		}
 
-		public virtual void DeleteById(object id)
+		public virtual void DeleteEntityById(object id)
 		{
-			var entityToDelete = Set.Find(id);
-			Delete(entityToDelete);
+			var entityToDelete = SetEntity.Find(id);
+			DeleteEntity(entityToDelete);
 		}
 
-		public virtual void Delete(TEntity entityToDelete)
+		public virtual void DeleteEntity(TEntity entityToDelete)
 		{
-			if (_context.Entry(entityToDelete).State == EntityState.Detached) Set.Attach(entityToDelete);
-			Set.Remove(entityToDelete);
+			if (_context.Entry(entityToDelete).State == EntityState.Detached) SetEntity.Attach(entityToDelete);
+			SetEntity.Remove(entityToDelete);
 		}
 
-		public virtual void Update(TEntity entityToUpdate)
+		public virtual void UpdateEntity(TEntity entityToUpdate)
 		{
-			Set.Attach(entityToUpdate);
+			SetEntity.Attach(entityToUpdate);
 			_context.Entry(entityToUpdate).State = EntityState.Modified;
 		}
 

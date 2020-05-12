@@ -11,8 +11,7 @@ namespace backend.Models
 		[Required]
         [MaxLength(32, ErrorMessage = "Name must be 500 characters or less")]
 		public string Name { get; set; }
-
-		//public ICollection<Appointment> Appointments { get; set; }
-		public ICollection<Order> Orders { get; set; }
+		
+		public ICollection<Order> Orders { get; }
 	}
 }

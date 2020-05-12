@@ -10,7 +10,7 @@ namespace backend.Controllers
 	[Route("taxbreak/api/[controller]")]
 	public class ExampleController : ControllerBase
 	{
-		protected readonly ExampleRepository _repo;
+		private readonly ExampleRepository _repo;
 
 		public ExampleController(ExampleRepository repo)
 		{
@@ -20,27 +20,27 @@ namespace backend.Controllers
 		[HttpGet]
 		public ActionResult<IEnumerable<Example>> GetAll()
 		{
-			return _repo.Get(null, null, a => a).ToList();
+			return _repo.GetEntities(null, null, a => a).ToList();
 		}
 
 		[HttpGet("{id}")]
 		public ActionResult<Example> Get(int id)
 		{
-			return _repo.GetByID(id);
+			return _repo.GetEntityByID(id);
 		}
 
 		[HttpPost]
 		public ActionResult<Example> Add(Example example)
 		{
-			_repo.Insert(example);
+			_repo.InsertEntity(example);
 			_repo.Save();
 			return example;
 		}
 
 		[HttpPut("{id}")]
-		public ActionResult<Example> Update(string id, Example example)
+		public ActionResult<Example> Update(Example example)
 		{
-			_repo.Update(example);
+			_repo.UpdateEntity(example);
 			_repo.Save();
 			return example;
 		}
@@ -48,8 +48,8 @@ namespace backend.Controllers
 		[HttpDelete("{id}")]
 		public ActionResult<Example> Delete(int id)
 		{
-			var example = _repo.GetByID(id);
-			_repo.Delete(example);
+			var example = _repo.GetEntityByID(id);
+			_repo.DeleteEntity(example);
 			_repo.Save();
 			return example;
 		}

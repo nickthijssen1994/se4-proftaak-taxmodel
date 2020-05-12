@@ -1,4 +1,5 @@
-﻿using backend.Models;
+﻿using System;
+using backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.DAL
@@ -17,6 +18,7 @@ namespace backend.DAL
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			if (modelBuilder == null) throw new ArgumentNullException(nameof(modelBuilder));
 			modelBuilder.Entity<Account>().ToTable("account");
 			modelBuilder.Entity<Appointment>().ToTable("appointment");
 			modelBuilder.Entity<Order>().ToTable("order");
