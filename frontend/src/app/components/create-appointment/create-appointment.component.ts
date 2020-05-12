@@ -38,8 +38,7 @@ export class CreateAppointmentComponent implements OnInit {
 
   onFormSubmit(): void {
     if (this.validate()) {
-      this.completeBeginDate();
-      this.completeEndDate();
+      this.addTimeToDate();
       console.log(this.appointment);
       console.log(this.date);
       this.appointmentTestService.addAppointment(this.appointment).subscribe();
@@ -57,26 +56,19 @@ export class CreateAppointmentComponent implements OnInit {
     this.date = $event.value;
   }
 
-  completeBeginDate() {
-    const result = new Date(this.date);
-    const dateArray =  this.appointment.beginDate.toString().split(':');
+  addTimeToDate() {
+    this.appointment.beginDate = this.createDate(new Date(this.date), this.appointment.beginDate);
+    this.appointment.endDate = this.createDate(new Date(this.date), this.appointment.endDate);
+  }
 
-    console.log(dateArray);
+  createDate( date: Date, time: Date): Date {
+    const result = new Date(this.date);
+    const dateArray =  time.toString().split(':');
 
     result.setHours(Number(dateArray[0]));
     result.setMinutes(Number(dateArray[1]));
-    this.appointment.beginDate = result;
-  }
-
-  completeEndDate() {
-    const result2 = new Date(this.date);
-    const dateArray2 =  this.appointment.endDate.toString().split(':');
-
-    console.log(dateArray2);
-
-    result2.setHours(Number(dateArray2[0]));
-    result2.setMinutes(Number(dateArray2[1]));
-    this.appointment.endDate = result2;
+    console.log(result);
+    return result;
   }
 
   validate(): boolean {
