@@ -28,45 +28,18 @@
       <mat-form-field class="edit-appointment-form-full-width">
         <mat-label>Type</mat-label>
         <mat-select matNativeControl required [(ngModel)]="appointment.type"
-                    [ngModelOptions]="{standalone: true}"></mat-select>
-        <input matInput [(ngModel)]="appointment.title" value="{{appointment.title}}" class="form-control"
-               [ngModelOptions]="{standalone: true}">
-      </mat-form-field>
-      <mat-form-field class="edit-appointment-form-full-width">
-        <mat-label>Description</mat-label>
-        <input matInput [(ngModel)]="appointment.description" value="{{appointment.description}}"
-               [ngModelOptions]="{standalone: true}">
-      </mat-form-field>
-      <mat-form-field class="edit-appointment-form-full-width">
-        <mat-label>Begin Date</mat-label>
-        <input type="date" matInput [(ngModel)]="appointment.beginDate" value="{{appointment.beginDate}}"
-               [ngModelOptions]="{standalone: true}">
-      </mat-form-field>
-      <mat-form-field class="edit-appointment-form-full-width">
-        <mat-label>End Date</mat-label>
-        <input type="date" matInput [(ngModel)]="appointment.endDate" value="{{appointment.endDate}}"
-               [ngModelOptions]="{standalone: true}">
-      </mat-form-field>
-      <mat-form-field class="edit-appointment-form-full-width">
-        <mat-label>Type</mat-label>
-        <mat-select matNativeControl required [(ngModel)]="appointment.type"
                     [ngModelOptions]="{standalone: true}">
           <mat-option value="private">Private</mat-option>
           <mat-option value="public">Public</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="edit-appointment-form-full-width">
-        <mat-label>Minimum Number Of People</mat-label>
-        <input type="number" matInput [(ngModel)]="appointment.minSize" value="{{appointment.minSize}}"
-               [ngModelOptions]="{standalone: true}"> <br>
-        <mat-label>Maximum Number Of People</mat-label>
-        <input type="number" matInput [(ngModel)]="appointment.maxSize" value="{{appointment.maxSize}}"
-               [ngModelOptions]="{standalone: true}"> <br>
-      </mat-form-field>
-      <mat-form-field class="edit-appointment-form-full-width">
         <mat-label>Location</mat-label>
         <input matInput [(ngModel)]="appointment.location" value="{{appointment.location}}"
                [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <mat-form-field class="edit-appointment-form-full-width">
+        <mat-label>Minimum Number Of People</mat-label>
         <input type="number" matInput [(ngModel)]="appointment.minSize" value="{{appointment.minSize}}"
                [ngModelOptions]="{standalone: true}"> <br>
       </mat-form-field>
@@ -74,11 +47,6 @@
         <mat-label>Maximum Number Of People</mat-label>
         <input type="number" matInput [(ngModel)]="appointment.maxSize" value="{{appointment.maxSize}}"
                [ngModelOptions]="{standalone: true}"><br>
-      </mat-form-field>
-      <mat-form-field class="edit-appointment-form-full-width">
-        <mat-label>Location</mat-label>
-        <input matInput [(ngModel)]="appointment.location" value="{{appointment.location}}"
-               [ngModelOptions]="{standalone: true}">
       </mat-form-field>
     </form>
   </mat-card-content>
