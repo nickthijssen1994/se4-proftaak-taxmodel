@@ -8,87 +8,83 @@ using System.Linq;
 
 namespace backend.Controllers
 {
-    [ApiController]
-    [Route("taxbreak/api/[controller]")]
-    public class AppointmentController : ControllerBase
-    {
-        private readonly AppointmentRepository _repo;
+	[ApiController]
+	[Route("taxbreak/api/[controller]")]
+	public class AppointmentController : ControllerBase
+	{
+		private readonly AppointmentRepository _repo;
 
-        public AppointmentController(AppointmentRepository repo)
-        {
-            _repo = repo;
-        }
+		public AppointmentController(AppointmentRepository repo)
+		{
+			_repo = repo;
+		}
 
-        [HttpGet]
-        public ActionResult<IEnumerable<Appointment>> GetAppointments()
-        {
-            return _repo.Get(null, null, a => a.Organiser).ToList();
-        }
+		[HttpGet]
+		public ActionResult<IEnumerable<Appointment>> GetAppointments()
+		{
+			return _repo.Get(null, null, a => a.Organiser).ToList();
+		}
 
-        [HttpGet("{id}")]
-        public ActionResult<Appointment> GetAppointmentById(int id)
-        {
-            var appointment = _repo.GetByID(id);
+		[HttpGet("{id}")]
+		public ActionResult<Appointment> GetAppointmentById(long id)
+		{
+			var appointment = _repo.GetByID(id);
 
-            if (appointment == null) return NotFound();
+			if (appointment == null) return NotFound();
 
-            return appointment;
-            ;
-        }
+			return appointment;
+		}
 
-        [HttpPut("{id}")]
-        public ActionResult PutAppointment(int id, [FromForm] Appointment appointment)
-        {
-            if (id != appointment.Id) return BadRequest();
+		[HttpPut("{id}")]
+		public ActionResult<Appointment> PutAppointment(long id, Appointment appointment)
+		{
+			if (id != appointment.Id) return BadRequest();
+			
+			// try
+			// {
+				_repo.Update(appointment);
+				_repo.Save();
+				return _repo.GetByID(id);
+			// }
+			// catch (DbUpdateConcurrencyException)
+			// {
+			// 	if (!AppointmentExists(id))
+			// 		return NotFound();
+			// 	throw;
+			// }
+		}
 
-            _repo.Update(appointment);
+		[HttpPost]
+		public ActionResult<Appointment> PostAppointment(Appointment appointment)
+		{
+			if (ModelState.IsValid)
+			{
+				_repo.Insert(appointment);
+				_repo.Save();
 
-            try
-            {
-                _repo.Save();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AppointmentExists(id))
-                    return NotFound();
-                throw;
-            }
+				return appointment;
+			}
+			else
+			{
+				throw new System.Web.Http.HttpResponseException(System.Net.HttpStatusCode.BadRequest);
+			}
+		}
 
-            return NoContent();
-        }
+		[HttpDelete("{id}")]
+		public ActionResult<Appointment> DeleteAppointment(long id)
+		{
+			var appointment = _repo.GetByID(id);
+			if (appointment == null) return NotFound();
 
-        [HttpPost]
-        public ActionResult<Appointment> PostAppointment(Appointment appointment)
-        {
-            if (ModelState.IsValid)
-            {
-                _repo.Insert(appointment);
-                _repo.Save();
+			_repo.Delete(appointment);
+			_repo.Save();
 
-                return appointment;
-            }
-            else
-            {
-                throw new System.Web.Http.HttpResponseException(System.Net.HttpStatusCode.BadRequest);
-            }
+			return appointment;
+		}
 
-        }
-
-        [HttpDelete("{id}")]
-        public ActionResult<Appointment> DeleteAppointment(int id)
-        {
-            var appointment = _repo.GetByID(id);
-            if (appointment == null) return NotFound();
-
-            _repo.Delete(appointment);
-            _repo.Save();
-
-            return appointment;
-        }
-
-        private bool AppointmentExists(int id)
-        {
-            return _repo.Set.Any(e => e.Id == id);
-        }
-    }
+		private bool AppointmentExists(long id)
+		{
+			return _repo.Set.Any(e => e.Id == id);
+		}
+	}
 }
