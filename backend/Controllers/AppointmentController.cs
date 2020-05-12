@@ -2,6 +2,7 @@ using System;
 using backend.DAL.Repositories;
 using backend.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
@@ -26,6 +27,7 @@ namespace backend.Controllers
 			return _repo.GetEntities(null, null, a => a.Organiser).ToList();
 		}
 
+
 		[HttpGet("{id}")]
 		public ActionResult<Appointment> GetAppointmentById(long id)
 		{
@@ -33,8 +35,8 @@ namespace backend.Controllers
 
 			if (appointment == null) return NotFound();
 
-			return appointment;
-		}
+            return appointment;
+        }
 
 		[HttpPut("{id}")]
 		public ActionResult<Appointment> PutAppointment(long id, Appointment appointment)
