@@ -52,7 +52,7 @@ namespace backend.Controllers
 			if (id != appointment.Id) return BadRequest();
 			_repo.Update(appointment);
 			_repo.Save();
-			return _repo.GetByID(id);
+			return appointment;
 		}
 
 		[HttpPost]
