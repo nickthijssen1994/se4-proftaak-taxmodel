@@ -12,14 +12,14 @@ import {Location} from '@angular/common';
 export class CreateAppointmentComponent implements OnInit {
   appointment: Appointment = {
     id: null,
-    title: '',
-    description: '',
-    location: '',
-    type: null,
-    size: null,
-    beginDate: new Date(),
-    endDate: null,
-    organiser: null
+    Title: '',
+    Description: '',
+    Location: '',
+    Type: null,
+    Size: null,
+    BeginTime: new Date(),
+    EndTime: null,
+    OrganiserId: null
   };
   disabled = false;
 
