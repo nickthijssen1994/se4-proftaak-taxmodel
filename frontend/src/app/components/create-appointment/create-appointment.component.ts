@@ -23,17 +23,25 @@ export class CreateAppointmentComponent implements OnInit {
     endDate: null,
     organiser: null
   };
+
+  date: Date;
   disabled = false;
+  private testString: string;
   constructor(private route: ActivatedRoute, private appointmentTestService: AppointmentTestService,
               private location: Location, private notificationService: MatSnackBar) {
   }
 
   ngOnInit(): void {
+    const currentDate = new Date('MM/dd/yyyy').getDate();
+    this.date = new Date(currentDate);
   }
 
   onFormSubmit(): void {
     if (this.validate()) {
+      this.completeBeginDate();
+      this.completeEndDate();
       console.log(this.appointment);
+      console.log(this.date);
       this.appointmentTestService.addAppointment(this.appointment).subscribe();
       this.notificationService.open('Appointment created', null, {
         duration: 5000,
@@ -43,6 +51,32 @@ export class CreateAppointmentComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  onDangeDate($event): void {
+    this.date = $event.value;
+  }
+
+  completeBeginDate() {
+    const result = new Date(this.date);
+    const dateArray =  this.appointment.beginDate.toString().split(':');
+
+    console.log(dateArray);
+
+    result.setHours(Number(dateArray[0]));
+    result.setMinutes(Number(dateArray[1]));
+    this.appointment.beginDate = result;
+  }
+
+  completeEndDate() {
+    const result2 = new Date(this.date);
+    const dateArray2 =  this.appointment.endDate.toString().split(':');
+
+    console.log(dateArray2);
+
+    result2.setHours(Number(dateArray2[0]));
+    result2.setMinutes(Number(dateArray2[1]));
+    this.appointment.endDate = result2;
   }
 
   validate(): boolean {
