@@ -39,35 +39,23 @@ namespace backend.Controllers
 		public ActionResult<Appointment> PutAppointment(long id, Appointment appointment)
 		{
 			if (id != appointment.Id) return BadRequest();
-			
-			// try
-			// {
-				_repo.Update(appointment);
-				_repo.Save();
-				return _repo.GetByID(id);
-			// }
-			// catch (DbUpdateConcurrencyException)
-			// {
-			// 	if (!AppointmentExists(id))
-			// 		return NotFound();
-			// 	throw;
-			// }
+			_repo.Update(appointment);
+			_repo.Save();
+			return _repo.GetByID(id);
 		}
 
 		[HttpPost]
 		public ActionResult<Appointment> PostAppointment(Appointment appointment)
 		{
-			if (ModelState.IsValid)
+			if (!ModelState.IsValid)
 			{
-				_repo.Insert(appointment);
-				_repo.Save();
+				return BadRequest();
+			}
 
-				return appointment;
-			}
-			else
-			{
-				throw new System.Web.Http.HttpResponseException(System.Net.HttpStatusCode.BadRequest);
-			}
+			_repo.Insert(appointment);
+			_repo.Save();
+
+			return appointment;
 		}
 
 		[HttpDelete("{id}")]
