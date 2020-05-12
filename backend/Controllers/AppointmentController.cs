@@ -3,6 +3,7 @@ using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.Linq;
 
 namespace backend.Controllers
@@ -36,7 +37,7 @@ namespace backend.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult PutAppointment(int id, [FromForm] Appointment appointment)
+        public ActionResult PutAppointment(int id, [FromForm] Appointment appointment)
         {
             if (id != appointment.Id) return BadRequest();
 

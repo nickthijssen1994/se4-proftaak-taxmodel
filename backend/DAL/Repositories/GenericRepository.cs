@@ -12,7 +12,7 @@ namespace backend.DAL.Repositories
 
 		public GenericRepository(MySqlContext context)
 		{
-			_context = context;
+			_context = context ?? throw new ArgumentNullException(nameof(context));
 			Set = context.Set<TEntity>();
 		}
 
