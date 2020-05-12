@@ -71,16 +71,7 @@ namespace backend.Controllers
                 return BadRequest();
             }
 
-            try
-            {
-                _service.Update(appointment);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AppointmentExists(id))
-                    return NotFound();
-                throw;
-            }
+             _service.Update(appointment);
 
 			return appointment;
 		}
