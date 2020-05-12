@@ -42,16 +42,14 @@ namespace backend.Controllers
 		}
 
         [HttpGet("GetInTimeSpan")]
-        public ActionResult<IEnumerable<Appointment>> GetAppointmentsInTimeSpan([FromBody] AppointmentByWeekDto dto)
+        public ActionResult<IEnumerable<AppointmentDto>> GetAppointmentsInTimeSpan(AppointmentsWithinTimespanDto dto)
         {
-            if (ModelState.IsValid || dto.EndTime <= dto.BeginTime)
+            if (ModelState.IsValid || dto == null || dto.EndTime <= dto.BeginTime)
             {
                 return BadRequest();
             }
 
-            List<Appointment> appointments = _repo.Get<Appointment>(
-                a => a.BeginTime >= dto.BeginTime && a.EndTime <= dto.EndTime
-                ).ToList();
+            List<AppointmentDto> appointments = _service.GetWithinTimeSpan(dto).ToList();
 
             if (appointments == null)
             {
@@ -66,9 +64,9 @@ namespace backend.Controllers
 
 
         [HttpPut("{id}")]
-		public IActionResult PutAppointment(long id, [FromBody] AppointmentDto appointment)
+		public ActionResult<UpdateAppointmentDto> PutAppointment(long id, UpdateAppointmentDto appointment)
 		{
-            if (appointment == null || id != appointment.Id)
+            if (!ModelState.IsValid ||appointment == null || id != appointment.Id)
             {
                 return BadRequest();
             }
@@ -84,7 +82,7 @@ namespace backend.Controllers
                 throw;
             }
 
-			return NoContent();
+			return appointment;
 		}
 
 

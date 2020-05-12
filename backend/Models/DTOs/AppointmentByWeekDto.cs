@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace backend.Models.DTOs
 {
-	public class AppointmentByWeekDto
+	public class AppointmentsWithinTimespanDto
 	{
         [Required]
 		public DateTime? BeginTime { get; set; }
         [Required]
-		public DateTime EndTime { get; set; }
+		public DateTime? EndTime { get; set; }
 	}
 }
