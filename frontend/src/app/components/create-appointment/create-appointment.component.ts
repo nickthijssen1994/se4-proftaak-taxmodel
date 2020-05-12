@@ -17,8 +17,8 @@ export class CreateAppointmentComponent implements OnInit {
     description: '',
     location: '',
     type: 'true',
-    minSize: null,
-    maxSize: null,
+    minPeople: null,
+    maxPeople: null,
     beginDate: new Date(),
     endDate: null,
     organiser: null
@@ -104,13 +104,13 @@ export class CreateAppointmentComponent implements OnInit {
          duration: 5000,
        });
        return false;
-     } else if (this.appointment.minPeople  < 2) {
+     } else if (this.appointment.minPeople < 2) {
        this.notificationService.open('Appointment need more than 1 person', null, {
          duration: 5000,
        });
        return false;
      } else if (this.appointment.maxPeople) {
-      if (this.appointment.maxPeople <= this.appointment.maxPeople) {
+      if (this.appointment.maxPeople <= this.appointment.minPeople) {
         this.notificationService.open('Minimum people needs to be smaller than the maximum people', null, {
           duration: 5000,
         });
