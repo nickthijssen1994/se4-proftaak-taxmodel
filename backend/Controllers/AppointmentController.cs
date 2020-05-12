@@ -1,6 +1,7 @@
 using backend.DAL.Repositories;
 using backend.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -27,7 +28,16 @@ namespace backend.Controllers
         [HttpGet("{id}")]
         public ActionResult<Appointment> GetAppointmentById(int id)
         {
-            var appointment = _repo.GetByID(id);
+            long longId;
+            try
+            {
+                longId = Convert.ToInt64(id);
+            }
+            catch
+            {
+                throw new System.Web.Http.HttpResponseException(System.Net.HttpStatusCode.BadRequest);
+            }
+            var appointment = _repo.GetByID(longId);
 
             if (appointment == null) return NotFound();
 
