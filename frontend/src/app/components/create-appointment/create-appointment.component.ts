@@ -78,18 +78,18 @@ export class CreateAppointmentComponent implements OnInit {
          duration: 5000,
        });
        return false;
-     } else if (this.appointment.minSize  < 2) {
+     } else if (this.appointment.minPeople  < 2) {
        this.notificationService.open('Appointment need more than 1 person', null, {
          duration: 5000,
        });
        return false;
-     } else if (this.appointment.maxSize) {
-      if (this.appointment.maxSize <= this.appointment.minSize) {
+     } else if (this.appointment.maxPeople) {
+      if (this.appointment.maxPeople <= this.appointment.maxPeople) {
         this.notificationService.open('Minimum people needs to be smaller than the maximum people', null, {
           duration: 5000,
         });
         return false;
-      } else if (this.appointment.maxSize > 999) {
+      } else if (this.appointment.maxPeople > 999) {
         this.notificationService.open('Appointment maximum persons that can join is 999', null, {
           duration: 5000,
         });
