@@ -1,6 +1,7 @@
 using backend.DAL.Repositories;
 using backend.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
@@ -25,15 +26,25 @@ namespace backend.Controllers
 			return _repo.Get(null, null, a => a.Organiser).ToList();
 		}
 
-		[HttpGet("{id}")]
-		public ActionResult<Appointment> GetAppointmentById(long id)
-		{
-			var appointment = _repo.GetByID(id);
+        [HttpGet("{id}")]
+        public ActionResult<Appointment> GetAppointmentById(int id)
+        {
+            long longId;
+            try
+            {
+                longId = Convert.ToInt64(id);
+            }
+            catch
+            {
+                throw new System.Web.Http.HttpResponseException(System.Net.HttpStatusCode.BadRequest);
+            }
+            var appointment = _repo.GetByID(longId);
 
-			if (appointment == null) return NotFound();
+            if (appointment == null) return NotFound();
 
-			return appointment;
-		}
+            return appointment;
+            ;
+        }
 
 		[HttpPut("{id}")]
 		public ActionResult<Appointment> PutAppointment(long id, Appointment appointment)
