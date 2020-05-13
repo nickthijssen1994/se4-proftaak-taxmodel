@@ -85,7 +85,7 @@ export class CreateAppointmentComponent implements OnInit {
       });
       return false;
     } else if (this.appointment.maxPeople) {
-      if (this.appointment.maxPeople <= this.appointment.maxPeople) {
+      if (this.appointment.maxPeople <= this.appointment.minPeople) {
         this.notificationService.open('Minimum people needs to be smaller than the maximum people', null, {
           duration: 5000,
         });
