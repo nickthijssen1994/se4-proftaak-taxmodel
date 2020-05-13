@@ -26,7 +26,6 @@ export class CreateAppointmentComponent implements OnInit {
 
   date: Date;
   disabled = false;
-  
   constructor(private route: ActivatedRoute, private appointmentTestService: AppointmentTestService,
               private location: Location, private notificationService: MatSnackBar) {
   }
