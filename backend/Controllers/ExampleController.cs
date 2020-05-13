@@ -20,13 +20,13 @@ namespace backend.Controllers
 		[HttpGet]
 		public ActionResult<IEnumerable<Example>> GetAll()
 		{
-			return _repo.GetEntities(null, null, a => a).ToList();
+			return _repo.GetEntities(null, a => a).ToList();
 		}
 
 		[HttpGet("{id}")]
 		public ActionResult<Example> Get(int id)
 		{
-			return _repo.GetEntityByID(id);
+			return _repo.GetEntityById(id);
 		}
 
 		[HttpPost]
@@ -48,7 +48,7 @@ namespace backend.Controllers
 		[HttpDelete("{id}")]
 		public ActionResult<Example> Delete(int id)
 		{
-			var example = _repo.GetEntityByID(id);
+			var example = _repo.GetEntityById(id);
 			_repo.DeleteEntity(example);
 			_repo.Save();
 			return example;

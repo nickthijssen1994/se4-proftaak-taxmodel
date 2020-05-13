@@ -12,10 +12,9 @@ namespace backend.DAL.Repositories
 
 		IEnumerable<TEntity> GetEntities<TProperty>(
 			Expression<Func<TEntity, bool>> filter = null,
-			Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
 			Expression<Func<TEntity, TProperty>> includes = null);
 
-		TEntity GetEntityByID(object id);
+		TEntity GetEntityById(object id);
 		void InsertEntity(TEntity entity);
 		void DeleteEntityById(object id);
 		void DeleteEntity(TEntity entityToDelete);

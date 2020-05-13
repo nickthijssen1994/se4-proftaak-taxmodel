@@ -1,6 +1,9 @@
 using System;
+using AutoMapper;
 using backend.DAL;
 using backend.DAL.Repositories;
+using backend.Models.Mapping;
+using backend.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -48,7 +51,10 @@ namespace backend
 					options.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole(); }));
 				});
 
+
+            services.AddAutoMapper(config => config.AddProfile<AutoMappingProfile>(), typeof(Startup));
 			services.AddTransient<ExampleRepository>();
+            services.AddTransient<IAppointmentService, AppointmentService>();
 			services.AddTransient<AppointmentRepository>();
 			services.AddControllers();
 		}

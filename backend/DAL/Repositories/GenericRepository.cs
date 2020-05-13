@@ -12,33 +12,38 @@ namespace backend.DAL.Repositories
 
 		public GenericRepository(MySqlContext context)
 		{
-			_context = context ?? throw new ArgumentNullException(nameof(context));
-			SetEntity = context.Set<TEntity>();
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            Set = context.Set<TEntity>();
 		}
 
-		public DbSet<TEntity> SetEntity { get; set; }
+    public DbSet<TEntity> Set { get; set; }
 
+		public virtual IEnumerable<TEntity> GetEntities<TProperty>()
+		{
+			IQueryable<TEntity> query = Set;
+			return query.ToList();
+		}
+    
 		public virtual IEnumerable<TEntity> GetEntities<TProperty>(
 			Expression<Func<TEntity, bool>> filter = null,
-			Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
 			Expression<Func<TEntity, TProperty>> includes = null)
 		{
 			IQueryable<TEntity> query = SetEntity;
 
-			if (filter != null) query = query.Where(filter);
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+           
 			if (includes != null)
 			{
-				if (orderBy != null) return orderBy(query.Include(includes));
-
 				return query.Include(includes);
 			}
 
-			if (orderBy != null)
-				return orderBy(query).ToList();
 			return query.ToList();
 		}
 
-		public virtual TEntity GetEntityByID(object id)
+		public virtual TEntity GetEntityById(object id)
 		{
 			return SetEntity.Find(id);
 		}
@@ -50,7 +55,7 @@ namespace backend.DAL.Repositories
 
 		public virtual void DeleteEntityById(object id)
 		{
-			var entityToDelete = SetEntity.Find(id);
+			var entityToDelete = Set.Find(id);
 			DeleteEntity(entityToDelete);
 		}
 
