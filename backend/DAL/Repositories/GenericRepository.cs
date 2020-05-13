@@ -13,14 +13,14 @@ namespace backend.DAL.Repositories
 		public GenericRepository(MySqlContext context)
 		{
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            Set = context.Set<TEntity>();
+            SetEntity = context.Set<TEntity>();
 		}
 
-    public DbSet<TEntity> Set { get; set; }
+    public DbSet<TEntity> SetEntity { get; set; }
 
 		public virtual IEnumerable<TEntity> GetEntities<TProperty>()
 		{
-			IQueryable<TEntity> query = Set;
+			IQueryable<TEntity> query = SetEntity;
 			return query.ToList();
 		}
     
@@ -55,7 +55,7 @@ namespace backend.DAL.Repositories
 
 		public virtual void DeleteEntityById(object id)
 		{
-			var entityToDelete = Set.Find(id);
+			var entityToDelete = SetEntity.Find(id);
 			DeleteEntity(entityToDelete);
 		}
 
