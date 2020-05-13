@@ -11,9 +11,10 @@ declare var $: any;
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-  public Appointments: Array<Appointment> = null;
+  public Appointments: Array<Appointment> = [];
   public test: Appointment = null;
-  test2: CalendarEvent;
+  x: any;
+  public Events: Array<CalendarEvent> = [];
   title = 'Calendar';
   constructor(private http: HttpClient) {
   }
@@ -21,18 +22,14 @@ export class CalendarComponent implements OnInit {
     this.getItems();
   }
 
-getItems() {
-   return this.http.get('https://localhost:5001/taxbreak/api/appointment').subscribe(data => {
-   this.test = data as Appointment;
-   console.log(this.test);
-   const event = CalendarEvent.create({
-     id: this.test.id,
-     begin: this.test.beginDate.toString(),
-     end: this.test.endDate.toString(),
-     title: this.test.title.toString(),
-   });
-   console.log(event)
-   setTimeout(() => {
+  getItems() {
+    return this.http.get('https://localhost:5001/taxbreak/api/appointment').subscribe(data => {
+      this.Appointments = data as Appointment[];
+      this.Appointments.forEach((elements) => {
+        const events = new CalendarEvent(elements.id, elements.title, elements.beginTime, elements.endTime);
+        this.Events.push(events);
+      });
+      setTimeout(() => {
         $('#calendar').fullCalendar({
           header: {
             left: 'prev,next',
@@ -41,7 +38,7 @@ getItems() {
           },
           plugins: Interaction,
           eventClick(info) {
-            alert('Datum = ' + new Date(info.start).toLocaleString() + ' - ' + new Date(info.end).toLocaleString());
+            alert('ID = ' + info.id + ' - Datum = ' + new Date(info.start).toUTCString() + ' - ' + new Date(info.end).toUTCString());
           },
           navLinks: true,
           editable: true,
@@ -51,10 +48,10 @@ getItems() {
           endTime: '15:00',
           events: [
             {
-          }
-        ]
-        }).fullCalendar('addEventSource', event);
+            }
+          ]
+        }).fullCalendar('addEventSource', this.Events);
       }, 100);
     });
-}
+  }
 }

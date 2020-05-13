@@ -10,16 +10,16 @@ import {Location} from '@angular/common';
   styleUrls: ['./create-appointment.component.css']
 })
 export class CreateAppointmentComponent implements OnInit {
-  appointment: Appointment = {
+  appointment: {}  = {
     id: null,
-    Title: '',
-    Description: '',
-    Location: '',
-    Type: null,
-    Size: null,
-    BeginTime: new Date(),
-    EndTime: null,
-    OrganiserId: null
+    title: '',
+    description: '',
+    location: '',
+    type: null,
+    size: null,
+    beginTime: new Date(),
+    endTime: null,
+    organiser: null
   };
   disabled = false;
 

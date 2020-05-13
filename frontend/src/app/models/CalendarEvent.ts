@@ -1,5 +1,14 @@
+import construct = Reflect.construct;
+
 export class CalendarEvent {
-  static create(event: { id: number; begin: string, end: string, title: string; }) {
-    return { id: event.id, begin: event.begin, end: event.end, title: event.title};
+  id: number;
+  title: string;
+  start: Date;
+  end: Date;
+  constructor(Id: number, Title: string, Start: Date, End: Date) {
+    this.id = Id;
+    this.title = Title;
+    this.start = Start;
+    this.end = End;
 }
 }
