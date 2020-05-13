@@ -17,8 +17,8 @@ export class CreateAppointmentComponent implements OnInit {
     description: '',
     location: '',
     type: 'true',
-    minSize: null,
-    maxSize: null,
+    minPeople: null,
+    maxPeople: null,
     beginDate: new Date(),
     endDate: null,
     organiser: null
