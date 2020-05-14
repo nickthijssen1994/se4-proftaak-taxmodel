@@ -22,13 +22,13 @@
       <mat-label class="time-picker-text"> From: </mat-label>
       <div class="ngx-material-timepicker-example__form-group">
         <input class="time-picker-input" placeholder="12:00" [format]="24" aria-label="24hr format" required
-               [ngxTimepicker]="defaultPicker" min="10:00" max="17:00" [(ngModel)]="appointment.beginDate" name="begin time" required (error)="defaultPicker.appendToInput">
+              [ngxTimepicker]="defaultPicker" min="10:00" max="17:00" [(ngModel)]="appointment.beginTime" name="begin time" required (error)="defaultPicker.appendToInput">
         <ngx-material-timepicker #defaultPicker [preventOverlayClick]="true"></ngx-material-timepicker>
       </div>
       <mat-label class="time-picker-text"> to</mat-label>
       <div class="ngx-material-timepicker-example__form-group">
         <input class="time-picker-input" placeholder="17:00" [format]="24" aria-label="24hr format"
-               [ngxTimepicker]="defaultPicker2" min="10:00" max="17:00" [(ngModel)]="appointment.endDate" name="end time" required>
+               [ngxTimepicker]="defaultPicker2" min="10:00" max="17:00" [(ngModel)]="appointment.endTime" name="end time" required>
         <ngx-material-timepicker #defaultPicker2></ngx-material-timepicker>
       </div>
     </div>
