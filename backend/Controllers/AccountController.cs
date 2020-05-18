@@ -1,6 +1,7 @@
 ﻿using backend.DAL.Repositories;
 using backend.Helpers;
 using backend.Models.DTOs.Accounts;
+using backend.Security;
 using backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -31,21 +32,21 @@ namespace backend.Controllers
         }
 
         [HttpPost("login")]
-        public ActionResult<bool> Login(LoginDto dto)
+        public ActionResult<string> Login(LoginDto loginDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            // Auth with identity
+            // Auth here
 
             bool loginFailed = false;
 
             if (!loginFailed)
             {
-                //TODO: Return something useful
-                return true;
+                JwtGenerator jwtGenerator = new JwtGenerator();
+                return Ok(jwtGenerator.GenerateToken(loginDto.Name));
             }
             else
             {
@@ -69,7 +70,8 @@ namespace backend.Controllers
                     PasswordHasher hasher = new PasswordHasher();
                     registerDto.Password = hasher.GenerateHash(registerDto.Password);
                     service.Create(registerDto);
-                    return Ok(registerDto);
+                    JwtGenerator jwtGenerator = new JwtGenerator();
+                    return Ok(jwtGenerator.GenerateToken(registerDto.Name));
                 }
                 else
                 {
