@@ -8,6 +8,7 @@ namespace backend.Models
     public class Account
     {
         public long Id { get; set; }
+        public string Email { get; set; }
         [Required]
         [MinLength(5, ErrorMessage = "Name must be at least 5 characters.")]
         [MaxLength(32, ErrorMessage = "Name must be 32 characters or less.")]

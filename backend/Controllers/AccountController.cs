@@ -1,4 +1,6 @@
-﻿using backend.Models.DTOs.Accounts;
+﻿using backend.DAL.Repositories;
+using backend.Models.DTOs.Accounts;
+using backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,9 +15,18 @@ namespace backend.Controllers
     [Route("taxbreak/api/[controller]")]
     public class AccountController : ControllerBase
     {
+        private readonly IAccountService service;
+
         //Inject UserService
-        public AccountController()
+        public AccountController(IAccountService service)
         {
+            this.service = service;
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<AccountDto>> GetAccounts()
+        {
+            return service.GetAll().ToList();
         }
 
         [HttpPost("login")]
@@ -42,12 +53,22 @@ namespace backend.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register(RegisterDto dto)
+        public IActionResult Register(RegisterDto registerDto)
         {
-            if (Regex.Match(dto.Password, ".*\\d.*").Success)
+            if (registerDto.Password.Any(char.IsDigit))
             {
 
-                if (Regex.Match(dto.Password, ".*[A - Z].* ").Success)
+                if (registerDto.Password.Any(char.IsUpper))
+                {
+                    if (!ModelState.IsValid)
+                    {
+                        return BadRequest();
+                    }
+
+                    service.Create(registerDto);
+                    return Ok(registerDto);
+                }
+                else
                 {
                     return BadRequest(new Exception("Password must contain at least one capital."));
                 }
@@ -55,26 +76,6 @@ namespace backend.Controllers
             else
             {
                 return BadRequest(new Exception("Password must contain at least one number."));
-
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            // Register with identity
-
-            bool registerFailed = false;
-
-            if (!registerFailed)
-            {
-                // TODO: return something useful
-                return Ok();
-            }
-            else
-            {
-                return Unauthorized();
             }
         }
     }
