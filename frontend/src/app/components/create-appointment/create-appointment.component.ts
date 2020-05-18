@@ -4,7 +4,6 @@ import {AppointmentTestService} from '../../services/appointment-test.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Appointment} from "../../models/Appointment";
 
 @Component({
   selector: 'app-create-appointment',
@@ -19,11 +18,11 @@ export class CreateAppointmentComponent implements OnInit {
     type: 'true',
     minPeople: null,
     maxPeople: null,
-    beginDate: '',
-    endDate: '',
+    beginDate: null,
+    endDate: null,
     organiser: null,
-    beginTime: null,
-    endTime: null,
+    beginTime: '',
+    endTime: '',
   };
 
   date: Date;
@@ -53,13 +52,13 @@ export class CreateAppointmentComponent implements OnInit {
     this.location.back();
   }
 
-  onDangeDate($event): void {
+  onChangeDate($event): void {
     this.date = $event.value;
   }
 
   addTimeToDate() {
-    this.appointment.beginDate = this.createDate(new Date(this.date), this.appointment.beginTime).toISOString();
-    this.appointment.endDate = this.createDate(new Date(this.date), this.appointment.endTime).toISOString();
+    this.appointment.beginTime = this.createDate(new Date(this.date), this.appointment.beginDate).toISOString();
+    this.appointment.endTime = this.createDate(new Date(this.date), this.appointment.endDate).toISOString();
     console.log(this.appointment.beginDate);
   }
 
@@ -67,7 +66,7 @@ export class CreateAppointmentComponent implements OnInit {
     let result = new Date(this.date);
     const dateArray =  time.toString().split(':');
 
-    result.setHours(Number(dateArray[0]));
+    result.setHours(Number(dateArray[0]) + 2 );
     result.setMinutes(Number(dateArray[1]));
 
     result = new Date(result.toISOString());

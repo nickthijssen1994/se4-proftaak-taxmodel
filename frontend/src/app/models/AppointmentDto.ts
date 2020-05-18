@@ -5,9 +5,9 @@ export interface AppointmentDto {
   type: string;
   minPeople: number;
   maxPeople: number;
-  beginDate: string;
-  endDate: string;
-  beginTime: Date;
-  endTime: Date;
+  beginDate: Date;
+  endDate: Date;
+  beginTime: string;
+  endTime: string;
   organiser: Account;
 }

@@ -6,7 +6,7 @@ export interface Appointment {
   type: string;
   minPeople: number;
   maxPeople: number;
-  beginDate: Date;
-  endDate: Date;
+  beginTime: Date;
+  endTime: Date;
   organiser: Account;
 }
