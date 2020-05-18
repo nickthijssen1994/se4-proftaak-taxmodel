@@ -45,8 +45,7 @@ namespace backend.Controllers
 
             if (!loginFailed)
             {
-                JwtGenerator jwtGenerator = new JwtGenerator();
-                return Ok(jwtGenerator.GenerateToken(loginDto.Name));
+                return Ok(JwtManager.GenerateToken(loginDto.Name));
             }
             else
             {
@@ -70,8 +69,7 @@ namespace backend.Controllers
                     PasswordHasher hasher = new PasswordHasher();
                     registerDto.Password = hasher.GenerateHash(registerDto.Password);
                     service.Create(registerDto);
-                    JwtGenerator jwtGenerator = new JwtGenerator();
-                    return Ok(jwtGenerator.GenerateToken(registerDto.Name));
+                    return Ok(JwtManager.GenerateToken(registerDto.Name));
                 }
                 else
                 {

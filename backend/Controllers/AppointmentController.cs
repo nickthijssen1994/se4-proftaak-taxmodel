@@ -1,6 +1,7 @@
 using backend.DAL.Repositories;
 using backend.Models;
 using backend.Models.DTOs;
+using backend.Security.Filters;
 using backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,6 +25,7 @@ namespace backend.Controllers
             _service = service;
         }
 
+        //[JwtAuthentication]
         [HttpGet]
         public ActionResult<IEnumerable<AppointmentDto>> GetAppointments()
         {
@@ -31,6 +33,7 @@ namespace backend.Controllers
         }
 
 
+        //[JwtAuthentication]
         [HttpGet("{id}")]
         public ActionResult<AppointmentDto> GetAppointmentById(long id)
         {
@@ -44,6 +47,7 @@ namespace backend.Controllers
             return appointment;
         }
 
+        //[JwtAuthentication]
         [HttpGet("GetInTimeSpan")]
         public ActionResult<IEnumerable<AppointmentDto>> GetAppointmentsInTimeSpan(AppointmentsWithinTimespanDto dto)
         {
@@ -66,6 +70,7 @@ namespace backend.Controllers
         }
 
 
+        //[JwtAuthentication]
         [HttpPut("{id}")]
         public ActionResult<UpdateAppointmentDto> PutAppointment(long id, UpdateAppointmentDto appointment)
         {
@@ -81,6 +86,7 @@ namespace backend.Controllers
 
 
 
+        //[JwtAuthentication]
         [HttpPost]
         public ActionResult<CreateAppointmentDto> PostAppointment(CreateAppointmentDto appointment)
         {
@@ -94,6 +100,7 @@ namespace backend.Controllers
             return appointment;
         }
 
+        //[JwtAuthentication]
         [HttpDelete("{id}")]
         public ActionResult<AppointmentDto> DeleteAppointment(long id)
         {
