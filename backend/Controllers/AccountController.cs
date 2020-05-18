@@ -1,4 +1,5 @@
 ﻿using backend.DAL.Repositories;
+using backend.Helpers;
 using backend.Models.DTOs.Accounts;
 using backend.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -65,6 +66,8 @@ namespace backend.Controllers
                         return BadRequest();
                     }
 
+                    PasswordHasher hasher = new PasswordHasher();
+                    registerDto.Password = hasher.GenerateHash(registerDto.Password);
                     service.Create(registerDto);
                     return Ok(registerDto);
                 }
