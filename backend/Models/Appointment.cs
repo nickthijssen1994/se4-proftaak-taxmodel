@@ -18,5 +18,6 @@ namespace backend.Models
         public Account Organiser { get; set; }
         public ICollection<Order> Orders { get; set; }
         public string Description { get; set; }
+        public string Type { get; set; }
     }
 }

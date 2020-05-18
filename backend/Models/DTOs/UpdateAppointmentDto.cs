@@ -28,5 +28,7 @@ namespace backend.Models.DTOs
         public ICollection<Order> Orders { get; }
         [MaxLength(500, ErrorMessage = "Description must be 500 characters or less.")]
         public string Description { get; set; }
+
+        public string Type { get; set; }
     }
 }
