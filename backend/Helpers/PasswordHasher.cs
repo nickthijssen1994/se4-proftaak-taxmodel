@@ -30,7 +30,7 @@ namespace backend.Helpers
             return sBuilder.ToString();
         }
 
-        private bool VerifyHash(string input, string hash)
+        public bool VerifyHash(string input, string hash)
         {
             // Hash the input.
             var hashOfInput = GenerateHash(input);
