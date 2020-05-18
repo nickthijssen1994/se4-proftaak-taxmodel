@@ -11,5 +11,6 @@ namespace backend.Services
         void Create(CreateAppointmentDto dto);
         void Update(UpdateAppointmentDto dto);
         void Delete(AppointmentDto  dto);
+        void Unsubscribe(UnsubscribeFromAppointmentDto dto);
     }
 }
