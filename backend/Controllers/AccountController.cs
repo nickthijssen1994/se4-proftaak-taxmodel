@@ -1,7 +1,10 @@
 ﻿using backend.Models.DTOs.Accounts;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace backend.Controllers
@@ -41,6 +44,20 @@ namespace backend.Controllers
         [HttpPost("register")]
         public IActionResult Register(RegisterDto dto)
         {
+            if (Regex.Match(dto.Password, ".*\\d.*").Success)
+            {
+
+                if (Regex.Match(dto.Password, ".*[A - Z].* ").Success)
+                {
+                    return BadRequest(new Exception("Password must contain at least one capital."));
+                }
+            }
+            else
+            {
+                return BadRequest(new Exception("Password must contain at least one number."));
+
+            }
+
             if (!ModelState.IsValid)
             {
                 return BadRequest();
