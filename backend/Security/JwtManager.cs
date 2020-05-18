@@ -6,8 +6,8 @@ using System.Security.Claims;
 namespace backend.Security
 {
     /*
-      Created by: Arialdo Martini
-      Date: 21-06-2019
+      Created by: @cuongle
+      Date: 27-10-2016
       Source: https://github.com/cuongle/WebApi.Jwt
      */
 

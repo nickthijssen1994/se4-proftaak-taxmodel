@@ -13,7 +13,7 @@ namespace backend.Security.Filters
       Date: 27-10-2016
       Source: https://github.com/cuongle/WebApi.Jwt
      */
-
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class JwtAuthenticationAttribute : Attribute, IAuthenticationFilter
     {
         public string Realm { get; set; }
@@ -25,7 +25,10 @@ namespace backend.Security.Filters
             var authorization = request.Headers.Authorization;
 
             if (authorization == null || authorization.Scheme != "Bearer")
+            {
+                context.ErrorResult = new AuthenticationFailureResult("Missing Authorization Header", request);
                 return;
+            }
 
             if (string.IsNullOrEmpty(authorization.Parameter))
             {
