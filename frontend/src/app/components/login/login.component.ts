@@ -9,7 +9,7 @@ import {AccountService} from '../../services/account.service';
 })
 export class LoginComponent implements OnInit {
   account: LoginDto = {
-    email: null,
+    name: null,
     password: null
 };
 
@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(account: LoginDto): void {
-    this.accountService.login(account);
+    this.accountService.login(account).subscribe();
   }
-
 }

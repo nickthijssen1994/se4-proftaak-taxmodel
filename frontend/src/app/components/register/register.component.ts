@@ -9,17 +9,18 @@ import {RegisterDto} from '../../models/RegisterDto';
 })
 export class RegisterComponent implements OnInit {
   account: RegisterDto = {
-    name : null,
-    password : null,
-    email : null,
-  }
+    name: null,
+    password: null,
+    email: null,
+  };
 
-  constructor(private accountService: AccountService) { }
+  constructor(private accountService: AccountService) {
+  }
 
   ngOnInit(): void {
   }
 
   register(account: RegisterDto) {
-    this.accountService.register(account);
+    this.accountService.register(account).subscribe();
   }
 }
