@@ -27,8 +27,34 @@ namespace backend.Services
 
         public AccountDto GetByName(string name)
         {
-            Account account = repository.GetEntities<Account>(a => a.Name == name).FirstOrDefault();
+            Account account = repository.GetEntities<Account>(a => a.Name == name).Single();
             return mapper.Map<AccountDto>(account);
+        }
+
+        public bool CheckNameExists(string name)
+        {
+            try
+            {
+                Account account = repository.GetEntities<Account>(a => a.Name == name).Single();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool CheckEmailExists(string email)
+        {
+            try
+            {
+                Account account = repository.GetEntities<Account>(a => a.Email == email).Single();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public RegisterDto Register(RegisterDto registerDto)

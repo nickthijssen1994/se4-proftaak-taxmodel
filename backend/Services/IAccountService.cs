@@ -11,6 +11,8 @@ namespace backend.Services
     {
         AccountDto GetById(long id);
         AccountDto GetByName(string name);
+        bool CheckNameExists(string name);
+        bool CheckEmailExists(string email);
         IEnumerable<AccountDto> GetAll();
         RegisterDto Register(RegisterDto registerDto);
         string Login(string name);

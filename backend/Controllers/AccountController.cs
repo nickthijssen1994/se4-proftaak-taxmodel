@@ -63,35 +63,54 @@ namespace backend.Controllers
                     return Unauthorized();
                 }
             }
-            return BadRequest();
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [AllowAnonymous]
         [HttpPost("register")]
         public IActionResult Register(RegisterDto registerDto)
         {
-            if (registerDto.Password.Any(char.IsDigit))
+            if (ModelState.IsValid)
             {
-
-                if (registerDto.Password.Any(char.IsUpper))
+                string password = registerDto.Password;
+                if (password.Any(char.IsDigit))
                 {
-                    if (!ModelState.IsValid)
+                    if (password.Any(char.IsUpper))
                     {
-                        return BadRequest();
+                        if (!service.CheckNameExists(registerDto.Name))
+                        {
+                            if (!service.CheckEmailExists(registerDto.Email))
+                            {
+                                registerDto.Password = hasher.GenerateHash(password); // Hash password before registration.
+                                service.Register(registerDto);
+                                return Ok(registerDto);
+                            }
+                            else
+                            {
+                                return BadRequest(new Exception("This email is already in use."));
+                            }
+                        }
+                        else
+                        {
+                            return BadRequest(new Exception("This username is already taken."));
+                        }
                     }
-
-                    registerDto.Password = hasher.GenerateHash(registerDto.Password);
-                    service.Register(registerDto);
-                    return Ok(registerDto);
+                    else
+                    {
+                        return BadRequest(new Exception("Password must contain at least one capital."));
+                    }
                 }
                 else
                 {
-                    return BadRequest(new Exception("Password must contain at least one capital."));
+                    return BadRequest(new Exception("Password must contain at least one number."));
                 }
             }
             else
             {
-                return BadRequest(new Exception("Password must contain at least one number."));
+                return BadRequest();
             }
         }
 
