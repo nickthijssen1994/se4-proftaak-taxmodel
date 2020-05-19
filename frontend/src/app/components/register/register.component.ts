@@ -14,13 +14,13 @@ export class RegisterComponent implements OnInit {
     email: null,
   };
 
-  constructor(private accountService: AccountService) {
-  }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
   }
 
-  register(account: RegisterDto) {
-    this.accountService.register(account).subscribe();
-  }
+  register(account: RegisterDto)
+{
+  this.accountService.register(account).subscribe();
+}
 }
