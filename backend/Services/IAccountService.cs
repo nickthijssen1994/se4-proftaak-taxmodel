@@ -1,4 +1,5 @@
-﻿using backend.Models.DTOs.Accounts;
+﻿using backend.Models;
+using backend.Models.DTOs.Accounts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,13 @@ namespace backend.Services
     public interface IAccountService
     {
         AccountDto GetById(long id);
+        AccountDto GetByName(string name);
+        bool CheckNameExists(string name);
+        bool CheckEmailExists(string email);
         IEnumerable<AccountDto> GetAll();
-        void Create(RegisterDto dto);
-        void Update(RegisterDto dto);
-        void Delete(AccountDto dto);
+        RegisterDto Register(RegisterDto registerDto);
+        string Login(string name);
+        EditAccountDto Update(EditAccountDto editAccountDto);
+        void Delete(AccountDto accountDto);
     }
 }

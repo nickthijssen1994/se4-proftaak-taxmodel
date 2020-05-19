@@ -1,17 +1,16 @@
 using backend.DAL.Repositories;
-using backend.Models;
 using backend.Models.DTOs;
 using backend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
-using System.Diagnostics;
 using System.Linq;
 
 namespace backend.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("taxbreak/api/[controller]")]
     public class AppointmentController : ControllerBase
@@ -93,7 +92,7 @@ namespace backend.Controllers
 
             return dto;
         }
-
+        
         [HttpPost]
         public ActionResult<CreateAppointmentDto> PostAppointment(CreateAppointmentDto appointment)
         {

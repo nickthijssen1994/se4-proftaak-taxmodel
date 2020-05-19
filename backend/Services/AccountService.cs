@@ -1,7 +1,11 @@
 ﻿using AutoMapper;
 using backend.DAL.Repositories;
+using backend.Helpers;
 using backend.Models;
 using backend.Models.DTOs.Accounts;
+using backend.Security;
+using Microsoft.AspNetCore.Mvc.Formatters.Xml;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,17 +17,64 @@ namespace backend.Services
     {
         private readonly AccountRepository repository;
         private readonly IMapper mapper;
-        public AccountService(AccountRepository repository, IMapper mapper)
+        private TokenHandler tokenHandler;
+        public AccountService(AccountRepository repository, IMapper mapper, IOptions<AppSettings> appSettings)
         {
             this.mapper = mapper;
             this.repository = repository;
+            tokenHandler = new TokenHandler(appSettings);
         }
 
-        public void Create(RegisterDto dto)
+        public AccountDto GetByName(string name)
         {
-            Account account = mapper.Map<Account>(dto);
+            Account account = repository.GetEntities<Account>(a => a.Name == name).Single();
+            return mapper.Map<AccountDto>(account);
+        }
+
+        public bool CheckNameExists(string name)
+        {
+            try
+            {
+                Account account = repository.GetEntities<Account>(a => a.Name == name).Single();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool CheckEmailExists(string email)
+        {
+            try
+            {
+                Account account = repository.GetEntities<Account>(a => a.Email == email).Single();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public RegisterDto Register(RegisterDto registerDto)
+        {
+            Account account = mapper.Map<Account>(registerDto);
+
+            // Generate jwt.
+            registerDto.token = tokenHandler.GenerateToken(registerDto.Name);
+
+            // Save to storage.
             repository.InsertEntity(account);
             repository.Save();
+
+            return registerDto;
+        }
+
+        public string Login(string name)
+        {
+            // Generate jwt.
+            return tokenHandler.GenerateToken(name);
         }
 
         public void Delete(AccountDto dto)
@@ -45,11 +96,12 @@ namespace backend.Services
             return mapper.Map<AccountDto>(account);
         }
 
-        public void Update(RegisterDto dto)
+        public EditAccountDto Update(EditAccountDto editAccountDto)
         {
-            Account account = mapper.Map<Account>(dto);
+            Account account = mapper.Map<Account>(editAccountDto);
             repository.UpdateEntity(account);
             repository.Save();
+            return editAccountDto;
         }
     }
 }
