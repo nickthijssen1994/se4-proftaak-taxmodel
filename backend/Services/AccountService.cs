@@ -4,6 +4,7 @@ using backend.Helpers;
 using backend.Models;
 using backend.Models.DTOs.Accounts;
 using backend.Security;
+using Microsoft.AspNetCore.Mvc.Formatters.Xml;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,12 @@ namespace backend.Services
             tokenHandler = new TokenHandler(appSettings);
         }
 
+        public AccountDto GetByName(string name)
+        {
+            Account account = repository.GetEntities<Account>(a => a.Name == name).FirstOrDefault();
+            return mapper.Map<AccountDto>(account);
+        }
+
         public RegisterDto Register(RegisterDto registerDto)
         {
             Account account = mapper.Map<Account>(registerDto);
@@ -38,14 +45,10 @@ namespace backend.Services
             return registerDto;
         }
 
-        public LoginDto Login(LoginDto loginDto)
+        public string Login(string name)
         {
-            // logic to authenticate
-
             // Generate jwt.
-            loginDto.token = tokenHandler.GenerateToken(loginDto.Name);
-
-            return loginDto;
+            return tokenHandler.GenerateToken(name);
         }
 
         public void Delete(AccountDto dto)

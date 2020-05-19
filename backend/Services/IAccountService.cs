@@ -10,9 +10,10 @@ namespace backend.Services
     public interface IAccountService
     {
         AccountDto GetById(long id);
+        AccountDto GetByName(string name);
         IEnumerable<AccountDto> GetAll();
         RegisterDto Register(RegisterDto registerDto);
-        LoginDto Login(LoginDto loginDto);
+        string Login(string name);
         EditAccountDto Update(EditAccountDto editAccountDto);
         void Delete(AccountDto accountDto);
     }

@@ -19,11 +19,13 @@ namespace backend.Controllers
     [Route("taxbreak/api/[controller]")]
     public class AccountController : ControllerBase
     {
+        private PasswordHasher hasher;
         private readonly IAccountService service;
 
         //Inject UserService
         public AccountController(IAccountService service)
         {
+            hasher = new PasswordHasher();
             this.service = service;
         }
 
@@ -37,14 +39,31 @@ namespace backend.Controllers
         [HttpPost("login")]
         public ActionResult<string> Login(LoginDto loginDto)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return BadRequest();
+                string hash;
+                // Check if user exists.
+                try
+                {
+                    hash = service.GetByName(loginDto.Name).Password;
+                }
+                catch (Exception e)
+                {
+                    return Unauthorized(e.Message);
+                }
+
+                // Check password against password in database.
+                if (VerifyPassword(loginDto.Password, hash))
+                {
+                    loginDto.token = service.Login(loginDto.Name);
+                    return Ok(loginDto);
+                }
+                else
+                {
+                    return Unauthorized();
+                }
             }
-
-            service.Login(loginDto);
-
-            return Ok(loginDto);
+            return BadRequest();
         }
 
         [AllowAnonymous]
@@ -61,7 +80,6 @@ namespace backend.Controllers
                         return BadRequest();
                     }
 
-                    PasswordHasher hasher = new PasswordHasher();
                     registerDto.Password = hasher.GenerateHash(registerDto.Password);
                     service.Register(registerDto);
                     return Ok(registerDto);
@@ -75,6 +93,11 @@ namespace backend.Controllers
             {
                 return BadRequest(new Exception("Password must contain at least one number."));
             }
+        }
+
+        private bool VerifyPassword(string input, string hash)
+        {
+            return hasher.VerifyHash(input, hash);
         }
     }
 }

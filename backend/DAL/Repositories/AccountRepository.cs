@@ -6,6 +6,7 @@ namespace backend.DAL.Repositories
     {
         public AccountRepository(MySqlContext context) : base(context)
         {
+
         }
     }
 }

@@ -22,7 +22,6 @@ namespace backend.Services
         {
             Appointment appointment  = _repo.GetEntityById(id);
             return _mapper.Map<AppointmentDto>(appointment);
-
         }
         public IEnumerable<AppointmentDto> GetAll()
         {
