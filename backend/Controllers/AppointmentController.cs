@@ -44,7 +44,8 @@ namespace backend.Controllers
             return appointment;
         }
 
-        [HttpGet("GetInTimeSpan")]
+
+        [HttpGet("getInTimeSpan")]
         public ActionResult<IEnumerable<AppointmentDto>> GetAppointmentsInTimeSpan(AppointmentsWithinTimespanDto dto)
         {
             if (ModelState.IsValid || dto == null || dto.EndTime <= dto.BeginTime)
@@ -79,7 +80,18 @@ namespace backend.Controllers
             return appointment;
         }
 
+        [HttpPost("register")]
+        public ActionResult<RegisterForAppointmentDto> RegisterForAppointment(RegisterForAppointmentDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
 
+            _service.RegisterForAppointment(dto);
+
+            return dto;
+        }
 
         [HttpPost]
         public ActionResult<CreateAppointmentDto> PostAppointment(CreateAppointmentDto appointment)
