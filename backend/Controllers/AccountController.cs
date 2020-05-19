@@ -1,16 +1,11 @@
-﻿using backend.DAL.Repositories;
-using backend.Helpers;
+﻿using backend.Helpers;
 using backend.Models.DTOs.Accounts;
-using backend.Security;
 using backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace backend.Controllers
 {
@@ -39,79 +34,60 @@ namespace backend.Controllers
         [HttpPost("login")]
         public ActionResult<string> Login(LoginDto loginDto)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) // Check modelstate.
             {
-                string hash;
-                // Check if user exists.
-                try
-                {
-                    hash = service.GetByName(loginDto.Name).Password;
-                }
-                catch (Exception e)
-                {
-                    return Unauthorized(e.Message);
-                }
+                return BadRequest(ResponseConstants.INVALID_INPUT);
+            }
 
-                // Check password against password in database.
-                if (VerifyPassword(loginDto.Password, hash))
-                {
-                    loginDto.token = service.Login(loginDto.Name);
-                    return Ok(loginDto);
-                }
-                else
-                {
-                    return Unauthorized();
-                }
-            }
-            else
+            if (!service.CheckNameExists(loginDto.Name)) // Check if user exists.  
             {
-                return BadRequest();
+                return Unauthorized(ResponseConstants.INVALID_CREDENTIALS);
             }
+
+            string hash = service.GetByName(loginDto.Name).Password;
+
+            if (!VerifyPassword(loginDto.Password, hash)) // Check password against password in database.
+            {
+                return Unauthorized(ResponseConstants.INVALID_CREDENTIALS);
+            }
+
+            return Ok(service.Login(loginDto.Name));
         }
 
         [AllowAnonymous]
         [HttpPost("register")]
         public IActionResult Register(RegisterDto registerDto)
         {
-            if (ModelState.IsValid)
+            string password = registerDto.Password;
+
+            if (!ModelState.IsValid) // Check modelstate.
             {
-                string password = registerDto.Password;
-                if (password.Any(char.IsDigit))
-                {
-                    if (password.Any(char.IsUpper))
-                    {
-                        if (!service.CheckNameExists(registerDto.Name))
-                        {
-                            if (!service.CheckEmailExists(registerDto.Email))
-                            {
-                                registerDto.Password = hasher.GenerateHash(password); // Hash password before registration.
-                                service.Register(registerDto);
-                                return Ok(registerDto);
-                            }
-                            else
-                            {
-                                return BadRequest(new Exception("This email is already in use."));
-                            }
-                        }
-                        else
-                        {
-                            return BadRequest(new Exception("This username is already taken."));
-                        }
-                    }
-                    else
-                    {
-                        return BadRequest(new Exception("Password must contain at least one capital."));
-                    }
-                }
-                else
-                {
-                    return BadRequest(new Exception("Password must contain at least one number."));
-                }
+                return BadRequest(ResponseConstants.INVALID_INPUT);
             }
-            else
+
+            if (!password.Any(char.IsDigit)) // Check for at least one digit in password.
             {
-                return BadRequest();
+                return BadRequest(new Exception(ResponseConstants.PASSWORD_MISSING_NUMBER));
             }
+
+            if (!password.Any(char.IsUpper)) // Check for at least one capital in password;
+            {
+                return BadRequest(new Exception(ResponseConstants.PASSWORD_MISSING_CAPITAL));
+            }
+
+            if (service.CheckNameExists(registerDto.Name)) // Throw badrequest if name is already taken.
+            {
+                return BadRequest(new Exception(ResponseConstants.USERNAME_TAKEN));
+            }
+
+            if (service.CheckEmailExists(registerDto.Email)) // Throw badrequest if email is already in use.
+            {
+                return BadRequest(new Exception(ResponseConstants.EMAIL_TAKEN));
+            }
+
+            registerDto.Password = hasher.GenerateHash(password); // Hash password before registration.
+            service.Register(registerDto);
+            return Ok(registerDto);
         }
 
         private bool VerifyPassword(string input, string hash)
