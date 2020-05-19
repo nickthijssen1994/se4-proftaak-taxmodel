@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using backend.Models.DTOs;
+using backend.Models.DTOs.Accounts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace backend.Models.Mapping
             CreateMap<Appointment, AppointmentDto>();
             CreateMap<CreateAppointmentDto, Appointment>();
             CreateMap<UpdateAppointmentDto, Appointment>();
+
+            CreateMap<Account, AccountDto>();
         }
     }
 }

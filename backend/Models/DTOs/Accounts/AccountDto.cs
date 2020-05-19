@@ -10,7 +10,6 @@ namespace backend.Models.DTOs.Accounts
         public long Id { get; set; }
 
         public string Name { get; set; }
-
         // public ICollection<Order> Orders { get; set; }
     }
 }

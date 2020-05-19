@@ -8,6 +8,7 @@ namespace backend.Services
         AppointmentDto GetById(long id);
         IEnumerable<AppointmentDto> GetAll();
         IEnumerable<AppointmentDto> GetWithinTimeSpan(AppointmentsWithinTimespanDto dto);
+        bool RegisterForAppointment(RegisterForAppointmentDto dto);
         void Create(CreateAppointmentDto dto);
         void Update(UpdateAppointmentDto dto);
         void Delete(AppointmentDto  dto);

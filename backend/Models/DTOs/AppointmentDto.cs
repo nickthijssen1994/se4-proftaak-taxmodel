@@ -1,4 +1,5 @@
-﻿using System;
+﻿using backend.Models.DTOs.Accounts;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -14,8 +15,8 @@ namespace backend.Models.DTOs
         public string Type { get; set; }
         public int MaxPeople { get; set; }
         public int MinPeople { get; set; }
-        public Account Organiser { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public AccountDto Organiser { get; set; }
+        public ICollection<Order> Orders { get; }
         public string Description { get; set; }
     }
 }
