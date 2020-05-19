@@ -17,6 +17,9 @@ namespace backend.Models
         public int MinPeople { get; set; }
         public Account Organiser { get; set; }
         public ICollection<Order> Orders { get; set; }
+        public ICollection<AppointmentAccount> AccountsRegistered { get; set;  }
+        
         public string Description { get; set; }
+        public string Type { get; set; }
     }
 }

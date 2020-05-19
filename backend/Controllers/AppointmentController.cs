@@ -3,6 +3,8 @@ using backend.Models.DTOs;
 using backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -42,7 +44,8 @@ namespace backend.Controllers
             return appointment;
         }
 
-        [HttpGet("GetInTimeSpan")]
+
+        [HttpGet("getInTimeSpan")]
         public ActionResult<IEnumerable<AppointmentDto>> GetAppointmentsInTimeSpan(AppointmentsWithinTimespanDto dto)
         {
             if (ModelState.IsValid || dto == null || dto.EndTime <= dto.BeginTime)
@@ -77,6 +80,19 @@ namespace backend.Controllers
             return appointment;
         }
 
+        [HttpPost("register")]
+        public ActionResult<RegisterForAppointmentDto> RegisterForAppointment(RegisterForAppointmentDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            _service.RegisterForAppointment(dto);
+
+            return dto;
+        }
+        
         [HttpPost]
         public ActionResult<CreateAppointmentDto> PostAppointment(CreateAppointmentDto appointment)
         {
@@ -107,6 +123,19 @@ namespace backend.Controllers
         private bool AppointmentExists(long id)
         {
             return _repo.SetEntity.Any(e => e.Id == id);
+        }
+
+        [HttpDelete("unsubscribe")]
+        public ActionResult<RegisterForAppointmentDto> Unsubscribe(RegisterForAppointmentDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            _service.Unsubscribe(dto);
+
+            return dto;
         }
     }
 }

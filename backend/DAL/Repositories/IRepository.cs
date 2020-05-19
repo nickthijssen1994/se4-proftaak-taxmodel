@@ -12,7 +12,7 @@ namespace backend.DAL.Repositories
 
 		IEnumerable<TEntity> GetEntities<TProperty>(
 			Expression<Func<TEntity, bool>> filter = null,
-			Expression<Func<TEntity, TProperty>> includes = null);
+			Expression<Func<TEntity, TProperty>>[] includes = null);
 
 		TEntity GetEntityById(object id);
 		void InsertEntity(TEntity entity);

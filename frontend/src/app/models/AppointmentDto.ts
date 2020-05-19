@@ -1,12 +1,13 @@
-export interface Appointment {
-  id: number;
+export interface AppointmentDto {
   title: string;
   description: string;
   location: string;
   type: string;
   minPeople: number;
   maxPeople: number;
-  beginTime: Date;
-  endTime: Date;
+  beginDate: Date;
+  endDate: Date;
+  beginTime: string;
+  endTime: string;
   organiser: Account;
 }

@@ -26,7 +26,7 @@ namespace backend.DAL.Repositories
     
 		public virtual IEnumerable<TEntity> GetEntities<TProperty>(
 			Expression<Func<TEntity, bool>> filter = null,
-			Expression<Func<TEntity, TProperty>> includes = null)
+			Expression<Func<TEntity, TProperty>>[] includes = null)
 		{
 			IQueryable<TEntity> query = SetEntity;
 
@@ -37,15 +37,15 @@ namespace backend.DAL.Repositories
            
 			if (includes != null)
 			{
-				return query.Include(includes);
+                return includes.Aggregate(query, (current, include) => current.Include(include));
 			}
 
 			return query.ToList();
 		}
 
-		public virtual TEntity GetEntityById(object id)
+        public virtual TEntity GetEntityById(object id)
 		{
-			return SetEntity.Find(id);
+            return SetEntity.Find(id);
 		}
 
 		public virtual void InsertEntity(TEntity entity)
