@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace backend.Models
 {
-    [Table("accountappointment")]
+    [Table("account_appointment")]
     public class AppointmentAccount
     {
         public long AppointmentId { get; set; }

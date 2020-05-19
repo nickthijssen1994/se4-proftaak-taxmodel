@@ -93,8 +93,6 @@ namespace backend.Controllers
             return dto;
         }
 
-
-
         [HttpPost]
         public ActionResult<CreateAppointmentDto> PostAppointment(CreateAppointmentDto appointment)
         {

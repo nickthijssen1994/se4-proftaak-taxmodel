@@ -16,6 +16,7 @@ namespace backend.Models.Mapping
             CreateMap<CreateAppointmentDto, Appointment>();
             CreateMap<UpdateAppointmentDto, Appointment>();
 
+            CreateMap<RegisterForAppointmentDto, AppointmentAccount>();
             CreateMap<Account, AccountDto>();
         }
     }

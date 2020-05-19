@@ -54,12 +54,13 @@ namespace backend.Services
 
             Appointment appointment = _repo.GetEntities(x=> x.Id == dto.AppointmentId, includes).FirstOrDefault();
 
-            appointment.AccountsRegistered.Add(new AppointmentAccount { 
-                AppointmentId = dto.AppointmentId, AccountId = dto.AccountId 
-            });
+            appointment.AccountsRegistered.Add(_mapper.Map<AppointmentAccount>(dto));
+
 
             //Removing an account from an appointment
-            //ap.AccountsRegistered.Remove(ap.AccountsRegistered.FirstOrDefault(x => x.AccountId == dto.AccountId && x.AppointmentId == dto.AppointmentId));
+            //appointment.AccountsRegistered.Remove(appointment.AccountsRegistered.FirstOrDefault(
+                //   x => x.AccountId == dto.AccountId && x.AppointmentId == dto.AppointmentId
+                //   ));
 
             _repo.UpdateEntity(appointment);
             _repo.Save();
