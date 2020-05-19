@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginDto} from '../../models/LoginDto';
-import {AppointmentTestService} from "../../services/appointment-test.service";
-
+import {AccountService} from '../../services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -14,13 +13,13 @@ export class LoginComponent implements OnInit {
     password: null
 };
 
-  constructor() { }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
   }
 
-  login(): void {
-
+  login(account: LoginDto): void {
+    this.accountService.login(account);
   }
 
 }
