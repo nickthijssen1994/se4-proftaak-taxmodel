@@ -14,65 +14,68 @@ using Microsoft.Extensions.Logging;
 
 namespace backend
 {
-	public class Startup
-	{
-		readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+    public class Startup
+    {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-		public Startup(IConfiguration configuration)
-		{
-			Configuration = configuration;
-		}
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
-		public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
-		public void ConfigureServices(IServiceCollection services)
-		{
-			services.AddCors(options =>
-			{
-				options.AddPolicy(name: MyAllowSpecificOrigins,
-					builder =>
-					{
-						builder.WithOrigins("*").AllowAnyHeader()
-							.AllowAnyMethod();
-					});
-			});
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("*").AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
 
-			if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
-				services.AddDbContext<MySqlContext>(options =>
-				{
-					options.UseMySql(Configuration.GetConnectionString("ProductionDatabaseConnection"));
-					options.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole(); }));
-				});
-			else if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
-				services.AddDbContext<MySqlContext>(options =>
-				{
-					options.UseInMemoryDatabase("InMemoryDatabase");
-					options.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole(); }));
-				});
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+                services.AddDbContext<MySqlContext>(options =>
+                {
+                    options.UseMySql(Configuration.GetConnectionString("ProductionDatabaseConnection"));
+                    options.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole(); }));
+                });
+            else if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+                services.AddDbContext<MySqlContext>(options =>
+                {
+                    options.UseInMemoryDatabase("InMemoryDatabase");
+                    options.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole(); }));
+                });
 
 
             services.AddAutoMapper(config => config.AddProfile<AutoMappingProfile>(), typeof(Startup));
-			services.AddTransient<ExampleRepository>();
+            services.AddTransient<ExampleRepository>();
             services.AddTransient<IAppointmentService, AppointmentService>();
-			services.AddTransient<AppointmentRepository>();
-			services.AddControllers();
-		}
+            services.AddTransient<AppointmentRepository>();
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-		{
-			if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<AccountRepository>();
+            services.AddControllers();
+        }
 
-			app.UseCors(MyAllowSpecificOrigins);
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
-			app.UseHttpsRedirection();
+            app.UseCors(MyAllowSpecificOrigins);
 
-			app.UseRouting();
+            app.UseHttpsRedirection();
 
-			app.UseAuthorization();
+            app.UseRouting();
 
-			app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-		}
-	}
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
+    }
 }
