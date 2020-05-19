@@ -3,6 +3,7 @@ using backend.Helpers;
 using backend.Models.DTOs.Accounts;
 using backend.Security;
 using backend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace backend.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("taxbreak/api/[controller]")]
     public class AccountController : ControllerBase
@@ -31,6 +33,7 @@ namespace backend.Controllers
             return service.GetAll().ToList();
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public ActionResult<string> Login(LoginDto loginDto)
         {
@@ -39,20 +42,12 @@ namespace backend.Controllers
                 return BadRequest();
             }
 
-            // Auth here
+            service.Login(loginDto);
 
-            bool loginFailed = false;
-
-            if (!loginFailed)
-            {
-                return Ok(JwtManager.GenerateToken(loginDto.Name));
-            }
-            else
-            {
-                return Unauthorized();
-            }
+            return Ok(loginDto);
         }
 
+        [AllowAnonymous]
         [HttpPost("register")]
         public IActionResult Register(RegisterDto registerDto)
         {
@@ -68,8 +63,8 @@ namespace backend.Controllers
 
                     PasswordHasher hasher = new PasswordHasher();
                     registerDto.Password = hasher.GenerateHash(registerDto.Password);
-                    service.Create(registerDto);
-                    return Ok(JwtManager.GenerateToken(registerDto.Name));
+                    service.Register(registerDto);
+                    return Ok(registerDto);
                 }
                 else
                 {

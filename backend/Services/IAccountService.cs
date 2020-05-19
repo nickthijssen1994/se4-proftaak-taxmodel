@@ -1,4 +1,5 @@
-﻿using backend.Models.DTOs.Accounts;
+﻿using backend.Models;
+using backend.Models.DTOs.Accounts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,9 @@ namespace backend.Services
     {
         AccountDto GetById(long id);
         IEnumerable<AccountDto> GetAll();
-        void Create(RegisterDto dto);
-        void Update(RegisterDto dto);
-        void Delete(AccountDto dto);
+        RegisterDto Register(RegisterDto registerDto);
+        LoginDto Login(LoginDto loginDto);
+        EditAccountDto Update(EditAccountDto editAccountDto);
+        void Delete(AccountDto accountDto);
     }
 }

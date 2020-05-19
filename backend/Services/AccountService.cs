@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using backend.DAL.Repositories;
+using backend.Helpers;
 using backend.Models;
 using backend.Models.DTOs.Accounts;
+using backend.Security;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,17 +16,36 @@ namespace backend.Services
     {
         private readonly AccountRepository repository;
         private readonly IMapper mapper;
-        public AccountService(AccountRepository repository, IMapper mapper)
+        private TokenHandler tokenHandler;
+        public AccountService(AccountRepository repository, IMapper mapper, IOptions<AppSettings> appSettings)
         {
             this.mapper = mapper;
             this.repository = repository;
+            tokenHandler = new TokenHandler(appSettings);
         }
 
-        public void Create(RegisterDto dto)
+        public RegisterDto Register(RegisterDto registerDto)
         {
-            Account account = mapper.Map<Account>(dto);
+            Account account = mapper.Map<Account>(registerDto);
+
+            // Generate jwt.
+            registerDto.token = tokenHandler.GenerateToken(registerDto.Name);
+
+            // Save to storage.
             repository.InsertEntity(account);
             repository.Save();
+
+            return registerDto;
+        }
+
+        public LoginDto Login(LoginDto loginDto)
+        {
+            // logic to authenticate
+
+            // Generate jwt.
+            loginDto.token = tokenHandler.GenerateToken(loginDto.Name);
+
+            return loginDto;
         }
 
         public void Delete(AccountDto dto)
@@ -45,11 +67,12 @@ namespace backend.Services
             return mapper.Map<AccountDto>(account);
         }
 
-        public void Update(RegisterDto dto)
+        public EditAccountDto Update(EditAccountDto editAccountDto)
         {
-            Account account = mapper.Map<Account>(dto);
+            Account account = mapper.Map<Account>(editAccountDto);
             repository.UpdateEntity(account);
             repository.Save();
+            return editAccountDto;
         }
     }
 }
