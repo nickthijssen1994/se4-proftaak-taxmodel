@@ -85,9 +85,7 @@ namespace backend.Controllers
                 return BadRequest(new Exception(ResponseConstants.EMAIL_TAKEN));
             }
 
-            registerDto.Password = hasher.GenerateHash(password); // Hash password before registration.
-            service.Register(registerDto);
-            return Ok(registerDto);
+            return Ok(service.Register(registerDto));
         }
 
         private bool VerifyPassword(string input, string hash)

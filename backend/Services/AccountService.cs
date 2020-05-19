@@ -59,12 +59,14 @@ namespace backend.Services
 
         public RegisterDto Register(RegisterDto registerDto)
         {
-            Account account = mapper.Map<Account>(registerDto);
-
             // Generate jwt.
             registerDto.token = tokenHandler.GenerateToken(registerDto.Name);
 
+            PasswordHasher hasher = new PasswordHasher();
+            registerDto.Password = hasher.GenerateHash(registerDto.Password); // Hash password before registration.
+
             // Save to storage.
+            Account account = mapper.Map<Account>(registerDto);
             repository.InsertEntity(account);
             repository.Save();
 
