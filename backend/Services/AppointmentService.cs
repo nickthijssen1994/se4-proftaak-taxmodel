@@ -88,8 +88,22 @@ namespace backend.Services
             _repo.Save();
         }
 
-        public void Unsubscribe(UnsubscribeFromAppointmentDto dto)
+        public void Unsubscribe(RegisterForAppointmentDto dto)
         {
+            Expression<Func<Appointment, object>>[] includes = new Expression<Func<Appointment, object>>[]
+             {
+                a => a.AccountsRegistered,
+                d => d.Organiser
+             };
+
+            Appointment appointment = _repo.GetEntities(x => x.Id == dto.AppointmentId, includes).FirstOrDefault();
+
+            //Removing an account from an appointment
+            appointment.AccountsRegistered.Remove(appointment.AccountsRegistered.FirstOrDefault(
+               x => x.AccountId == dto.AccountId && x.AppointmentId == dto.AppointmentId
+               ));
+
+            _repo.UpdateEntity(appointment);
             _repo.Save();
         }
     }

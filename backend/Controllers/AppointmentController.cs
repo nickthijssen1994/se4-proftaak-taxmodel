@@ -127,10 +127,16 @@ namespace backend.Controllers
         }
 
         [HttpDelete("unsubscribe")]
-        public ActionResult<UnsubscribeFromAppointmentDto> Unsubscribe(UnsubscribeFromAppointmentDto dto)
+        public ActionResult<RegisterForAppointmentDto> Unsubscribe(RegisterForAppointmentDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             _service.Unsubscribe(dto);
-            return null;
+
+            return dto;
         }
     }
 }
