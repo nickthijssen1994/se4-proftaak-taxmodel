@@ -87,5 +87,10 @@ namespace backend.Services
             _repo.DeleteEntity(appointment);
             _repo.Save();
         }
+
+        public void Unsubscribe(UnsubscribeFromAppointmentDto dto)
+        {
+            _repo.Save();
+        }
     }
 }

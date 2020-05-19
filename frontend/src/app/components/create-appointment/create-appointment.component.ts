@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Appointment} from '../../models/Appointment';
+import {AppointmentDto} from '../../models/AppointmentDto';
 import {AppointmentTestService} from '../../services/appointment-test.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
@@ -11,17 +11,18 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./create-appointment.component.css']
 })
 export class CreateAppointmentComponent implements OnInit {
-  appointment: Appointment = {
-    id: null,
+  appointment: AppointmentDto = {
     title: '',
     description: '',
     location: '',
     type: 'true',
     minPeople: null,
     maxPeople: null,
-    beginDate: new Date(),
+    beginDate: null,
     endDate: null,
-    organiser: null
+    organiser: null,
+    beginTime: '',
+    endTime: '',
   };
 
   date: Date;
@@ -51,21 +52,24 @@ export class CreateAppointmentComponent implements OnInit {
     this.location.back();
   }
 
-  onDangeDate($event): void {
+  onChangeDate($event): void {
     this.date = $event.value;
   }
 
   addTimeToDate() {
-    this.appointment.beginDate = this.createDate(new Date(this.date), this.appointment.beginDate);
-    this.appointment.endDate = this.createDate(new Date(this.date), this.appointment.endDate);
+    this.appointment.beginTime = this.createDate(new Date(this.date), this.appointment.beginDate).toISOString();
+    this.appointment.endTime = this.createDate(new Date(this.date), this.appointment.endDate).toISOString();
+    console.log(this.appointment.beginDate);
   }
 
   createDate( date: Date, time: Date): Date {
-    const result = new Date(this.date);
+    let result = new Date(this.date);
     const dateArray =  time.toString().split(':');
 
-    result.setHours(Number(dateArray[0]));
+    result.setHours(Number(dateArray[0]) + 2 );
     result.setMinutes(Number(dateArray[1]));
+
+    result = new Date(result.toISOString());
     console.log(result);
     return result;
   }
@@ -120,17 +124,12 @@ export class CreateAppointmentComponent implements OnInit {
         });
         return false;
       }
-    } else if (!this.appointment.beginDate) {
-      this.notificationService.open('Appointment needs to be planned later than 10AM', null, {
-        duration: 5000,
-      });
-      return false;
-    } else if (this.appointment.endDate < this.appointment.beginDate) {
-      this.notificationService.open('End Time of appointment has to be planned after begin time', null, {
-        duration: 5000,
-      });
-      return false;
-    } else if (this.appointment.description !== '') {
+    }  else if (this.appointment.endDate < this.appointment.beginDate) {
+       this.notificationService.open('End Time of appointment has to be planned after begin time', null, {
+         duration: 5000,
+       });
+       return false;
+     } else if (this.appointment.description !== '') {
       if (this.appointment.description.length <= 4) {
         this.notificationService.open('Description has to be greater than 4 characters', null, {
           duration: 5000,

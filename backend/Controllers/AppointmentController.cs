@@ -3,6 +3,7 @@ using backend.Models;
 using backend.Models.DTOs;
 using backend.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
@@ -123,6 +124,13 @@ namespace backend.Controllers
         private bool AppointmentExists(long id)
         {
             return _repo.SetEntity.Any(e => e.Id == id);
+        }
+
+        [HttpDelete("unsubscribe")]
+        public ActionResult<UnsubscribeFromAppointmentDto> Unsubscribe(UnsubscribeFromAppointmentDto dto)
+        {
+            _service.Unsubscribe(dto);
+            return null;
         }
     }
 }
