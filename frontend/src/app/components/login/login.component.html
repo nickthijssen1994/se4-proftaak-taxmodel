@@ -1,0 +1,12 @@
+
+<div class="container">
+  <div class="login-container">
+    <form>
+        <h2> Log in </h2>
+      <input class="input" placeholder="Email" [ngModel]="account.email" name="email"/>
+      <input class="input" placeholder="Password" type="password" [ngModel]="account.password" name="password"/>
+      <button class="login-button"> Login </button>
+      <button class="login-button" routerLink="/register"> Go to register page </button>
+    </form>
+  </div>
+</div>
