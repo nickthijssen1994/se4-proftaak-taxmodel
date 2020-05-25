@@ -24,13 +24,13 @@ export class AccountService {
     this.headers = this.headers.set('Accept', 'application/json');
   }
 
-  login(account: LoginDto): Observable<Account> {
+  login(account: LoginDto): Observable<any> {
     return this.http.post<Account>(this.accountUrl + '/login', account, this.httpOptions);
   }
 
-  register(account: RegisterDto): Observable<RegisterDto> {
+  register(account: RegisterDto): Observable<any> {
     console.log(account);
     console.log('register triggered');
-    return this.http.post<RegisterDto>('https://localhost:5001/taxbreak/api/account/register', account);
+    return this.http.post<RegisterDto>('https://localhost:5001/taxbreak/api/account/register', account, this.httpOptions);
   }
 }
