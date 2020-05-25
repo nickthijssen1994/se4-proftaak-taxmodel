@@ -1,9 +1,9 @@
 using backend.Helpers;
 using NUnit.Framework;
 
-namespace backend_test
+namespace Logic
 {
-    public class Tests
+    public class HashTest
     {
         private string password;
         private string hash;
