@@ -3,56 +3,66 @@
     <h3 mat-dialog-title> Create an appointment on 6-4-2020</h3>
     <mat-form-field>
       <mat-label for="title"> Title:</mat-label>
-      <input matInput type="input" id="title" required [minlength]="4" [(ngModel)]="appointment.title" name="title"
-             style="height: 3%">
+      <input [(ngModel)]="appointment.title" [minlength]="4" id="appointment-title" matInput name="title" required
+             style="height: 3%"
+             type="input">
     </mat-form-field>
     <mat-form-field>
       <mat-label for="location"> Location:</mat-label>
-      <input matInput type="input" id="location" required [minlength]="4" [(ngModel)]="appointment.location"
-             name="location" style="height: 3%">
+      <input [(ngModel)]="appointment.location" [minlength]="4" id="appointment-location" matInput name="location"
+             required
+             style="height: 3%" type="input">
     </mat-form-field>
-      <div class="time-picker-container">
-        <mat-form-field>
-          <mat-label>Choose a date</mat-label>
-          <input matInput [matDatepicker]="picker" [ngModel]="date" name="date" (dateChange)="onChangeDate($event)">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+    <div class="time-picker-container">
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input (dateChange)="onChangeDate($event)" [matDatepicker]="picker" [ngModel]="date" matInput name="date">
+        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
 
-      <mat-label class="time-picker-text"> From: </mat-label>
+      <mat-label class="time-picker-text"> From:</mat-label>
       <div class="ngx-material-timepicker-example__form-group">
-        <input class="time-picker-input" placeholder="12:00" [format]="24" aria-label="24hr format" required
-              [ngxTimepicker]="defaultPicker" min="10:00" max="17:00" [(ngModel)]="appointment.beginDate" name="begin time" required (error)="defaultPicker.appendToInput">
+        <input (error)="defaultPicker.appendToInput" [(ngModel)]="appointment.beginDate" [format]="24"
+               [ngxTimepicker]="defaultPicker" aria-label="24hr format"
+               class="time-picker-input" max="17:00" min="10:00" name="begin time"
+               placeholder="12:00" required required>
         <ngx-material-timepicker #defaultPicker [preventOverlayClick]="true"></ngx-material-timepicker>
       </div>
       <mat-label class="time-picker-text"> to</mat-label>
       <div class="ngx-material-timepicker-example__form-group">
-        <input class="time-picker-input" placeholder="17:00" [format]="24" aria-label="24hr format"
-               [ngxTimepicker]="defaultPicker2" min="10:00" max="17:00" [(ngModel)]="appointment.endDate" name="end time" required>
+        <input [(ngModel)]="appointment.endDate" [format]="24" [ngxTimepicker]="defaultPicker2" aria-label="24hr format"
+               class="time-picker-input" max="17:00" min="10:00" name="end time"
+               placeholder="17:00" required>
         <ngx-material-timepicker #defaultPicker2></ngx-material-timepicker>
       </div>
     </div>
     <div>
       <mat-form-field>
-        <mat-label> minimal amount of people: </mat-label>
-        <input type="number" [disabled]="disabled" matInput class="input" required [min]="2" [max]="999" [(ngModel)]="appointment.minPeople" name="min amount" >
-      </mat-form-field><br>
+        <mat-label> minimal amount of people:</mat-label>
+        <input [(ngModel)]="appointment.minPeople" [disabled]="disabled" [max]="999" [min]="2" class="input" id="appointment-min-amount"
+               matInput
+               name="min amount" required type="number">
+      </mat-form-field>
+      <br>
       <mat-form-field>
-        <mat-label> Max amount of people: </mat-label>
-        <input type="number" [disabled]="disabled" matInput  class="input" [min]="2" [max]="999" [(ngModel)]="appointment.maxPeople" name="max amount">
+        <mat-label> Max amount of people:</mat-label>
+        <input [(ngModel)]="appointment.maxPeople" [disabled]="disabled" [max]="999" [min]="2" class="input" id="appointment-max-amount"
+               matInput name="max amount" type="number">
       </mat-form-field>
       <mat-form-field class="description">
         <mat-label> Comment:</mat-label>
-        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                  maxlength="250" cdkAutosizeMaxRows="5" class="input" [(ngModel)]="appointment.description"
-                  name="description"></textarea>
+        <textarea #autosize="cdkTextareaAutosize" [(ngModel)]="appointment.description" cdkAutosizeMaxRows="5"
+                  cdkTextareaAutosize class="input" id="appointment-description" matInput
+                  maxlength="250" name="description"></textarea>
       </mat-form-field>
     </div>
-    <mat-checkbox [(ngModel)]="appointment.type" [disabled]="disabled" color="primary" name="private"> Private meeting
+    <mat-checkbox [(ngModel)]="appointment.type" [disabled]="disabled" color="primary" id="appointment-type"
+                  name="private"> Private meeting
     </mat-checkbox>
 
-    <button mat-raised-button type="submit" id="submit-button">Submit</button>
-    <button mat-button (click)="goBack()">Back</button>
+    <button id="submit-button" mat-raised-button type="submit">Submit</button>
+    <button (click)="goBack()" id="back-button" mat-button>Back</button>
   </form>
 
 </div>

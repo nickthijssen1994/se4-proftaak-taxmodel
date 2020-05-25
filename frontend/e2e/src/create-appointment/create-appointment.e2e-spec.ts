@@ -3,12 +3,12 @@ import {browser, by, element, logging} from 'protractor';
 describe('Create Appointment Component Tests', function() {
   it('should create appointment', function() {
     browser.get(browser.baseUrl + '/dashboard');
-    element(by.id('title')).sendKeys('Lunch');
-    element(by.id('location')).sendKeys('Tilburg');
+    element(by.id('appointment-title')).sendKeys('Lunch');
+    element(by.id('appointment-location')).sendKeys('Tilburg');
+    element(by.id('appointment-min-amount')).sendKeys(3);
+    element(by.id('appointment-max-amount')).sendKeys(5);
+    element(by.id('appointment-description')).sendKeys('Lunch');
     element(by.id('submit-button')).click();
-
-    expect(element(by.binding('latest')).getText()).
-    toEqual('5');
   });
 
   afterEach(async () => {
