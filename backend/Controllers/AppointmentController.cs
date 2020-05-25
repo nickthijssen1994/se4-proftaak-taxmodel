@@ -1,13 +1,8 @@
 using backend.DAL.Repositories;
-using backend.Models;
 using backend.Models.DTOs;
 using backend.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
-using System.Diagnostics;
 using System.Linq;
 
 namespace backend.Controllers
@@ -89,7 +84,38 @@ namespace backend.Controllers
                 return BadRequest();
             }
 
-            _service.RegisterForAppointment(dto);
+            bool resultSuccess = _service.RegisterForAppointment(dto);
+
+            if (!resultSuccess)
+            {
+                return Conflict();
+            }
+            else
+            {
+                return dto;
+            }
+        }
+
+        [HttpGet("isRegisteredForAppointment")]
+        public ActionResult<bool> IsRegisteredForAppointment(RegisterForAppointmentDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return _service.IsRegisteredForAppointment(dto);
+        }
+
+        [HttpDelete("unsubscribe")]
+        public ActionResult<RegisterForAppointmentDto> Unsubscribe(RegisterForAppointmentDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            _service.Unsubscribe(dto);
 
             return dto;
         }
@@ -124,19 +150,6 @@ namespace backend.Controllers
         private bool AppointmentExists(long id)
         {
             return _repo.SetEntity.Any(e => e.Id == id);
-        }
-
-        [HttpDelete("unsubscribe")]
-        public ActionResult<RegisterForAppointmentDto> Unsubscribe(RegisterForAppointmentDto dto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            _service.Unsubscribe(dto);
-
-            return dto;
         }
     }
 }

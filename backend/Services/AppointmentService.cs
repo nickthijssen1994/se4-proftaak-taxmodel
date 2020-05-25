@@ -30,10 +30,11 @@ namespace backend.Services
             Expression<Func<Appointment, object>>[] includes = new Expression<Func<Appointment, object>>[] 
             { 
                 a => a.AccountsRegistered, 
-                d => d.Organiser 
+                o => o.Organiser 
             };
 
-            IEnumerable<Appointment> appointments = _repo.GetEntities(null, includes);
+            IEnumerable<Appointment> appointments = _repo.GetEntities(includes: includes);
+
             return _mapper.Map<IEnumerable<AppointmentDto>>(appointments);
         }
         public IEnumerable<AppointmentDto> GetWithinTimeSpan(AppointmentsWithinTimespanDto dto)
@@ -54,17 +55,20 @@ namespace backend.Services
 
             Appointment appointment = _repo.GetEntities(x=> x.Id == dto.AppointmentId, includes).FirstOrDefault();
 
-            appointment.AccountsRegistered.Add(_mapper.Map<AppointmentAccount>(dto));
+            AppointmentAccount aa = _mapper.Map<AppointmentAccount>(dto);
 
+            if (IsRegisteredForAppointment(dto))
+            {
+                return false;
+            }
+            else
+            {
+                appointment.AccountsRegistered.Add(aa);
 
-            //Removing an account from an appointment
-            //appointment.AccountsRegistered.Remove(appointment.AccountsRegistered.FirstOrDefault(
-                //   x => x.AccountId == dto.AccountId && x.AppointmentId == dto.AppointmentId
-                //   ));
-
-            _repo.UpdateEntity(appointment);
-            _repo.Save();
-            return true;
+                _repo.UpdateEntity(appointment);
+                _repo.Save();
+                return true;
+            }
         }
 
         public void Create(CreateAppointmentDto dto)
@@ -98,13 +102,17 @@ namespace backend.Services
 
             Appointment appointment = _repo.GetEntities(x => x.Id == dto.AppointmentId, includes).FirstOrDefault();
 
-            //Removing an account from an appointment
             appointment.AccountsRegistered.Remove(appointment.AccountsRegistered.FirstOrDefault(
                x => x.AccountId == dto.AccountId && x.AppointmentId == dto.AppointmentId
                ));
 
             _repo.UpdateEntity(appointment);
             _repo.Save();
+        }
+
+        public bool IsRegisteredForAppointment(RegisterForAppointmentDto dto)
+        {
+            return _repo.GetEntityById(dto.AppointmentId).AccountsRegistered.Any(a => a.AccountId == dto.AccountId);
         }
     }
 }
