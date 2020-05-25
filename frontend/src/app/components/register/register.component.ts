@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AccountService} from '../../services/account.service';
 import {RegisterDto} from '../../models/RegisterDto';
 
@@ -9,9 +9,10 @@ import {RegisterDto} from '../../models/RegisterDto';
 })
 export class RegisterComponent implements OnInit {
   account: RegisterDto = {
-    name: null,
-    password: null,
-    email: null,
+
+    name : null,
+    password : null,
+    email : null,
   };
 
   constructor(private accountService: AccountService) { }
@@ -19,8 +20,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  register(account: RegisterDto)
-{
-  this.accountService.register(account).subscribe();
-}
+  register(account: RegisterDto) {
+    this.accountService.register(account).subscribe();
+  }
+
 }
