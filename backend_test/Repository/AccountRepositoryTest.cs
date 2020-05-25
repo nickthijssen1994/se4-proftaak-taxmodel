@@ -21,7 +21,10 @@ namespace backend_test.Repository
         {
             // Arrange
             var mock = new Mock<IAccountService>();
-            RegisterDto user = new RegisterDto("testemail", "testUser", "TestPass1");
+            RegisterDto user = new RegisterDto();
+            user.Email = "testemail";
+            user.Name = "testUser";
+            user.Password = "TestPass1";
             mock.Setup(AccountService => AccountService.Register(user)).Returns(user);
 
             // Act
@@ -36,7 +39,9 @@ namespace backend_test.Repository
         {
             // Arrange
             var mock = new Mock<IAccountService>();
-            LoginDto user = new LoginDto("testUser", "TestPass1");
+            LoginDto user = new LoginDto();
+            user.Name = "testUser";
+            user.Password = "TestPass1";
             string token = "token";
             mock.Setup(AccountService => AccountService.Login(user.Name)).Returns(token);
 
@@ -45,6 +50,22 @@ namespace backend_test.Repository
 
             // Assert
             Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void GetById()
+        {
+            // Arrange
+            var mock = new Mock<IAccountService>();
+            AccountDto user = new AccountDto();
+            user.Id = 1;
+            mock.Setup(AccountService => AccountService.GetById(user.Id)).Returns(user);
+
+            // Act
+            AccountDto result = mock.Object.GetById(user.Id);
+
+            // Assert
+            Assert.AreEqual(user.Id, result.Id);
         }
     }
 }

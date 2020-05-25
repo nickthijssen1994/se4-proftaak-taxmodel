@@ -21,12 +21,5 @@ namespace backend.Models.DTOs.Accounts
         [MaxLength(32, ErrorMessage = "Password must be 32 characters or less.")]
         public string Password { get; set; }
         public string token { get; set; }
-        
-        public RegisterDto(string email, string name, string password)
-        {
-            Email = email;
-            Name = name;
-            Password = password;
-        }
     }
 }

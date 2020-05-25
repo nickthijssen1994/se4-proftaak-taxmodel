@@ -25,6 +25,12 @@ namespace backend.Services
             tokenHandler = new TokenHandler(appSettings);
         }
 
+        public AccountDto GetById(long id)
+        {
+            Account account = repository.GetEntityById(id);
+            return mapper.Map<AccountDto>(account);
+        }
+
         public AccountDto GetByName(string name)
         {
             Account account = repository.GetEntities<Account>(a => a.Name == name).Single();
@@ -90,12 +96,6 @@ namespace backend.Services
         {
             IEnumerable<Account> accounts = repository.GetEntities<Account>();
             return mapper.Map<IEnumerable<AccountDto>>(accounts);
-        }
-
-        public AccountDto GetById(long id)
-        {
-            Account account = repository.GetEntityById(id);
-            return mapper.Map<AccountDto>(account);
         }
 
         public EditAccountDto Update(EditAccountDto editAccountDto)

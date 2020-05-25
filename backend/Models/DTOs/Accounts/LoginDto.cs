@@ -14,11 +14,5 @@ namespace backend.Models.DTOs.Accounts
         [Required]
         public string Password { get; set; }
         public string Token { get; set; }
-
-        public LoginDto(string name, string password)
-        {
-            Name = name;
-            Password = password;
-        }
     }
 }
