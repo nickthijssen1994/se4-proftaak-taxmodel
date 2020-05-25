@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace backend.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("taxbreak/api/[controller]")]
     public class AccountController : ControllerBase
