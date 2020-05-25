@@ -9,8 +9,8 @@ import {AccountService} from '../../services/account.service';
 })
 export class LoginComponent implements OnInit {
   account: LoginDto = {
-    name: null,
-    password: null
+    name: '',
+    password: ''
 };
 
   constructor(private accountService: AccountService) { }
@@ -21,5 +21,6 @@ export class LoginComponent implements OnInit {
   login(account: LoginDto): void {
     this.accountService.login(account).subscribe();
     console.log(account);
+    console.log('logged in');
   }
 }

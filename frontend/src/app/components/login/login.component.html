@@ -1,12 +1,10 @@
-<form (ngSubmit)="login(account)" class="mat-custom-container">
 <div class="container">
   <div class="login-container">
     <form>
         <h2> Log in </h2>
-      <input class="input" placeholder="Name" [(ngModel)]="account.name" name="name"/>
+      <input class="input" placeholder="Name" [(ngModel)]="account.name" name="name" />
       <input class="input" placeholder="Password" type="password" [(ngModel)]="account.password" name="password"/>
-      <button class="login-button" (click)="login(account)"> Login </button>
-
+      <button class="login-button" type="submit" (click)="login(account)"> Login </button>
       <button class="login-button" routerLink="/register"> Go to register page </button>
     </form>
   </div>

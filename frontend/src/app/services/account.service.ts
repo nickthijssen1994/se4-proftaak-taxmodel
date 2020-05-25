@@ -25,12 +25,12 @@ export class AccountService {
   }
 
   login(account: LoginDto): Observable<any> {
-    return this.http.post<Account>(this.accountUrl + '/login', account, this.httpOptions);
+    return this.http.post<LoginDto>(this.accountUrl + '/login', account, this.httpOptions);
   }
 
   register(account: RegisterDto): Observable<any> {
     console.log(account);
     console.log('register triggered');
-    return this.http.post<RegisterDto>('https://localhost:5001/taxbreak/api/account/register', account, this.httpOptions);
+    return this.http.post<RegisterDto>(this.accountUrl + '/register', account, this.httpOptions);
   }
 }
