@@ -25,6 +25,12 @@ namespace backend.Services
             tokenHandler = new TokenHandler(appSettings);
         }
 
+        public AccountDto GetById(long id)
+        {
+            Account account = repository.GetEntityById(id);
+            return mapper.Map<AccountDto>(account);
+        }
+
         public AccountDto GetByName(string name)
         {
             Account account = repository.GetEntities<Account>(a => a.Name == name).Single();
@@ -59,12 +65,14 @@ namespace backend.Services
 
         public RegisterDto Register(RegisterDto registerDto)
         {
-            Account account = mapper.Map<Account>(registerDto);
-
             // Generate jwt.
             registerDto.token = tokenHandler.GenerateToken(registerDto.Name);
 
+            PasswordHasher hasher = new PasswordHasher();
+            registerDto.Password = hasher.GenerateHash(registerDto.Password); // Hash password before registration.
+
             // Save to storage.
+            Account account = mapper.Map<Account>(registerDto);
             repository.InsertEntity(account);
             repository.Save();
 
@@ -88,12 +96,6 @@ namespace backend.Services
         {
             IEnumerable<Account> accounts = repository.GetEntities<Account>();
             return mapper.Map<IEnumerable<AccountDto>>(accounts);
-        }
-
-        public AccountDto GetById(long id)
-        {
-            Account account = repository.GetEntityById(id);
-            return mapper.Map<AccountDto>(account);
         }
 
         public EditAccountDto Update(EditAccountDto editAccountDto)
