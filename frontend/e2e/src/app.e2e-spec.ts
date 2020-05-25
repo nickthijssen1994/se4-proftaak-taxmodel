@@ -1,16 +1,16 @@
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
 
-describe('workspace-project App', () => {
+describe('App Root Component Tests', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display app title', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('frontend app is running!');
+    expect(page.getTitleText()).toEqual('TaxBreak');
   });
 
   afterEach(async () => {

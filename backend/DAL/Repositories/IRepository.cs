@@ -1,25 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.DAL.Repositories
 {
-    public interface IRepository<TEntity> where TEntity : class
-    {
-        DbSet<TEntity> Set { get; set; }
-        IEnumerable<TEntity> Get<TProperty>(
-            Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            Expression<Func<TEntity, TProperty>> includes = null);
-        TEntity GetByID(object id);
-        void Insert(TEntity entity);
-        void DeleteById(object id);
-        void Delete(TEntity entityToDelete);
-        void Update(TEntity entityToUpdate);
+	public interface IRepository<TEntity> where TEntity : class
+	{
+		DbSet<TEntity> SetEntity { get; set; }
 
-        void Save();
-    }
+		IEnumerable<TEntity> GetEntities<TProperty>(
+			Expression<Func<TEntity, bool>> filter = null,
+			Expression<Func<TEntity, TProperty>>[] includes = null);
+
+		TEntity GetEntityById(object id);
+		void InsertEntity(TEntity entity);
+		void DeleteEntityById(object id);
+		void DeleteEntity(TEntity entityToDelete);
+		void UpdateEntity(TEntity entityToUpdate);
+		void Save();
+	}
 }

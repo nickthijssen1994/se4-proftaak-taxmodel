@@ -1,0 +1,20 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>Appointments</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list role="list">
+      <mat-list-item *ngFor="let appointment of appointments">
+        <button mat-button routerLink="/detail/{{appointment.id}}">
+          {{appointment.id}} -
+          {{appointment.title}} -
+          {{appointment.location}} -
+          {{appointment.description}}
+        </button>
+        <button mat-button (click)="delete(appointment)">X</button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
