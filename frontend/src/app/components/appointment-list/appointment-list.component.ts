@@ -23,17 +23,6 @@ export class AppointmentListComponent implements OnInit {
     console.log(this.appointments);
   }
 
-  add(title: string): void {
-    title = title.trim();
-    if (!title) {
-      return;
-    }
-    this.appointmentTestService.addAppointment({title} as Appointment)
-      .subscribe(appointment => {
-        this.appointments.push(appointment);
-      });
-  }
-
   delete(appointment: Appointment): void {
     this.appointments = this.appointments.filter(a => a !== appointment);
     this.appointmentTestService.deleteAppointment(appointment).subscribe();

@@ -1,85 +1,141 @@
-using backend.Controllers.DTOs;
 using backend.DAL.Repositories;
-using backend.Models;
+using backend.Models.DTOs;
+using backend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace backend.Controllers
 {
-	[ApiController]
-	[Route("taxbreak/api/[controller]")]
-	public class AppointmentController : ControllerBase
-	{
-		private readonly AppointmentRepository _repo;
+    [Authorize]
+    [ApiController]
+    [Route("taxbreak/api/[controller]")]
+    public class AppointmentController : ControllerBase
+    {
+        private readonly AppointmentRepository _repo;
+        private readonly IAppointmentService _service;
 
-		public AppointmentController(AppointmentRepository repo)
-		{
-			_repo = repo;
-		}
+        public AppointmentController(AppointmentRepository repo, IAppointmentService service)
+        {
+            _repo = repo;
+            _service = service;
+        }
 
-		[HttpGet]
-		public ActionResult<IEnumerable<Appointment>> GetAppointments()
-		{
-			return _repo.Get(null, null, a => a.Organiser).ToList();
-		}
+        [HttpGet]
+        public ActionResult<IEnumerable<AppointmentDto>> GetAppointments()
+        {
+            return _service.GetAll().ToList();
+        }
 
-		[HttpGet("{id}")]
-		public ActionResult<Appointment> GetAppointmentById(int id)
-		{
-			var appointment = _repo.GetByID(id);
 
-			if (appointment == null) return NotFound();
+        [HttpGet("{id}")]
+        public ActionResult<AppointmentDto> GetAppointmentById(long id)
+        {
+            var appointment = _service.GetById(id);
 
-			return appointment;
-		}
+            if (appointment == null)
+            {
+                return NotFound();
+            }
 
-		[HttpPut("{id}")]
-		public IActionResult PutAppointment(int id, [FromForm] Appointment appointment)
-		{
-			if (id != appointment.Id) return BadRequest();
+            return appointment;
+        }
 
-			_repo.Update(appointment);
 
-			try
-			{
-				_repo.Save();
-			}
-			catch (DbUpdateConcurrencyException)
-			{
-				if (!AppointmentExists(id))
-					return NotFound();
-				throw;
-			}
+        [HttpGet("getInTimeSpan")]
+        public ActionResult<IEnumerable<AppointmentDto>> GetAppointmentsInTimeSpan(AppointmentsWithinTimespanDto dto)
+        {
+            if (ModelState.IsValid || dto == null || dto.EndTime <= dto.BeginTime)
+            {
+                return BadRequest();
+            }
 
-			return NoContent();
-		}
+            List<AppointmentDto> appointments = _service.GetWithinTimeSpan(dto).ToList();
 
-		[HttpPost]
-		public ActionResult<Appointment> PostAppointment(Appointment appointment)
-		{
-			_repo.Insert(appointment);
-			_repo.Save();
+            if (appointments == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return appointments;
+            }
 
-			return appointment;
-		}
+        }
 
-		[HttpDelete("{id}")]
-		public ActionResult<Appointment> DeleteAppointment(int id)
-		{
-			var appointment = _repo.GetByID(id);
-			if (appointment == null) return NotFound();
 
-			_repo.Delete(appointment);
-			_repo.Save();
+        [HttpPut("{id}")]
+        public ActionResult<UpdateAppointmentDto> PutAppointment(long id, UpdateAppointmentDto appointment)
+        {
+            if (!ModelState.IsValid || appointment == null || id != appointment.Id)
+            {
+                return BadRequest();
+            }
 
-			return appointment;
-		}
+            _service.Update(appointment);
 
-		private bool AppointmentExists(int id)
-		{
-			return _repo.Set.Any(e => e.Id == id);
-		}
-	}
+            return appointment;
+        }
+
+        [HttpPost("register")]
+        public ActionResult<RegisterForAppointmentDto> RegisterForAppointment(RegisterForAppointmentDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            _service.RegisterForAppointment(dto);
+
+            return dto;
+        }
+        
+        [HttpPost]
+        public ActionResult<CreateAppointmentDto> PostAppointment(CreateAppointmentDto appointment)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            _service.Create(appointment);
+
+            return appointment;
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<AppointmentDto> DeleteAppointment(long id)
+        {
+            var appointment = _service.GetById(id);
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+
+            _service.Delete(appointment);
+
+            return appointment;
+        }
+
+        private bool AppointmentExists(long id)
+        {
+            return _repo.SetEntity.Any(e => e.Id == id);
+        }
+
+        [HttpDelete("unsubscribe")]
+        public ActionResult<RegisterForAppointmentDto> Unsubscribe(RegisterForAppointmentDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            _service.Unsubscribe(dto);
+
+            return dto;
+        }
+    }
 }

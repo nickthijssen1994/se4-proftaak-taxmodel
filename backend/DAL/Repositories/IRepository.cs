@@ -8,18 +8,17 @@ namespace backend.DAL.Repositories
 {
 	public interface IRepository<TEntity> where TEntity : class
 	{
-		DbSet<TEntity> Set { get; set; }
+		DbSet<TEntity> SetEntity { get; set; }
 
-		IEnumerable<TEntity> Get<TProperty>(
+		IEnumerable<TEntity> GetEntities<TProperty>(
 			Expression<Func<TEntity, bool>> filter = null,
-			Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-			Expression<Func<TEntity, TProperty>> includes = null);
+			Expression<Func<TEntity, TProperty>>[] includes = null);
 
-		TEntity GetByID(object id);
-		void Insert(TEntity entity);
-		void DeleteById(object id);
-		void Delete(TEntity entityToDelete);
-		void Update(TEntity entityToUpdate);
+		TEntity GetEntityById(object id);
+		void InsertEntity(TEntity entity);
+		void DeleteEntityById(object id);
+		void DeleteEntity(TEntity entityToDelete);
+		void UpdateEntity(TEntity entityToUpdate);
 		void Save();
 	}
 }

@@ -20,7 +20,13 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Make sure Chrome or Firefox are updated to the latest version!
+
+If Protractor is not installed yet, run `npm install -g protractor`.
+
+Run `webdriver-manager update` to install the Selenium Server and use `webdriver-manager start` to run it in the background.
+
+If Selenium is running, run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
 ## Further help
 

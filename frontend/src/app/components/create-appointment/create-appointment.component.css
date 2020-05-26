@@ -6,6 +6,10 @@ md-card {
   background-color: #fff;
 }
 
+.cross-validation-error input {
+  border-left: 5px solid red;
+}
+
 .create-appointment-page-container {
   display: flex;
   justify-content: center;

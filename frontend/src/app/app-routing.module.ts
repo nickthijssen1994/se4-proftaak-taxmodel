@@ -9,9 +9,8 @@ import {AppointmentViewComponent} from './components/appointment-view/appointmen
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
-  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'appointments', component: AppointmentListComponent},
-      {path: 'create', component: CreateAppointmentComponent},
+  {path: 'create', component: CreateAppointmentComponent},
   {path: 'detail/:id', component: EditAppointmentComponent},
   {path: 'calendar', component: CalendarComponent},
   {path: 'show', component: AppointmentViewComponent},
