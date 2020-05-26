@@ -21,7 +21,6 @@
     "@angular/platform-browser": "~9.1.9",
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
-    "@ngrx/store": "^9.1.2",
     "angular-in-memory-web-api": "^0.10.0",
     "axios": "^0.19.2",
     "ngx-material-timepicker": "^5.5.1",
