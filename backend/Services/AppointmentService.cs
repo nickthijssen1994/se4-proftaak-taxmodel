@@ -10,29 +10,32 @@ using System.Threading.Tasks;
 
 namespace backend.Services
 {
+    //TODO: Look at automatically loading the foreign properties instead of using the conveluted include
     public class AppointmentService : IAppointmentService
     {
         private readonly AppointmentRepository _repo;
         private readonly IMapper _mapper;
+
+       static Expression<Func<Appointment, object>>[] includes = new Expression<Func<Appointment, object>>[]
+       {
+                a => a.AccountsRegistered,
+                o => o.Organiser
+       };
         public AppointmentService(AppointmentRepository repo, IMapper mapper)
         {
             _mapper = mapper;
             _repo = repo;
         }
+
+
         public AppointmentDto GetById(long id)
         {
-            Appointment appointment  = _repo.GetEntityById(id);
+            Appointment appointment  = _repo.GetEntities(x => x.Id == id, includes).FirstOrDefault();
             return _mapper.Map<AppointmentDto>(appointment);
-
         }
+
         public IEnumerable<AppointmentDto> GetAll()
         {
-            Expression<Func<Appointment, object>>[] includes = new Expression<Func<Appointment, object>>[] 
-            { 
-                a => a.AccountsRegistered, 
-                o => o.Organiser 
-            };
-
             IEnumerable<Appointment> appointments = _repo.GetEntities(includes: includes);
 
             return _mapper.Map<IEnumerable<AppointmentDto>>(appointments);
@@ -45,19 +48,15 @@ namespace backend.Services
 
             return _mapper.Map<IEnumerable<AppointmentDto>>(appointments);
         }
+
         public bool RegisterForAppointment(RegisterForAppointmentDto dto)
         {
-            Expression<Func<Appointment, object>>[] includes = new Expression<Func<Appointment, object>>[]
-            {
-                a => a.AccountsRegistered,
-                d => d.Organiser
-            };
-
             Appointment appointment = _repo.GetEntities(x=> x.Id == dto.AppointmentId, includes).FirstOrDefault();
 
+            
             AppointmentAccount aa = _mapper.Map<AppointmentAccount>(dto);
 
-            if (IsRegisteredForAppointment(dto))
+            if (IsRegisteredForAppointment(dto) || appointment == null || appointment.AccountsRegistered.Count + 1 > appointment.MaxPeople)
             {
                 return false;
             }
@@ -94,12 +93,6 @@ namespace backend.Services
 
         public void Unsubscribe(RegisterForAppointmentDto dto)
         {
-            Expression<Func<Appointment, object>>[] includes = new Expression<Func<Appointment, object>>[]
-             {
-                a => a.AccountsRegistered,
-                d => d.Organiser
-             };
-
             Appointment appointment = _repo.GetEntities(x => x.Id == dto.AppointmentId, includes).FirstOrDefault();
 
             appointment.AccountsRegistered.Remove(appointment.AccountsRegistered.FirstOrDefault(
@@ -112,7 +105,14 @@ namespace backend.Services
 
         public bool IsRegisteredForAppointment(RegisterForAppointmentDto dto)
         {
-            return _repo.GetEntityById(dto.AppointmentId).AccountsRegistered.Any(a => a.AccountId == dto.AccountId);
+            Appointment account = _repo.GetEntityById(dto.AppointmentId);
+
+            if (account == null)
+            {
+                return false;
+            }
+
+            return account.AccountsRegistered.Any(a => a.AccountId == dto.AccountId);
         }
     }
 }

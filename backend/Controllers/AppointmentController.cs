@@ -87,13 +87,12 @@ namespace backend.Controllers
             bool resultSuccess = _service.RegisterForAppointment(dto);
 
             if (!resultSuccess)
-            {
+            {             
+                //TODO: Return a more useful error indicating
                 return Conflict();
             }
-            else
-            {
-                return dto;
-            }
+
+            return dto;
         }
 
         [HttpGet("isRegisteredForAppointment")]
@@ -145,11 +144,6 @@ namespace backend.Controllers
             _service.Delete(appointment);
 
             return appointment;
-        }
-
-        private bool AppointmentExists(long id)
-        {
-            return _repo.SetEntity.Any(e => e.Id == id);
         }
     }
 }
