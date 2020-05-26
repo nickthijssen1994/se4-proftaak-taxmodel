@@ -12,7 +12,9 @@ namespace backend.Models.Mapping
     {
         public AutoMappingProfile()
         {
-            CreateMap<Appointment, AppointmentDto>();
+            CreateMap<Appointment, AppointmentDto>()
+                .ForMember(a => a.PeopleCount, pc => pc.MapFrom(a => a.AccountsRegistered.Count));
+
             CreateMap<CreateAppointmentDto, Appointment>();
             CreateMap<UpdateAppointmentDto, Appointment>();
 
