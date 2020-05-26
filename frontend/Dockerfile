@@ -13,9 +13,6 @@ RUN npm install -g @angular/cli
 
 COPY . /frontend
 
-RUN ng test --watch=false
-RUN ng e2e --port 4202
-
 RUN ng build --prod --output-path=dist
 
 FROM nginx:1.17.1-alpine
