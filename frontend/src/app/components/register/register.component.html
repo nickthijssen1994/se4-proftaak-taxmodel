@@ -1,0 +1,13 @@
+
+<div class="container">
+  <div class="login-container">
+    <form>
+      <h2> Register your account </h2>
+      <input class="input" placeholder="Email"  name="email" [(ngModel)]="account.email"/>
+      <input class="input" placeholder="Name"  name="name" [(ngModel)]="account.name"/>
+      <input class="input" placeholder="Password" type="password" name="password" [(ngModel)]="account.password"/>
+      <button class="login-button" (click)="register(account)"> Register </button>
+      <button class="login-button" routerLink="/login"> Go to login page </button>
+    </form>
+  </div>
+</div>
