@@ -14,8 +14,8 @@ namespace backend.Services
         bool CheckNameExists(string name);
         bool CheckEmailExists(string email);
         IEnumerable<AccountDto> GetAll();
-        RegisterDto Register(RegisterDto registerDto);
-        string Login(string name);
+        Registration Register(RegisterDto registerDto);
+        Jwt Login(string name);
         EditAccountDto Update(EditAccountDto editAccountDto);
         void Delete(AccountDto accountDto);
     }

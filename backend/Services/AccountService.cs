@@ -63,10 +63,10 @@ namespace backend.Services
             }
         }
 
-        public RegisterDto Register(RegisterDto registerDto)
+        public Registration Register(RegisterDto registerDto)
         {
             // Generate jwt.
-            registerDto.token = tokenHandler.GenerateToken(registerDto.Name);
+            string token = tokenHandler.GenerateToken(registerDto.Name);
 
             PasswordHasher hasher = new PasswordHasher();
             registerDto.Password = hasher.GenerateHash(registerDto.Password); // Hash password before registration.
@@ -76,13 +76,13 @@ namespace backend.Services
             repository.InsertEntity(account);
             repository.Save();
 
-            return registerDto;
+            return new Registration(registerDto.Email, registerDto.Name, token);
         }
 
-        public string Login(string name)
+        public Jwt Login(string name)
         {
             // Generate jwt.
-            return tokenHandler.GenerateToken(name);
+            return new Jwt(tokenHandler.GenerateToken(name));
         }
 
         public void Delete(AccountDto dto)

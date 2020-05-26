@@ -20,6 +20,5 @@ namespace backend.Models.DTOs.Accounts
         [MinLength(8, ErrorMessage = "Password must be at least 8 characters.")]
         [MaxLength(32, ErrorMessage = "Password must be 32 characters or less.")]
         public string Password { get; set; }
-        public string token { get; set; }
     }
 }
