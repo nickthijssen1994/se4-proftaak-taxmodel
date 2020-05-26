@@ -26,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import {FullCalendarModule} from '@fullcalendar/angular';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { AppointmentViewComponent } from './components/appointment-view/appointment-view.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     CreateAppointmentComponent,
     AppointmentListComponent,
     DashboardComponent,
-    CalendarComponent
+    CalendarComponent,
+    AppointmentViewComponent
   ],
   imports: [
     BrowserModule,

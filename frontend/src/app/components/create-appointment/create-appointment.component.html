@@ -1,6 +1,5 @@
-
 <div class="create-appointment-page-container">
-  <form (ngSubmit)="onFormSubmit()" class="mat-custom-container" >
+  <form (ngSubmit)="goBack()" class="mat-custom-container" >
     <h3 mat-dialog-title> Create an appointment on 6-4-2020</h3>
     <mat-form-field class="input">
       <mat-label> Title: </mat-label>
@@ -10,13 +9,13 @@
       <mat-label class="time-picker-text"> From: </mat-label>
       <div class="ngx-material-timepicker-example__form-group">
         <input class="time-picker-input" placeholder="12:00AM" aria-label="12hr format"
-               [ngxTimepicker]="defaultPicker" readonly [(ngModel)]="appointment.beginDate" name="begin time">
+               [ngxTimepicker]="defaultPicker" readonly [(ngModel)]="appointment.beginTime" name="begin time">
         <ngx-material-timepicker #defaultPicker [preventOverlayClick]="true"></ngx-material-timepicker>
       </div>
       <mat-label class="time-picker-text"> to </mat-label>
       <div class="ngx-material-timepicker-example__form-group">
         <input class="time-picker-input" placeholder="17:00PM" aria-label="12hr format"
-               [ngxTimepicker]="defaultPicker2" readonly [(ngModel)]="appointment.endDate" name="end time">
+               [ngxTimepicker]="defaultPicker2" readonly [(ngModel)]="appointment.endTime" name="end time">
         <ngx-material-timepicker #defaultPicker2></ngx-material-timepicker>
       </div>
     </div>
@@ -35,5 +34,4 @@
     <button mat-raised-button type="submit"> Pick one</button>
     <button mat-button (click)="goBack()">Back</button>
   </form>
-
 </div>

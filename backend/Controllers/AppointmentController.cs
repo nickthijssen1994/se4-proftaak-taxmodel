@@ -33,7 +33,6 @@ namespace backend.Controllers
 			if (appointment == null) return NotFound();
 
 			return appointment;
-			;
 		}
 
 		[HttpPut("{id}")]

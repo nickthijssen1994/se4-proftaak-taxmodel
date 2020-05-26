@@ -10,7 +10,8 @@ import {Location} from '@angular/common';
   styleUrls: ['./create-appointment.component.css']
 })
 export class CreateAppointmentComponent implements OnInit {
-  appointment: {}  = {
+  // tslint:disable-next-line:max-line-length
+  public appointment: { organiser: null; size: null; description: string; location: string; id: null; beginTime: Date; endTime: null; title: string; type: null }  = {
     id: null,
     title: '',
     description: '',
@@ -22,20 +23,11 @@ export class CreateAppointmentComponent implements OnInit {
     organiser: null
   };
   disabled = false;
-
   constructor(private route: ActivatedRoute, private appointmentTestService: AppointmentTestService,
               private location: Location) {
   }
-
   ngOnInit(): void {
-
   }
-
-  onFormSubmit(): void {
-    console.log(this.appointment);
-    this.appointmentTestService.addAppointment(this.appointment).subscribe();
-  }
-
   goBack(): void {
     this.location.back();
   }

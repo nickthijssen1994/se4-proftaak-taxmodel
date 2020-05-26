@@ -3,6 +3,9 @@ import { Interaction} from '@fullcalendar/core';
 import {HttpClient} from '@angular/common/http';
 import {Appointment} from '../../models/Appointment';
 import {CalendarEvent} from '../../models/CalendarEvent';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {AppointmentViewComponent} from '../appointment-view/appointment-view.component';
+import {element} from 'protractor';
 
 declare var $: any;
 @Component({
@@ -16,13 +19,19 @@ export class CalendarComponent implements OnInit {
   x: any;
   public Events: Array<CalendarEvent> = [];
   title = 'Calendar';
-  constructor(private http: HttpClient) {
-  }
-  ngOnInit() {
-    this.getItems();
+
+  constructor(private http: HttpClient, public matDialog: MatDialog) {
   }
 
-  getItems() {
+  ngOnInit() {
+    this.getItems(this.matDialog);
+  }
+
+  openDialog() {
+  }
+
+  getItems(matDialog1: MatDialog) {
+    const Dialog = matDialog1;
     return this.http.get('https://localhost:5001/taxbreak/api/appointment').subscribe(data => {
       this.Appointments = data as Appointment[];
       this.Appointments.forEach((elements) => {
@@ -38,7 +47,13 @@ export class CalendarComponent implements OnInit {
           },
           plugins: Interaction,
           eventClick(info) {
-            alert('ID = ' + info.id + ' - Datum = ' + new Date(info.start).toUTCString() + ' - ' + new Date(info.end).toUTCString());
+            const dialogRef = Dialog.open(AppointmentViewComponent, {
+              data: {
+                startDate: info.start,
+                endDate: info.end,
+                title: info.title,
+              }
+            });
           },
           navLinks: true,
           editable: true,
@@ -47,8 +62,7 @@ export class CalendarComponent implements OnInit {
           startTime: '10:00',
           endTime: '15:00',
           events: [
-            {
-            }
+            {}
           ]
         }).fullCalendar('addEventSource', this.Events);
       }, 100);
