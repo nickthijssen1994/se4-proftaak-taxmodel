@@ -27,10 +27,12 @@ namespace Repository
             user.Email = "testemail";
             user.Name = "testUser";
             user.Password = "TestPass1";
-            mock.Setup(AccountService => AccountService.Register(user)).Returns(user);
+            Registration registration = new Registration(user.Email, user.Name, user.Password);
+
+            mock.Setup(AccountService => AccountService.Register(user)).Returns(registration);
 
             // Act
-            RegisterDto result = mock.Object.Register(user);
+            Registration result = mock.Object.Register(user);
 
             // Assert
             Assert.AreEqual(user.Name, result.Name);
@@ -44,11 +46,11 @@ namespace Repository
             LoginDto user = new LoginDto();
             user.Name = "testUser";
             user.Password = "TestPass1";
-            string token = "token";
+            Jwt token = new Jwt("token");
             mock.Setup(AccountService => AccountService.Login(user.Name)).Returns(token);
 
             // Act
-            string result = mock.Object.Login(user.Name);
+            Jwt result = mock.Object.Login(user.Name);
 
             // Assert
             Assert.IsNotNull(result);
