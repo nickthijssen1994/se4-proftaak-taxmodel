@@ -1,4 +1,5 @@
 export class EditAppointmentDto {
+  id: number;
   title: string;
   description: string;
   location: string;

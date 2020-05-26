@@ -3,7 +3,7 @@ import { Appointment } from '../../models/Appointment';
 import { AppointmentTestService} from '../../services/appointment-test.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
-import {EditAppointmentDto} from "../../models/dtos/EditAppointmentDto";
+import {EditAppointmentDto} from '../../models/dtos/EditAppointmentDto';
 
 @Component({
   selector: 'app-edit-appointment',
@@ -32,6 +32,7 @@ export class EditAppointmentComponent implements OnInit {
   insertInfo(appointment: Appointment): void {
     this.appointment = appointment;
     this.beginTime = appointment.beginTime;
+    this.endTime = appointment.endTime;
     this.selectedDate = appointment.beginTime;
 
     this.beginTime = new Date(appointment.beginTime).getHours() + ':' + new Date(appointment.beginTime).getMinutes();
@@ -41,6 +42,9 @@ export class EditAppointmentComponent implements OnInit {
   update(): void {
     const dto = new EditAppointmentDto();
 
+    dto.id = this.appointment.id;
+    dto.title = this.appointment.title;
+    dto.type = this.appointment.type;
     dto.beginTime = this.createDate(new Date(this.selectedDate), this.beginTime).toISOString();
     dto.endTime = this.createDate(new Date(this.selectedDate), this.endTime).toISOString();
     dto.description = this.appointment.description;
@@ -49,6 +53,8 @@ export class EditAppointmentComponent implements OnInit {
     dto.minPeople  = this.appointment.minPeople;
     dto.organiser = this.appointment.organiser;
 
+
+    console.log(dto);
     this.appointmentTestService.updateAppointment(dto).subscribe(() => this.goBack());
   }
 
