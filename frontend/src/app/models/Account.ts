@@ -1,4 +1,5 @@
 export interface Account {
-  name: string;
   id: bigint;
+  name: string;
+  email: string;
 }
