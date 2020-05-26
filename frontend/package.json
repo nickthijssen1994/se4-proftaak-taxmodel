@@ -26,6 +26,7 @@
     "ngx-material-timepicker": "^5.5.1",
     "rxjs": "~6.5.5",
     "save": "^2.4.0",
+    "secure-ls": "^1.2.6",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.3"
   },
