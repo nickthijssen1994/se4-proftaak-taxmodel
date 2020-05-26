@@ -62,7 +62,7 @@ export class CreateAppointmentComponent implements OnInit {
     console.log(this.appointment.beginDate);
   }
 
-  createDate( date: Date, time: Date): Date {
+   createDate( date: Date, time: Date): Date {
     let result = new Date(this.date);
     const dateArray =  time.toString().split(':');
 

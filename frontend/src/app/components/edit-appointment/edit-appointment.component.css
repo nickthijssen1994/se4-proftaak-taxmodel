@@ -6,3 +6,19 @@
 .edit-appointment-form-full-width {
   width: 100%;
 }
+
+.time-pickers-container{
+  justify-content: center;
+  align-content: center;
+  margin-bottom: 15px;
+  display: grid;
+}
+
+.time-picker-input{
+  max-height: 40px;
+  margin-left: 0.6em;
+  margin-right: 0.6em;
+  margin-bottom: 0;
+  max-width: 5em;
+  color: #3f51b5;
+}

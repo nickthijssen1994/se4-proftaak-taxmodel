@@ -17,20 +17,26 @@
       </mat-form-field>
       <mat-form-field class="edit-appointment-form-full-width">
         <mat-label>Begin Date</mat-label>
-        <input type="date" matInput [(ngModel)]="appointment.beginTime" value="{{appointment.beginTime}}"
-               [ngModelOptions]="{standalone: true}">
+        <input matInput [matDatepicker]="picker" [ngModel]="appointment.beginTime" (dateChange)="onDateChange($event)" name="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      <mat-form-field class="edit-appointment-form-full-width">
-        <mat-label>End Date</mat-label>
-        <input type="date" matInput [(ngModel)]="appointment.endTime" value="{{appointment.endTime}}"
-               [ngModelOptions]="{standalone: true}">
-      </mat-form-field>
+      <div class="time-pickers-container">
+        <mat-label> Start time</mat-label>
+          <input class="time-picker-input" matInput placeholder="12:00" [format]="24" required
+                 [ngxTimepicker]="defaultPicker" min="10:00" max="17:00" [(ngModel)]="beginTime" name="begin time" required (error)="defaultPicker.appendToInput">
+        <ngx-material-timepicker #defaultPicker [preventOverlayClick]="true"></ngx-material-timepicker>
+        <mat-label> End time</mat-label>
+        <input class="time-picker-input" matInput placeholder="17:00" [format]="24"
+                 [ngxTimepicker]="defaultPicker2" min="10:00" max="17:00" [(ngModel)]="endTime" name="end time" required>
+        <ngx-material-timepicker #defaultPicker2></ngx-material-timepicker>
+
+      </div>
       <mat-form-field class="edit-appointment-form-full-width">
         <mat-label>Type</mat-label>
-        <mat-select matNativeControl required [(ngModel)]="appointment.type"
-                    [ngModelOptions]="{standalone: true}">
-          <mat-option value="private">Private</mat-option>
-          <mat-option value="public">Public</mat-option>
+        <mat-select matNativeControl required (selectionChange)="onTypeChange($event)" [(value)]="appointment.type">
+          <mat-option value="Private">Private</mat-option>
+          <mat-option value="Public">Public</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="edit-appointment-form-full-width">
