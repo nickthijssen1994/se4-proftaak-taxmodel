@@ -1,13 +1,10 @@
-FROM node:12.16.2 AS build
+FROM node:alpine AS build
 
-COPY package.json /usr/frontend/
-WORKDIR /usr/frontend
+WORKDIR /usr/src/app
+COPY package.json ./
 RUN npm install
-RUN ng build --prod
+COPY . .
+RUN npm run build --prod
 
-COPY ./ /usr/frontend
-
-FROM nginx:1.17.1-alpine
-RUN rm -rf /usr/share/nginx/html/*
-COPY ./dev/nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /usr/frontend/dist/frontend /usr/share/nginx/html
+FROM nginx:alpine
+COPY --from=build /usr/src/app/dist/frontend /usr/share/nginx/html
