@@ -65,7 +65,6 @@ import {RegisterComponent} from './components/register/register.component';
     MatSnackBarModule,
     MatNativeDateModule
   ],
-  entryComponents: [CreateAppointmentComponent],
   bootstrap: [AppComponent],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
