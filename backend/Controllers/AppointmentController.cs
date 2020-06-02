@@ -98,7 +98,7 @@ namespace backend.Controllers
             return _repo.SetEntity.Any(e => e.Id == id);
         }
 
-        [HttpDelete("unsubscribe")]
+        [HttpPost("unsubscribe")]
         public ActionResult<RegisterForAppointmentDto> Unsubscribe(RegisterForAppointmentDto dto)
         {
             if (!ModelState.IsValid) return BadRequest();

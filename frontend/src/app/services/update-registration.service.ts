@@ -24,18 +24,21 @@ export class UpdateRegistrationService {
     this.headers = this.headers.set('Accept', 'application/json');
   }
 
- subscribe(): void {
-    // return this.http.post<Appointment[]>(this.appointmentsUrl);
+  subscribe(updateRegistrationDto: UpdateRegistrationDto): Observable<any> {
+    const url = `${this.appointmentsUrl}/register/`
+    return this.http.post(url, updateRegistrationDto, this.httpOptions);
   }
 
-  unsubscribe(updateRegistrationDto: UpdateRegistrationDto): void {
+  unsubscribe(updateRegistrationDto: UpdateRegistrationDto): Observable<any> {
     const url = `${this.appointmentsUrl}/unsubscribe/`;
     const header: HttpHeaders = new HttpHeaders()
       .append('Content-Type', 'application/json; charset=UTF-8');
     const httpOptions = {
-      headers: header,
+      headers: this.headers,
       body: { updateRegistrationDto: UpdateRegistrationDto }
     };
-    this.http.delete<UpdateRegistrationDto>(url, httpOptions);
+
+    return this.http.post(url, updateRegistrationDto, httpOptions);
+
   }
 }
