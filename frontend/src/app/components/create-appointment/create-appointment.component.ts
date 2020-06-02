@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AppointmentTestService} from '../../services/appointment-test.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {AppointmentDto} from '../../models/AppointmentDto';
 
 @Component({
   selector: 'app-create-appointment',
@@ -10,24 +12,40 @@ import {Location} from '@angular/common';
 })
 export class CreateAppointmentComponent implements OnInit {
 
-  public appointment: { organiser: null; size: null; description: string; location: string; id: null; beginTime: Date; endTime: null; title: string; type: null } = {
-    id: null,
+  appointment: AppointmentDto = {
     title: '',
     description: '',
     location: '',
-    type: null,
-    size: null,
-    beginTime: new Date(),
-    endTime: null,
-    organiser: null
+    type: 'true',
+    minPeople: null,
+    maxPeople: null,
+    beginDate: null,
+    endDate: null,
+    organiser: null,
+    beginTime: '',
+    endTime: '',
   };
+
+  date: Date;
   disabled = false;
 
   constructor(private route: ActivatedRoute, private appointmentTestService: AppointmentTestService,
-              private location: Location) {
+              private location: Location, private notificationService: MatSnackBar) {
   }
 
   ngOnInit(): void {
+  }
+
+  onFormSubmit(): void {
+    if (this.validate()) {
+      this.addTimeToDate();
+      console.log(this.appointment);
+      console.log(this.date);
+      this.appointmentTestService.addAppointment(this.appointment).subscribe();
+      this.notificationService.open('Appointment created', null, {
+        duration: 5000,
+      });
+    }
   }
 
   goBack(): void {
