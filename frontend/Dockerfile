@@ -1,10 +1,9 @@
-FROM node:alpine AS build
+FROM node:alpine AS builder
 
-WORKDIR /usr/src/app
-COPY package.json ./
+COPY . ./frontend
+WORKDIR /frontend
 RUN npm install
-COPY . .
-RUN npm run build --prod
+RUN $(npm bin)/ng build --prod
 
 FROM nginx:alpine
-COPY --from=build /usr/src/app/dist/frontend /usr/share/nginx/html
+COPY --from=builder /frontend/dist/frontend /usr/share/nginx/html
