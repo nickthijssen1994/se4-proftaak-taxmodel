@@ -6,6 +6,8 @@ import {CreateAppointmentComponent} from './components/create-appointment/create
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {CalendarComponent} from './components/calendar/calendar.component';
 import {AppointmentViewComponent} from './components/appointment-view/appointment-view.component';
+import {LoginComponent} from './components/login/login.component';
+import {RegisterComponent} from './components/register/register.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
@@ -14,6 +16,8 @@ const routes: Routes = [
   {path: 'detail/:id', component: EditAppointmentComponent},
   {path: 'calendar', component: CalendarComponent},
   {path: 'show', component: AppointmentViewComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent}
 ];
 
 @NgModule({

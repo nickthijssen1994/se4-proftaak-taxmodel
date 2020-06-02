@@ -3,12 +3,11 @@ using System.Linq;
 using backend.DAL.Repositories;
 using backend.Models.DTOs;
 using backend.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
-    [ApiController]
+	[ApiController]
     [Route("taxbreak/api/[controller]")]
     public class AppointmentController : ControllerBase
     {
@@ -107,5 +106,16 @@ namespace backend.Controllers
 
             return dto;
         }
+
+        [HttpGet("isRegisteredForAppointment")]
+		public ActionResult<bool> IsRegisteredForAppointment(RegisterForAppointmentDto dto)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest();
+			}
+
+			return _service.IsRegisteredForAppointment(dto);
+		}
     }
 }
