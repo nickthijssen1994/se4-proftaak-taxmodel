@@ -12,32 +12,32 @@ namespace backend.DAL.Repositories
 
 		public GenericRepository(MySqlContext context)
 		{
-            _context = context ?? throw new ArgumentNullException(nameof(context));
-            SetEntity = context.Set<TEntity>();
+			_context = context ?? throw new ArgumentNullException(nameof(context));
+			SetEntity = context.Set<TEntity>();
 		}
 
-    public DbSet<TEntity> SetEntity { get; set; }
+		public DbSet<TEntity> SetEntity { get; set; }
 
 		public virtual IEnumerable<TEntity> GetEntities<TProperty>()
 		{
 			IQueryable<TEntity> query = SetEntity;
 			return query.ToList();
 		}
-    
+
 		public virtual IEnumerable<TEntity> GetEntities<TProperty>(
 			Expression<Func<TEntity, bool>> filter = null,
-			Expression<Func<TEntity, TProperty>> includes = null)
+			Expression<Func<TEntity, TProperty>>[] includes = null)
 		{
 			IQueryable<TEntity> query = SetEntity;
 
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
-           
+			if (filter != null)
+			{
+				query = query.Where(filter);
+			}
+
 			if (includes != null)
 			{
-				return query.Include(includes);
+				return includes.Aggregate(query, (current, include) => current.Include(include));
 			}
 
 			return query.ToList();

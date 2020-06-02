@@ -4,13 +4,20 @@ import {AppointmentListComponent} from './components/appointment-list/appointmen
 import {EditAppointmentComponent} from './components/edit-appointment/edit-appointment.component';
 import {CreateAppointmentComponent} from './components/create-appointment/create-appointment.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {CalendarComponent} from './components/calendar/calendar.component';
+import {AppointmentViewComponent} from './components/appointment-view/appointment-view.component';
+import {LoginComponent} from './components/login/login.component';
+import {RegisterComponent} from './components/register/register.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
-  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'appointments', component: AppointmentListComponent},
-      {path: 'create', component: CreateAppointmentComponent},
+  {path: 'create', component: CreateAppointmentComponent},
   {path: 'detail/:id', component: EditAppointmentComponent},
+  {path: 'calendar', component: CalendarComponent},
+  {path: 'show', component: AppointmentViewComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent}
 ];
 
 @NgModule({

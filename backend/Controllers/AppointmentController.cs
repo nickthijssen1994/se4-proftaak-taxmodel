@@ -1,17 +1,13 @@
+using System.Collections.Generic;
+using System.Linq;
 using backend.DAL.Repositories;
-using backend.Models;
 using backend.Models.DTOs;
 using backend.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
-using System.Diagnostics;
-using System.Linq;
 
 namespace backend.Controllers
 {
-    [ApiController]
+	[ApiController]
     [Route("taxbreak/api/[controller]")]
     public class AppointmentController : ControllerBase
     {
@@ -36,58 +32,49 @@ namespace backend.Controllers
         {
             var appointment = _service.GetById(id);
 
-            if (appointment == null)
-            {
-                return NotFound();
-            }
+            if (appointment == null) return NotFound();
 
             return appointment;
         }
 
-        [HttpGet("GetInTimeSpan")]
+
+        [HttpGet("getInTimeSpan")]
         public ActionResult<IEnumerable<AppointmentDto>> GetAppointmentsInTimeSpan(AppointmentsWithinTimespanDto dto)
         {
-            if (ModelState.IsValid || dto == null || dto.EndTime <= dto.BeginTime)
-            {
-                return BadRequest();
-            }
+            if (ModelState.IsValid || dto == null || dto.EndTime <= dto.BeginTime) return BadRequest();
 
-            List<AppointmentDto> appointments = _service.GetWithinTimeSpan(dto).ToList();
+            var appointments = _service.GetWithinTimeSpan(dto).ToList();
 
             if (appointments == null)
-            {
                 return BadRequest();
-            }
-            else
-            {
-                return appointments;
-            }
-
+            return appointments;
         }
 
 
         [HttpPut("{id}")]
         public ActionResult<UpdateAppointmentDto> PutAppointment(long id, UpdateAppointmentDto appointment)
         {
-            if (!ModelState.IsValid || appointment == null || id != appointment.Id)
-            {
-                return BadRequest();
-            }
+            if (!ModelState.IsValid || appointment == null || id != appointment.Id) return BadRequest();
 
             _service.Update(appointment);
 
             return appointment;
         }
 
+        [HttpPost("register")]
+        public ActionResult<RegisterForAppointmentDto> RegisterForAppointment(RegisterForAppointmentDto dto)
+        {
+            if (!ModelState.IsValid) return BadRequest();
 
+            _service.RegisterForAppointment(dto);
+
+            return dto;
+        }
 
         [HttpPost]
         public ActionResult<CreateAppointmentDto> PostAppointment(CreateAppointmentDto appointment)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
+            if (!ModelState.IsValid) return BadRequest();
 
             _service.Create(appointment);
 
@@ -98,10 +85,7 @@ namespace backend.Controllers
         public ActionResult<AppointmentDto> DeleteAppointment(long id)
         {
             var appointment = _service.GetById(id);
-            if (appointment == null)
-            {
-                return NotFound();
-            }
+            if (appointment == null) return NotFound();
 
             _service.Delete(appointment);
 
@@ -112,5 +96,26 @@ namespace backend.Controllers
         {
             return _repo.SetEntity.Any(e => e.Id == id);
         }
+
+        [HttpPost("unsubscribe")]
+        public ActionResult<RegisterForAppointmentDto> Unsubscribe(RegisterForAppointmentDto dto)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            _service.Unsubscribe(dto);
+
+            return dto;
+        }
+
+        [HttpGet("isRegisteredForAppointment")]
+		public ActionResult<bool> IsRegisteredForAppointment(RegisterForAppointmentDto dto)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest();
+			}
+
+			return _service.IsRegisteredForAppointment(dto);
+		}
     }
 }

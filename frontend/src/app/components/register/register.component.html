@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="login-container">
+    <form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" name="account" novalidate>
+      <h2> Register your account </h2>
+
+      <mat-error *ngIf="f.submitted && email.invalid && email.errors.required">Email is required</mat-error>
+      <mat-error *ngIf="f.submitted && email.invalid && email.errors.email">Email must be a valid email address
+      </mat-error>
+      <input class="input" placeholder="Email" #email="ngModel" [(ngModel)]="account.email" email
+             name="email"
+             required type="email"/>
+
+      <mat-error *ngIf="f.submitted && name.invalid && name.errors.required">Username is required</mat-error>
+      <mat-error *ngIf="f.submitted && name.invalid && name.errors.minlength">Username must be at least 6
+        characters
+      </mat-error>
+      <mat-error *ngIf="f.submitted && name.invalid && name.errors.maxlength"> Username must be at most 20
+        characters
+      </mat-error>
+      <input class="input" placeholder="Username" #name="ngModel" [(ngModel)]="account.name" maxlength="32"
+             minlength="4" name="name"
+             required type="text"/>
+
+      <mat-error *ngIf="f.submitted && password.invalid && password.errors.required">Password is required</mat-error>
+      <mat-error *ngIf="f.submitted && password.invalid && password.errors.minlength">Password must be at least 6
+        characters
+      </mat-error>
+      <input class="input" placeholder="Password" #password="ngModel" [(ngModel)]="account.password"
+             minlength="4"
+             name="password" required
+             type="password"/>
+
+      <mat-error *ngIf="f.submitted && isSignUpFailed">{{ errorMessage }}
+      </mat-error>
+      <br>
+      <div *ngIf="isSuccessful">
+        Your registration is successful
+      </div>
+      <br>
+      <button class="login-button"> Register</button>
+      <button class="login-button" routerLink="/login"> Go to login page</button>
+    </form>
+  </div>
+</div>

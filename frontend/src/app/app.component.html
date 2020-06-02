@@ -1,6 +1,19 @@
 <mat-toolbar color="primary">
-  <span>{{title}}</span>
+
+  <button mat-button routerLink="/"><h1>{{title}}</h1></button>
+
   <button mat-button routerLink="/dashboard">Dashboard</button>
   <button mat-button routerLink="/appointments">Appointments</button>
+  <button mat-button routerLink="/calendar">Calendar</button>
+  <span style="flex: 1 1 auto;"></span>
+  <div *ngIf="isLoggedIn == false">
+    <button mat-button routerLink="/login">Login</button>
+    <button mat-button routerLink="/register">Register</button>
+  </div>
+  <div *ngIf="isLoggedIn == true">
+    <button mat-button (click)="logout()">Logout - {{username}}</button>
+  </div>
+
 </mat-toolbar>
 <router-outlet></router-outlet>
+

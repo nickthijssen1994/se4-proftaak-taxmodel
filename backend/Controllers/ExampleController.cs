@@ -20,7 +20,7 @@ namespace backend.Controllers
 		[HttpGet]
 		public ActionResult<IEnumerable<Example>> GetAll()
 		{
-			return _repo.GetEntities(null, a => a).ToList();
+			return _repo.GetEntities<IEnumerable<Example>>(null, null).ToList();
 		}
 
 		[HttpGet("{id}")]

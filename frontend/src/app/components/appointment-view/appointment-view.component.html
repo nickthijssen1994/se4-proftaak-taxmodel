@@ -1,0 +1,12 @@
+<h1 mat-dialog-title> {{this.title}} </h1>
+<mat-dialog-content >
+  <h4><b>Location:</b> {{this.location}} </h4>
+  <p><b> Start:</b> {{this.beginTime}}</p>
+  <p><b> End:</b> {{this.endTime}}</p>
+  <h4><b>Further description:</b> {{this.description}}</h4>
+  <h4><b>Max amount of people:</b>  {{this.maxPeople.toString()}}</h4>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-button class="dialog-appointment-accept-button">Accept</button>
+  <button mat-button mat-dialog-close class="dialog-appointment-decline-button">Cancel</button>
+</mat-dialog-actions>
