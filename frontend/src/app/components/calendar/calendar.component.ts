@@ -48,10 +48,13 @@ export class CalendarComponent implements OnInit {
           plugins: Interaction,
           eventClick(info) {
             const dialogRef = Dialog.open(AppointmentViewComponent, {
+              width: '600px',
+              height: '500px',
               data: {
                 startDate: info.start,
                 endDate: info.end,
                 title: info.title,
+                id: info.id,
               }
             });
           },
