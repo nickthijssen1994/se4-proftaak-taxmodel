@@ -32,23 +32,23 @@ namespace backend.Controllers
 
 		[AllowAnonymous]
 		[HttpPost("login")]
-		public ActionResult<string> Login(LoginDto loginDto)
+		public IActionResult Login(LoginDto loginDto)
 		{
 			if (!ModelState.IsValid) // Check modelstate.
 			{
-				return BadRequest(ResponseConstants.InvalidInput);
+				return BadRequest(new Exception(ResponseConstants.InvalidInput));
 			}
 
 			if (!service.CheckNameExists(loginDto.Name)) // Check if user exists.  
 			{
-				return Unauthorized(ResponseConstants.InvalidCredentials);
+				return BadRequest(new Exception(ResponseConstants.InvalidCredentials));
 			}
 
 			string hash = service.GetByName(loginDto.Name).Password;
 
 			if (!VerifyPassword(loginDto.Password, hash)) // Check password against password in database.
 			{
-				return Unauthorized(ResponseConstants.InvalidCredentials);
+				return BadRequest(new Exception(ResponseConstants.InvalidCredentials));
 			}
 
 			return Ok(service.Login(loginDto.Name));

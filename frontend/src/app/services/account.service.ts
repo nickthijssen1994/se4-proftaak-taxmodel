@@ -5,6 +5,7 @@ import {LoginDto} from '../models/LoginDto';
 import {RegisterDto} from '../models/RegisterDto';
 import {login, isLoggedIn} from '../storage/UserStorage';
 import {Router} from '@angular/router';
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -26,17 +27,10 @@ export class AccountService {
   }
 
   login(account: LoginDto) {
-    return this.http.post<LoginDto>(this.accountUrl + '/login', account, this.httpOptions).subscribe((response: any) => {
-      login(account.name, response.token);
-      this.router.navigate(['dashboard']);
-    });
+    return this.http.post<LoginDto>(this.accountUrl + '/login', account, this.httpOptions);
   }
 
   register(account: RegisterDto) {
-    return this.http.post<RegisterDto>(this.accountUrl + '/register', account, this.httpOptions).subscribe((response: any) => {
-      login(response.name, response.token);
-      window.location.reload();
-      this.router.navigate(['dashboard']);
-    });
+    return this.http.post<RegisterDto>(this.accountUrl + '/register', account, this.httpOptions);
   }
 }

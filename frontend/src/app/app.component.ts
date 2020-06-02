@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {isLoggedIn, logout} from './storage/UserStorage';
+import {getName, isLoggedIn, logout} from './storage/UserStorage';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +9,7 @@ import {isLoggedIn, logout} from './storage/UserStorage';
 export class AppComponent {
   title = 'TaxBreak';
   isLoggedIn = isLoggedIn();
+  username = getName();
 
   constructor() {
   }
