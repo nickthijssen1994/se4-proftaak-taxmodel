@@ -11,12 +11,10 @@ namespace backend.Controllers
     [Route("taxbreak/api/[controller]")]
     public class AppointmentController : ControllerBase
     {
-        private readonly AppointmentRepository _repo;
         private readonly IAppointmentService _service;
 
-        public AppointmentController(AppointmentRepository repo, IAppointmentService service)
+        public AppointmentController(IAppointmentService service)
         {
-            _repo = repo;
             _service = service;
         }
 
@@ -48,8 +46,8 @@ namespace backend.Controllers
 
             var appointments = _service.GetWithinTimeSpan(dto).ToList();
 
-            if (appointments == null)
-                return BadRequest();
+            if (appointments == null) return BadRequest();
+
             return appointments;
         }
 
@@ -108,10 +106,7 @@ namespace backend.Controllers
         [HttpGet("isRegisteredForAppointment/{accountId}/{appointmentId}")]
 		public ActionResult<bool> IsRegisteredForAppointment(long accountId, long appointmentId)
 		{
-			if (!ModelState.IsValid)
-			{
-				return BadRequest();
-			}
+			if (!ModelState.IsValid) return BadRequest();
 
             RegisterForAppointmentDto dto = new RegisterForAppointmentDto
             {

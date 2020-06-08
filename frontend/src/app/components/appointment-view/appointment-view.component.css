@@ -70,6 +70,19 @@ md-card {
   border-radius: 2px;
   box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px, rgba(0, 0, 0, 0.12) 0 1px 4px;
   overflow: hidden;}
+
+.already-registered-text{
+  text-align: center;
+  font-weight: bold;
+  color: red;
+}
+
+.appointment-dialog-title{
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
 __description {
   margin: 0 0 15px;
 }
