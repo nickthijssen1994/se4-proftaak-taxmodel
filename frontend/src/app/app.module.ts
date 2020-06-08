@@ -19,14 +19,14 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HttpClientModule} from '@angular/common/http';
 import {FullCalendarModule} from '@fullcalendar/angular';
-import { CalendarComponent } from './components/calendar/calendar.component';
-import { AppointmentViewComponent } from './components/appointment-view/appointment-view.component';
+import {CalendarComponent} from './components/calendar/calendar.component';
+import {AppointmentViewComponent} from './components/appointment-view/appointment-view.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
@@ -37,20 +37,20 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AccountComponent,
-    OrderComponent,
-    AppointmentComponent,
-    EditAppointmentComponent,
-    CreateAppointmentComponent,
-    AppointmentListComponent,
-    DashboardComponent,
-    CalendarComponent,
-    AppointmentViewComponent,
-    LoginComponent,
-    RegisterComponent
-  ], imports: [
+    declarations: [
+        AppComponent,
+        AccountComponent,
+        OrderComponent,
+        AppointmentComponent,
+        EditAppointmentComponent,
+        CreateAppointmentComponent,
+        AppointmentListComponent,
+        DashboardComponent,
+        CalendarComponent,
+        AppointmentViewComponent,
+        LoginComponent,
+        RegisterComponent
+    ], imports: [
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule,
@@ -74,12 +74,9 @@ import {MatIconModule} from '@angular/material/icon';
         MatSidenavModule,
         MatTableModule,
         MatIconModule
-    ],
-  bootstrap: [AppComponent],
-  entryComponents: [CreateAppointmentComponent],
-  providers: [
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
-  ]
+    ], bootstrap: [AppComponent], providers: [
+        {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
+    ]
 })
 export class AppModule {
 }
