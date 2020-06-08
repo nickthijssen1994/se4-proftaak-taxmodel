@@ -9,7 +9,8 @@ import {AppointmentTestService} from '../../services/appointment-test.service';
 })
 export class AppointmentListComponent implements OnInit {
 
-  appointments: Appointment[];
+  displayedColumns: string[] = ['id', 'title', 'location', 'description', 'delete'];
+  appointments: Appointment[] = [];
 
   constructor(private appointmentTestService: AppointmentTestService) {
   }

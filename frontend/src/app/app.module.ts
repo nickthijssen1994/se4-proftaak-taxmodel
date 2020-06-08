@@ -33,6 +33,8 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -48,30 +50,31 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     AppointmentViewComponent,
     LoginComponent,
     RegisterComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    RouterModule,
-    HttpClientModule,
-    FormsModule,
-    AppRoutingModule,
-    MatGridListModule,
-    MatListModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatInputModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatCardModule,
-    MatDatepickerModule,
-    MatCheckboxModule,
-    NgxMaterialTimepickerModule,
-    FullCalendarModule,
-    MatSnackBarModule,
-    MatNativeDateModule,
-    MatSidenavModule
-  ],
+  ], imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        RouterModule,
+        HttpClientModule,
+        FormsModule,
+        AppRoutingModule,
+        MatGridListModule,
+        MatListModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatInputModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatCardModule,
+        MatDatepickerModule,
+        MatCheckboxModule,
+        NgxMaterialTimepickerModule,
+        FullCalendarModule,
+        MatSnackBarModule,
+        MatNativeDateModule,
+        MatSidenavModule,
+        MatTableModule,
+        MatIconModule
+    ],
   bootstrap: [AppComponent],
   entryComponents: [CreateAppointmentComponent],
   providers: [
