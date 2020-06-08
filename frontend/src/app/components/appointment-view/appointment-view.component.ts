@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import * as moment from 'moment';
 import {HttpClient} from '@angular/common/http';
 import {Appointment} from '../../models/appointment';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-appointment-view',
@@ -29,7 +30,7 @@ export class AppointmentViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    return this.http.get('https://localhost:5001/taxbreak/api/appointment/' + this.id).subscribe(data => {
+    return this.http.get(environment.apiUrl + '/appointment/' + this.id).subscribe(data => {
       this.appointment = data as Appointment;
       this.location = this.appointment.location;
       this.description = this.appointment.description;
