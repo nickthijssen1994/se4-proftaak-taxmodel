@@ -7,7 +7,6 @@ using backend.Helpers;
 using backend.Models;
 using backend.Models.DTOs.Accounts;
 using backend.Security;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace backend.Services
