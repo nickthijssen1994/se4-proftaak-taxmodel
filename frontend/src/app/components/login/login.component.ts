@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
       this.isSigninFailed = false;
       login(this.account.name, response.token);
       window.location.reload();
-      this.router.navigate(['dashboard']);
     }, err => {
       this.errorMessage = err.error.message;
       this.isSigninFailed = true;
