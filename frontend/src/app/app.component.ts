@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {getName, isLoggedIn, logout} from './storage/UserStorage';
+import {getName, isLoggedIn, logout} from './storage/user-storage';
 
 declare var $: any;
 

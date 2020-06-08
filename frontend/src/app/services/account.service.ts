@@ -1,9 +1,9 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
-import {LoginDto} from '../models/LoginDto';
-import {RegisterDto} from '../models/RegisterDto';
-import {login, isLoggedIn} from '../storage/UserStorage';
+import {LoginDto} from '../models/dtos/LoginDto';
+import {RegisterDto} from '../models/dtos/RegisterDto';
+import {login, isLoggedIn} from '../storage/user-storage';
 import {Router} from '@angular/router';
 import {Observable} from "rxjs";
 

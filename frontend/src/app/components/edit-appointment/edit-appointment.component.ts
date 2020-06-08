@@ -3,7 +3,7 @@ import { Appointment } from '../../models/Appointment';
 import { AppointmentTestService} from '../../services/appointment-test.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
-import {EditAppointmentDto} from '../../models/dtos/EditAppointmentDto';
+import {EditAppointmentDto} from '../../models/dtos/edit-appointment-dto';
 
 @Component({
   selector: 'app-edit-appointment',
