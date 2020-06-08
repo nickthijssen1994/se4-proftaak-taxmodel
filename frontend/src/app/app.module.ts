@@ -32,6 +32,9 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
+import {AuthService} from './authentication.service';
+import {LoginGuard} from './login.guard';
+import {AuthGuard} from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -68,11 +71,14 @@ import {RegisterComponent} from './components/register/register.component';
     NgxMaterialTimepickerModule,
     FullCalendarModule,
     MatSnackBarModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   bootstrap: [AppComponent],
   entryComponents: [CreateAppointmentComponent],
   providers: [
+    AuthService,
+    LoginGuard,
+    AuthGuard,
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
   ]
 })
