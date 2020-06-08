@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Appointment} from '../../models/Appointment';
+import {Appointment} from '../../models/appointment';
 import {AppointmentTestService} from '../../services/appointment-test.service';
 
 @Component({
@@ -9,7 +9,8 @@ import {AppointmentTestService} from '../../services/appointment-test.service';
 })
 export class AppointmentListComponent implements OnInit {
 
-  appointments: Appointment[];
+  displayedColumns: string[] = ['id', 'title', 'location', 'description', 'delete'];
+  appointments: Appointment[] = [];
 
   constructor(private appointmentTestService: AppointmentTestService) {
   }
@@ -19,8 +20,10 @@ export class AppointmentListComponent implements OnInit {
   }
 
   getAppointments(): void {
-    this.appointmentTestService.getAppointments().subscribe(appointments => this.appointments = appointments);
-    console.log(this.appointments);
+    this.appointmentTestService.getAppointments().subscribe(appointments => {
+      this.appointments = appointments;
+      console.log(this.appointments);
+    });
   }
 
   delete(appointment: Appointment): void {
