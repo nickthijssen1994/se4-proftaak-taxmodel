@@ -1,4 +1,4 @@
-<h1 mat-dialog-title> {{this.title}} </h1>
+<h1 class="appointment-dialog-title" mat-dialog-title> {{this.title}} </h1>
 <mat-dialog-content >
   <h4><b>Location:</b> {{this.location}} </h4>
   <p><b> Start:</b> {{this.beginTime}}</p>
@@ -6,7 +6,12 @@
   <h4><b>Further description:</b> {{this.description}}</h4>
   <h4><b>People registered:</b> {{this.peopleCount}} / {{this.maxPeople.toString()}}</h4>
 </mat-dialog-content>
-<mat-dialog-actions align="center">
-  <button mat-button mat-dialog-close class="dialog-appointment-accept-button" (click)="subscribe()" *ngIf="!canRegister">Accept</button>
-  <button mat-button mat-dialog-close class="dialog-appointment-decline-button" (click)="unsubscribe()" *ngIf="canRegister">Cancel</button>
-</mat-dialog-actions>
+<div *ngIf="canRegister != null">
+  <div class="already-registered-text" *ngIf="!canRegister">
+    <h3 class="already-registered-text"> You're already registered for this appointment!</h3>
+  </div>
+  <mat-dialog-actions align="center">
+    <button mat-button mat-dialog-close class="dialog-appointment-accept-button" (click)="subscribe()" *ngIf="canRegister">Accept</button>
+    <button mat-button mat-dialog-close class="dialog-appointment-decline-button" (click)="unsubscribe()" *ngIf="!canRegister">Cancel</button>
+  </mat-dialog-actions>
+</div>

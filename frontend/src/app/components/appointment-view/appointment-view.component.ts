@@ -21,15 +21,15 @@ export class AppointmentViewComponent implements OnInit {
   description: string;
   peopleCount: number;
   maxPeople: number;
-  canRegister: boolean;
+  canRegister: boolean = null;
   appointment: Appointment;
 
 
   constructor(private http: HttpClient, private updateRegistrationService: UpdateRegistrationService,
               @Inject(MAT_DIALOG_DATA) data) {
 
-    this.beginTime = moment(data.startDate).format('MMMM Do YYYY, h:mm:ss a');
-    this.endTime = moment(data.endDate).format('MMMM Do YYYY, h:mm:ss a');
+    this.beginTime = moment(data.startDate).format('MMMM Do YYYY, h:mm a');
+    this.endTime = moment(data.endDate).format('MMMM Do YYYY, h:mm a');
     this.title = data.title;
     this.id = data.id;
   }
@@ -42,10 +42,9 @@ export class AppointmentViewComponent implements OnInit {
       this.maxPeople = this.appointment.maxPeople;
       this.peopleCount = this.appointment.peopleCount;
       if (this.appointment.peopleCount < this.appointment.maxPeople) {
-        this.canRegister = true;
-      }
-      if (this.canRegister) {
-        this.updateRegistrationService.checkIfAlreadyRegistered(getId(), this.id).subscribe(b => this.canRegister = b);
+        this.updateRegistrationService.checkIfAlreadyRegistered(getId(), this.id).subscribe(b => this.canRegister = !b);
+      } else {
+        this.canRegister = false;
       }
     });
   }
@@ -55,6 +54,7 @@ export class AppointmentViewComponent implements OnInit {
     dto.appointmentId = this.id;
     dto.accountId = getId();
     if (this.canRegister) {
+      console.log(dto);
       this.updateRegistrationService.subscribe(dto).subscribe();
     }
   }
