@@ -23,8 +23,8 @@ export class AppointmentViewComponent implements OnInit {
   constructor(private http: HttpClient,
               @Inject(MAT_DIALOG_DATA) data) {
 
-    this.beginTime = moment(data.startDate).format('MMMM Do YYYY, h:mm:ss a');
-    this.endTime = moment(data.endDate).format('MMMM Do YYYY, h:mm:ss a');
+    this.beginTime = moment(data.startDate).format('h:mm a');
+    this.endTime = moment(data.endDate).format('h:mm a');
     this.title = data.title;
     this.id = data.id;
   }
