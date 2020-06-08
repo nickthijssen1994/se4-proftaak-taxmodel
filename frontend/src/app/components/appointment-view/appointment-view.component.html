@@ -4,9 +4,9 @@
   <p><b> Start:</b> {{this.beginTime}}</p>
   <p><b> End:</b> {{this.endTime}}</p>
   <h4><b>Further description:</b> {{this.description}}</h4>
-  <h4><b>Max amount of people:</b>  {{this.maxPeople.toString()}}</h4>
+  <h4><b>People registered:</b> {{this.peopleCount}} / {{this.maxPeople.toString()}}</h4>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-  <button mat-button class="dialog-appointment-accept-button">Accept</button>
-  <button mat-button mat-dialog-close class="dialog-appointment-decline-button">Cancel</button>
+  <button mat-button mat-dialog-close class="dialog-appointment-accept-button" (click)="subscribe()" *ngIf="!canRegister">Accept</button>
+  <button mat-button mat-dialog-close class="dialog-appointment-decline-button" (click)="unsubscribe()" *ngIf="canRegister">Cancel</button>
 </mat-dialog-actions>

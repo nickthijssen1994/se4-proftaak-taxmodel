@@ -105,14 +105,14 @@ namespace backend.Services
 
 		public bool IsRegisteredForAppointment(RegisterForAppointmentDto dto)
 		{
-			Appointment account = _repo.GetEntityById(dto.AppointmentId);
+			Appointment appointment = _repo.GetEntities(a => a.Id == dto.AppointmentId, includes).FirstOrDefault();
 
-			if (account == null)
+			if (appointment == null)
 			{
 				return false;
 			}
 
-			return account.AccountsRegistered.Any(a => a.AccountId == dto.AccountId);
+			return appointment.AccountsRegistered.Any(a => a.AccountId == dto.AccountId);
 		}
 	}
 }

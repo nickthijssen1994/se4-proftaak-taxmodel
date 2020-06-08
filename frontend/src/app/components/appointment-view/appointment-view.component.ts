@@ -3,6 +3,9 @@ import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import * as moment from 'moment';
 import {HttpClient} from '@angular/common/http';
 import {Appointment} from '../../models/Appointment';
+import {UpdateRegistrationService} from '../../services/update-registration.service';
+import {UpdateRegistrationDto} from '../../models/updateRegistrationDto';
+import {getId} from '../../storage/UserStorage';
 
 @Component({
   selector: 'app-appointment-view',
@@ -16,10 +19,13 @@ export class AppointmentViewComponent implements OnInit {
   endTime: string;
   location: string;
   description: string;
+  peopleCount: number;
   maxPeople: number;
+  canRegister: boolean;
   appointment: Appointment;
 
-  constructor(private http: HttpClient,
+
+  constructor(private http: HttpClient, private updateRegistrationService: UpdateRegistrationService,
               @Inject(MAT_DIALOG_DATA) data) {
 
     this.beginTime = moment(data.startDate).format('MMMM Do YYYY, h:mm:ss a');
@@ -34,6 +40,29 @@ export class AppointmentViewComponent implements OnInit {
       this.location = this.appointment.location;
       this.description = this.appointment.description;
       this.maxPeople = this.appointment.maxPeople;
+      this.peopleCount = this.appointment.peopleCount;
+      if (this.appointment.peopleCount < this.appointment.maxPeople) {
+        this.canRegister = true;
+      }
+      if (this.canRegister) {
+        this.updateRegistrationService.checkIfAlreadyRegistered(getId(), this.id).subscribe(b => this.canRegister = b);
+      }
     });
+  }
+
+  subscribe() {
+    const dto = new UpdateRegistrationDto();
+    dto.appointmentId = this.id;
+    dto.accountId = getId();
+    if (this.canRegister) {
+      this.updateRegistrationService.subscribe(dto).subscribe();
+    }
+  }
+
+  unsubscribe() {
+    const dto = new UpdateRegistrationDto();
+    dto.appointmentId = this.id;
+    dto.accountId = getId();
+    this.updateRegistrationService.unsubscribe(dto).subscribe();
   }
 }
