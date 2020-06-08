@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using backend.DAL.Repositories;
@@ -6,6 +7,7 @@ using backend.Helpers;
 using backend.Models;
 using backend.Models.DTOs.Accounts;
 using backend.Security;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace backend.Services
@@ -14,7 +16,7 @@ namespace backend.Services
 	{
 		private readonly AccountRepository repository;
 		private readonly IMapper mapper;
-		private TokenHandler tokenHandler;
+		private readonly TokenHandler tokenHandler;
 
 		public AccountService(AccountRepository repository, IMapper mapper, IOptions<AppSettings> appSettings)
 		{
@@ -42,7 +44,7 @@ namespace backend.Services
 				Account account = repository.GetEntities<Account>(a => a.Name == name).Single();
 				return true;
 			}
-			catch
+			catch (EntryPointNotFoundException e)
 			{
 				return false;
 			}
@@ -55,7 +57,7 @@ namespace backend.Services
 				Account account = repository.GetEntities<Account>(a => a.Email == email).Single();
 				return true;
 			}
-			catch
+			catch (EntryPointNotFoundException e)
 			{
 				return false;
 			}
@@ -83,9 +85,9 @@ namespace backend.Services
 			return new JwtToken(tokenHandler.GenerateToken(name));
 		}
 
-		public void Delete(AccountDto dto)
+		public void Delete(AccountDto accountDto)
 		{
-			Account account = mapper.Map<Account>(dto);
+			Account account = mapper.Map<Account>(accountDto);
 			repository.DeleteEntity(account);
 			repository.Save();
 		}

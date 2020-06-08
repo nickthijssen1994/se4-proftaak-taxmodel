@@ -14,7 +14,7 @@ namespace backend.Controllers
 	[Route("taxbreak/api/[controller]")]
 	public class AccountController : ControllerBase
 	{
-		private PasswordHasher hasher;
+		private readonly PasswordHasher hasher;
 		private readonly IAccountService service;
 
 		//Inject UserService
