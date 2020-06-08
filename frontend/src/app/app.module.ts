@@ -28,7 +28,6 @@ import {FullCalendarModule} from '@fullcalendar/angular';
 import {CalendarComponent} from './components/calendar/calendar.component';
 import {AppointmentViewComponent} from './components/appointment-view/appointment-view.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
@@ -74,9 +73,7 @@ import {MatIconModule} from '@angular/material/icon';
         MatSidenavModule,
         MatTableModule,
         MatIconModule
-    ], bootstrap: [AppComponent], providers: [
-        {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
-    ]
+    ], bootstrap: [AppComponent], providers: []
 })
 export class AppModule {
 }

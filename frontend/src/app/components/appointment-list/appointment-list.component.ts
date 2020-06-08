@@ -20,8 +20,10 @@ export class AppointmentListComponent implements OnInit {
   }
 
   getAppointments(): void {
-    this.appointmentTestService.getAppointments().subscribe(appointments => this.appointments = appointments);
-    console.log(this.appointments);
+    this.appointmentTestService.getAppointments().subscribe(appointments => {
+      this.appointments = appointments;
+      console.log(this.appointments);
+    });
   }
 
   delete(appointment: Appointment): void {
