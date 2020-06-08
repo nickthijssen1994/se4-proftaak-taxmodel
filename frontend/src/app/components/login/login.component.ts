@@ -33,9 +33,13 @@ export class LoginComponent implements OnInit {
       console.log(response);
       this.isSuccessful = true;
       this.isSigninFailed = false;
-      login(this.account.name, response.token);
-      window.location.reload();
-      this.router.navigate(['dashboard']);
+      this.accountService.getByName(this.account.name).subscribe(a => {
+        console.log(a.Id);
+        login(a.id, this.account.name, response.token);
+        window.location.reload();
+        this.router.navigate(['dashboard']);
+      });
+
     }, err => {
       this.errorMessage = err.error.message;
       this.isSigninFailed = true;

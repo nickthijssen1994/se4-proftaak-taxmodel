@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
       console.log(response);
       this.isSuccessful = true;
       this.isSignUpFailed = false;
-      login(response.name, response.token);
+      login(27, response.name, response.token);
       window.location.reload();
       this.router.navigate(['dashboard']);
     }, err => {

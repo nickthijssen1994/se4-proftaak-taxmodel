@@ -32,7 +32,10 @@ namespace backend.Controllers
         {
             var appointment = _service.GetById(id);
 
-            if (appointment == null) return NotFound();
+            if (appointment == null)
+            {
+                return NotFound();
+            }
 
             return appointment;
         }
@@ -92,11 +95,6 @@ namespace backend.Controllers
             return appointment;
         }
 
-        private bool AppointmentExists(long id)
-        {
-            return _repo.SetEntity.Any(e => e.Id == id);
-        }
-
         [HttpPost("unsubscribe")]
         public ActionResult<RegisterForAppointmentDto> Unsubscribe(RegisterForAppointmentDto dto)
         {
@@ -107,15 +105,21 @@ namespace backend.Controllers
             return dto;
         }
 
-        [HttpGet("isRegisteredForAppointment")]
-		public ActionResult<bool> IsRegisteredForAppointment(RegisterForAppointmentDto dto)
+        [HttpGet("isRegisteredForAppointment/{accountId}/{appointmentId}")]
+		public ActionResult<bool> IsRegisteredForAppointment(long accountId, long appointmentId)
 		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest();
 			}
 
-			return _service.IsRegisteredForAppointment(dto);
+            RegisterForAppointmentDto dto = new RegisterForAppointmentDto
+            {
+                AccountId = accountId,
+                AppointmentId = appointmentId
+            };
+
+            return _service.IsRegisteredForAppointment(dto);
 		}
     }
 }
