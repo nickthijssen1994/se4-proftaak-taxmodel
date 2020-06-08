@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Appointment } from '../../models/Appointment';
+import { Appointment } from '../../models/appointment';
 import { AppointmentTestService} from '../../services/appointment-test.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';

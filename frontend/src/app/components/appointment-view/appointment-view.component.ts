@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import * as moment from 'moment';
 import {HttpClient} from '@angular/common/http';
-import {Appointment} from '../../models/Appointment';
+import {Appointment} from '../../models/appointment';
 
 @Component({
   selector: 'app-appointment-view',

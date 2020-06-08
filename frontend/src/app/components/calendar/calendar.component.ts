@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Interaction} from '@fullcalendar/core';
 import {HttpClient} from '@angular/common/http';
-import {Appointment} from '../../models/Appointment';
-import {CalendarEvent} from '../../models/CalendarEvent';
+import {Appointment} from '../../models/appointment';
+import {CalendarEvent} from '../../models/calendar-event';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {AppointmentViewComponent} from '../appointment-view/appointment-view.component';
 import {element} from 'protractor';
+import {environment} from '../../../environments/environment';
 
 declare var $: any;
 @Component({
@@ -32,7 +33,7 @@ export class CalendarComponent implements OnInit {
 
   getItems(matDialog1: MatDialog) {
     const Dialog = matDialog1;
-    return this.http.get('https://localhost:5001/taxbreak/api/appointment').subscribe(data => {
+    return this.http.get(environment.apiUrl + '/appointment').subscribe(data => {
       this.Appointments = data as Appointment[];
       this.Appointments.forEach((elements) => {
         const events = new CalendarEvent(elements.id, elements.title, elements.beginTime, elements.endTime);
