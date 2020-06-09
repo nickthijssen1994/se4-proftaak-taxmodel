@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountService} from '../../services/account.service';
-import {RegisterDto} from '../../models/RegisterDto';
+import {RegisterDto} from '../../models/dtos/register-dto';
 import {Router} from '@angular/router';
-import {login} from '../../storage/UserStorage';
+import {login} from '../../storage/user-storage';
 
 @Component({
   selector: 'app-register',
@@ -36,7 +36,6 @@ export class RegisterComponent implements OnInit {
       this.isSignUpFailed = false;
       login(27, response.name, response.token);
       window.location.reload();
-      this.router.navigate(['dashboard']);
     }, err => {
       this.errorMessage = err.error.message;
       this.isSignUpFailed = true;

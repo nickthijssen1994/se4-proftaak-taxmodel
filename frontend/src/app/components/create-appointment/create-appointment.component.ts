@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AppointmentTestService} from '../../services/appointment-test.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {AppointmentDto} from '../../models/AppointmentDto';
+import {AppointmentDto} from '../../models/dtos/appointment-dto';
 
 @Component({
   selector: 'app-create-appointment',
@@ -11,7 +11,6 @@ import {AppointmentDto} from '../../models/AppointmentDto';
   styleUrls: ['./create-appointment.component.css']
 })
 export class CreateAppointmentComponent implements OnInit {
-
   appointment: AppointmentDto = {
     title: '',
     description: '',
@@ -28,8 +27,7 @@ export class CreateAppointmentComponent implements OnInit {
 
   date: Date;
   disabled = false;
-
-  constructor(private route: ActivatedRoute, private appointmentTestService: AppointmentTestService,
+  constructor(private router: Router, private route: ActivatedRoute, private appointmentTestService: AppointmentTestService,
               private location: Location, private notificationService: MatSnackBar) {
   }
 
@@ -64,6 +62,7 @@ export class CreateAppointmentComponent implements OnInit {
 
   createDate(date: Date, time: Date): Date {
     let result = new Date(this.date);
+    console.log(time);
     const dateArray = time.toString().split(':');
 
     result.setHours(Number(dateArray[0]) + 2);
@@ -76,7 +75,7 @@ export class CreateAppointmentComponent implements OnInit {
 
   validate(): boolean {
 
-    if (this.appointment.type.toString() === 'true') {
+    if (this.appointment.type === 'true') {
       this.appointment.type = 'Private';
     } else {
       this.appointment.type = 'Public';
@@ -86,7 +85,7 @@ export class CreateAppointmentComponent implements OnInit {
         duration: 5000,
       });
       return false;
-    } else if (this.appointment.title.length <= 4) {
+    } else if (this.appointment.title.length < 4) {
       this.notificationService.open('Title can`t be smaller than 4 characters', null, {
         duration: 5000,
       });
