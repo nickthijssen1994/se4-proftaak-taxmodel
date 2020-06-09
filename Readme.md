@@ -71,3 +71,15 @@ The Angular i18n attribute marks translatable content. Place it on every element
 Example: `<h1 i18n>Hello i18n!</h1>`
 
 More Info: [Angular Internationalization](https://angular.io/guide/i18n).
+
+# SonarQube
+
+After installation, execute the following commands:
+
+1. [SonarScanner installation path]\sonar-scanner-msbuild-4.7.1.2311-net46\SonarScanner.MSBuild.exe begin /k:"TaxBreak" /d:sonar.host.url="http://localhost:9000" /d:sonar.login=[login key]
+
+2. "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" /t:Rebuild [project path]\backend.sln   
+
+3. [SonarScanner installation path]\sonar-scanner-msbuild-4.7.1.2311-net46\SonarScanner.MSBuild.exe end /d:sonar.login=[login key]
+
+Project will now scan and appear in SonarQube.

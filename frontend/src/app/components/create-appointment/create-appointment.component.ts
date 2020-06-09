@@ -3,7 +3,7 @@ import {AppointmentTestService} from '../../services/appointment-test.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {AppointmentDto} from '../../models/AppointmentDto';
+import {AppointmentDto} from '../../models/dtos/appointment-dto';
 
 @Component({
   selector: 'app-create-appointment',

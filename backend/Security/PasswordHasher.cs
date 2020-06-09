@@ -9,7 +9,7 @@ namespace backend.Helpers
 	/// </summary>
 	public class PasswordHasher
 	{
-		private SHA256 sha256Hash = SHA256.Create();
+		private readonly SHA256 sha256Hash = SHA256.Create();
 
 		public string GenerateHash(string input)
 		{
