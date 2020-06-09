@@ -1,12 +1,10 @@
 FROM node:alpine AS builder
 
-COPY package.json package-lock.json ./
-RUN npm ci && mkdir /frontend && mv ./node_modules ./frontend
-WORKDIR /frontend
+WORKDIR /usr/src/app
 COPY . .
-
-RUN npm run ng build -- --prod --output-path=dist
+RUN npm install
+RUN npm run ng build --prod
 
 FROM nginx:alpine
-COPY --from=builder /frontend/dist /usr/share/nginx/html
+COPY --from=builder /usr/src/app/dist/frontend /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"]
