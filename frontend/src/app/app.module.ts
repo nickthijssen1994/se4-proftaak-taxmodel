@@ -19,62 +19,87 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HttpClientModule} from '@angular/common/http';
 import {FullCalendarModule} from '@fullcalendar/angular';
-import { CalendarComponent } from './components/calendar/calendar.component';
-import { AppointmentViewComponent } from './components/appointment-view/appointment-view.component';
+import {CalendarComponent} from './components/calendar/calendar.component';
+import {AppointmentViewComponent} from './components/appointment-view/appointment-view.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
+import {AuthService} from './authentication.service';
+import {LoginGuard} from './login.guard';
+import {AuthGuard} from './auth.guard';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AccountComponent,
-    OrderComponent,
-    AppointmentComponent,
-    EditAppointmentComponent,
-    CreateAppointmentComponent,
-    AppointmentListComponent,
-    DashboardComponent,
-    CalendarComponent,
-    AppointmentViewComponent,
-    LoginComponent,
-    RegisterComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    RouterModule,
-    HttpClientModule,
-    FormsModule,
-    AppRoutingModule,
-    MatGridListModule,
-    MatListModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatInputModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatCardModule,
-    MatDatepickerModule,
-    MatCheckboxModule,
-    NgxMaterialTimepickerModule,
-    FullCalendarModule,
-    MatSnackBarModule,
-    MatNativeDateModule
-  ],
-  bootstrap: [AppComponent],
-  entryComponents: [CreateAppointmentComponent],
-  providers: [
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
-  ]
+    declarations: [
+        AppComponent,
+        AccountComponent,
+        OrderComponent,
+        AppointmentComponent,
+        EditAppointmentComponent,
+        CreateAppointmentComponent,
+        AppointmentListComponent,
+        DashboardComponent,
+        CalendarComponent,
+        AppointmentViewComponent,
+        LoginComponent,
+        RegisterComponent
+    ], imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        RouterModule,
+        HttpClientModule,
+        FormsModule,
+        AppRoutingModule,
+        MatGridListModule,
+        MatListModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatInputModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatCardModule,
+        MatDatepickerModule,
+        MatCheckboxModule,
+        NgxMaterialTimepickerModule,
+        FullCalendarModule,
+        MatSnackBarModule,
+        MatNativeDateModule,
+        MatSidenavModule,
+        MatTableModule,
+        MatIconModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        RouterModule,
+        HttpClientModule,
+        FormsModule,
+        AppRoutingModule,
+        MatGridListModule,
+        MatListModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatInputModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatCardModule,
+        MatDatepickerModule,
+        MatCheckboxModule,
+        NgxMaterialTimepickerModule,
+        FullCalendarModule,
+        MatSnackBarModule,
+        MatNativeDateModule,
+    ], bootstrap: [AppComponent], providers: [
+        AuthService, LoginGuard, AuthGuard, {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
+    ]
 })
 export class AppModule {
 }
