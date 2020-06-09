@@ -5,39 +5,41 @@ import {Router} from '@angular/router';
 import {login} from '../../storage/user-storage';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    selector: 'app-login', templateUrl: './login.component.html', styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
-  form: any = {};
+    form: any = {};
 
-  account: LoginDto = {
-    name: null,
-    password: null
-  };
+    account: LoginDto = {
+        name: null, password: null
+    };
 
-  isSuccessful = false;
-  isSigninFailed = false;
-  errorMessage = '';
+    isSuccessful = false;
+    isSigninFailed = false;
+    errorMessage = '';
 
-  constructor(private accountService: AccountService, private router: Router) {
-  }
+    constructor(private accountService: AccountService, private router: Router) {
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
-  onSubmit() {
-    this.accountService.login(this.account).subscribe((response: any) => {
-      console.log(response);
-      this.isSuccessful = true;
-      this.isSigninFailed = false;
-      login(this.account.name, response.token);
-      window.location.reload();
-    }, err => {
-      this.errorMessage = err.error.message;
-      this.isSigninFailed = true;
-    });
-  }
+    onSubmit() {
+        this.accountService.login(this.account).subscribe((response: any) => {
+            console.log(response);
+            this.isSuccessful = true;
+            this.isSigninFailed = false;
+
+            this.accountService.getByName(this.account.name).subscribe(a => {
+                console.log(a.Id);
+                login(a.id, this.account.name, response.token);
+                window.location.reload();
+                this.router.navigate(['dashboard']);
+            });
+        }, err => {
+            this.errorMessage = err.error.message;
+            this.isSigninFailed = true;
+        });
+    }
 }

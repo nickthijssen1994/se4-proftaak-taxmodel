@@ -4,7 +4,7 @@ import {Observable, of} from 'rxjs';
 import {Appointment} from '../models/appointment';
 import {environment} from '../../environments/environment';
 import {AppointmentDto} from '../models/dtos/appointment-dto';
-import {EditAppointmentDto} from "../models/dtos/edit-appointment-dto";
+import {EditAppointmentDto} from '../models/dtos/edit-appointment-dto';
 
 @Injectable({
   providedIn: 'root'

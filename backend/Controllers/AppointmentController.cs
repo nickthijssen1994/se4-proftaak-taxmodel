@@ -11,12 +11,10 @@ namespace backend.Controllers
     [Route("taxbreak/api/[controller]")]
     public class AppointmentController : ControllerBase
     {
-        private readonly AppointmentRepository _repo;
         private readonly IAppointmentService _service;
 
-        public AppointmentController(AppointmentRepository repo, IAppointmentService service)
+        public AppointmentController(IAppointmentService service)
         {
-            _repo = repo;
             _service = service;
         }
 
@@ -32,7 +30,10 @@ namespace backend.Controllers
         {
             var appointment = _service.GetById(id);
 
-            if (appointment == null) return NotFound();
+            if (appointment == null)
+            {
+                return NotFound();
+            }
 
             return appointment;
         }
@@ -45,8 +46,8 @@ namespace backend.Controllers
 
             var appointments = _service.GetWithinTimeSpan(dto).ToList();
 
-            if (appointments == null)
-                return BadRequest();
+            if (appointments == null) return BadRequest();
+
             return appointments;
         }
 
@@ -92,11 +93,6 @@ namespace backend.Controllers
             return appointment;
         }
 
-        private bool AppointmentExists(long id)
-        {
-            return _repo.SetEntity.Any(e => e.Id == id);
-        }
-
         [HttpPost("unsubscribe")]
         public ActionResult<RegisterForAppointmentDto> Unsubscribe(RegisterForAppointmentDto dto)
         {
@@ -107,15 +103,18 @@ namespace backend.Controllers
             return dto;
         }
 
-        [HttpGet("isRegisteredForAppointment")]
-		public ActionResult<bool> IsRegisteredForAppointment(RegisterForAppointmentDto dto)
+        [HttpGet("isRegisteredForAppointment/{accountId}/{appointmentId}")]
+		public ActionResult<bool> IsRegisteredForAppointment(long accountId, long appointmentId)
 		{
-			if (!ModelState.IsValid)
-			{
-				return BadRequest();
-			}
+			if (!ModelState.IsValid) return BadRequest();
 
-			return _service.IsRegisteredForAppointment(dto);
+            RegisterForAppointmentDto dto = new RegisterForAppointmentDto
+            {
+                AccountId = accountId,
+                AppointmentId = appointmentId
+            };
+
+            return _service.IsRegisteredForAppointment(dto);
 		}
     }
 }

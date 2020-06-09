@@ -3,8 +3,9 @@ import SecureLS from 'secure-ls';
 
 const ls = new SecureLS({encodingType: 'aes', isCompression: false});
 
-export function login(name, token) {
+export function login(id, name, token) {
   ls.set('isLoggedIn', true);
+  ls.set('accountId', id)
   ls.set('name', name);
   ls.set('token', token);
 }
@@ -17,6 +18,9 @@ export function isLoggedIn() {
   return ls.get('isLoggedIn');
 }
 
+export function getId() {
+   return ls.get('accountId');
+}
 export function getName() {
   return ls.get('name');
 }

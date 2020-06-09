@@ -1,4 +1,4 @@
 export class UpdateRegistrationDto {
-  appointmentId: bigint;
-  accountId: bigint;
+  appointmentId: number;
+  accountId: number;
 }

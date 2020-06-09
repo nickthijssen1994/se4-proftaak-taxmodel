@@ -30,6 +30,18 @@ namespace backend.Controllers
 			return service.GetAll().ToList();
 		}
 
+        [HttpGet("{name}")]
+        public ActionResult<AccountDto> GetAccountByName(string name)
+        {
+            AccountDto account = service.GetByName(name); 
+            if (account == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(account);
+        }
+
 		[AllowAnonymous]
 		[HttpPost("login")]
 		public IActionResult Login(LoginDto loginDto)

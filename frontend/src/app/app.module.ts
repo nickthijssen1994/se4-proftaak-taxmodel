@@ -34,6 +34,10 @@ import {RegisterComponent} from './components/register/register.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
+import {AuthService} from './authentication.service';
+import {LoginGuard} from './login.guard';
+import {AuthGuard} from './auth.guard';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 
 @NgModule({
     declarations: [
@@ -72,8 +76,30 @@ import {MatIconModule} from '@angular/material/icon';
         MatNativeDateModule,
         MatSidenavModule,
         MatTableModule,
-        MatIconModule
-    ], bootstrap: [AppComponent], providers: []
+        MatIconModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        RouterModule,
+        HttpClientModule,
+        FormsModule,
+        AppRoutingModule,
+        MatGridListModule,
+        MatListModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatInputModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatCardModule,
+        MatDatepickerModule,
+        MatCheckboxModule,
+        NgxMaterialTimepickerModule,
+        FullCalendarModule,
+        MatSnackBarModule,
+        MatNativeDateModule,
+    ], bootstrap: [AppComponent], providers: [
+        AuthService, LoginGuard, AuthGuard, {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
+    ]
 })
 export class AppModule {
 }

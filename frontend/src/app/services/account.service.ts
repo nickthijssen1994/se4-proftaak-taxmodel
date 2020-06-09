@@ -26,6 +26,11 @@ export class AccountService {
     this.headers = this.headers.set('Accept', 'application/json');
   }
 
+  getByName(name: string): Observable<any>{
+    const url = this.accountUrl + '/' + name;
+    return this.http.get(url);
+  }
+
   login(account: LoginDto) {
     return this.http.post<LoginDto>(this.accountUrl + '/login', account, this.httpOptions);
   }

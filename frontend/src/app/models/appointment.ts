@@ -8,6 +8,7 @@ export interface Appointment {
   organiser: Account;
   size: number;
   type: string;
+  peopleCount: number;
   maxPeople: number;
   minPeople: number;
 }

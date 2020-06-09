@@ -24,6 +24,12 @@ export class UpdateRegistrationService {
     this.headers = this.headers.set('Accept', 'application/json');
   }
 
+  checkIfAlreadyRegistered(accountId, appointmentId): Observable<any> {
+    const url = `${this.appointmentsUrl}/isRegisteredForAppointment/${accountId}/${appointmentId}`;
+    console.log(url);
+    return this.http.get<boolean>(url);
+  }
+
   subscribe(updateRegistrationDto: UpdateRegistrationDto): Observable<any> {
     const url = `${this.appointmentsUrl}/register/`
     return this.http.post(url, updateRegistrationDto, this.httpOptions);
