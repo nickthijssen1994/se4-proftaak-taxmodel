@@ -1,45 +1,59 @@
-﻿using System;
+﻿using Org.BouncyCastle.Asn1.Pkcs;
+using System;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace backend.Helpers
 {
 	/// <summary>
-	/// Source: https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.hashalgorithm.computehash?view=netcore-3.1
+	/// Source: https://medium.com/@mehanix/lets-talk-security-salted-password-hashing-in-c-5460be5c3aae
 	/// </summary>
 	public class PasswordHasher
 	{
-		private readonly SHA256 sha256Hash = SHA256.Create();
-
-		public string GenerateHash(string input)
+		byte[] salt;
+		public string GenerateHash(string password)
 		{
-			// Convert the input string to a byte array and compute the hash.
-			byte[] data = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+			new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
 
-			// Create a new Stringbuilder to collect the bytes
-			// and create a string.
-			var sBuilder = new StringBuilder();
+			// Hash and salt password using PBKDF2.
+			var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
 
-			// Loop through each byte of the hashed data
-			// and format each one as a hexadecimal string.
-			for (int i = 0; i < data.Length; i++)
-			{
-				sBuilder.Append(data[i].ToString("x2"));
-			}
+			// Place the string in the byte array.
+			byte[] hash = pbkdf2.GetBytes(20);
 
-			// Return the hexadecimal string.
-			return sBuilder.ToString();
+			// New byte array to store hash.
+			byte[] hashBytes = new byte[36];
+
+			// Place the hash and salt in their respective places.
+			Array.Copy(salt, 0, hashBytes, 0, 16);
+			Array.Copy(hash, 0, hashBytes, 16, 20);
+
+			return Convert.ToBase64String(hashBytes);
 		}
 
 		public bool VerifyHash(string input, string hash)
 		{
-			// Hash the input.
-			var hashOfInput = GenerateHash(input);
+			byte[] hashBytes = Convert.FromBase64String(hash);
 
-			// Create a StringComparer an compare the hashes.
-			StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+			// Take the salt out of the string.
+			byte[] salt = new byte[16];
+			Array.Copy(hashBytes, 0, salt, 0, 16);
 
-			return comparer.Compare(hashOfInput, hash) == 0;
+			// Hash the user input.
+			var pbkdf2 = new Rfc2898DeriveBytes(input, salt, 10000);
+			byte[] hashedInput = pbkdf2.GetBytes(20);
+
+			// Compare results.
+			bool ok = true;
+			for (int i = 0; i < 20; i++)
+			{
+				if(hashBytes[i + 16] != hashedInput[i])
+				{
+					ok = false;
+				}
+			}
+
+			return ok;
 		}
 	}
 }
