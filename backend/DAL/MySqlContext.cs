@@ -24,14 +24,14 @@ namespace backend.DAL
 			modelBuilder.Entity<Order>().ToTable("order");
 			modelBuilder.Entity<Example>().ToTable("example");
 
-            modelBuilder.Entity<AppointmentAccount>().HasKey(a => new { a.AppointmentId, a.AccountId});
-            modelBuilder.Entity<AppointmentAccount>()
-             .HasOne(x => x.Appointment).WithMany(y => y.AccountsRegistered)
-             .HasForeignKey(y => y.AppointmentId);
+			modelBuilder.Entity<AppointmentAccount>().HasKey(a => new {a.AppointmentId, a.AccountId});
+			modelBuilder.Entity<AppointmentAccount>()
+				.HasOne(x => x.Appointment).WithMany(y => y.AccountsRegistered)
+				.HasForeignKey(y => y.AppointmentId);
 
-            modelBuilder.Entity<AppointmentAccount>()
-            .HasOne(x => x.Account).WithMany(y => y.Appointments)
-            .HasForeignKey(y => y.AppointmentId);
-        }
+			modelBuilder.Entity<AppointmentAccount>()
+				.HasOne(x => x.Account).WithMany(y => y.Appointments)
+				.HasForeignKey(y => y.AppointmentId);
+		}
 	}
 }

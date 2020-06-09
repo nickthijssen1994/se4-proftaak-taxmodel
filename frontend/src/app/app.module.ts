@@ -1,9 +1,3 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
-
-import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AccountComponent} from './components/account/account.component';
 import {OrderComponent} from './components/order/order.component';
 import {AppointmentComponent} from './components/appointment/appointment.component';
@@ -23,11 +17,21 @@ import {CreateAppointmentComponent} from './components/create-appointment/create
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import {FullCalendarModule} from '@fullcalendar/angular';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { AppointmentViewComponent } from './components/appointment-view/appointment-view.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
+import {LoginComponent} from './components/login/login.component';
+import {RegisterComponent} from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,11 @@ import {MatNativeDateModule} from '@angular/material/core';
     EditAppointmentComponent,
     CreateAppointmentComponent,
     AppointmentListComponent,
-    DashboardComponent
+    DashboardComponent,
+    CalendarComponent,
+    AppointmentViewComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -58,13 +66,14 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatDatepickerModule,
     MatCheckboxModule,
     NgxMaterialTimepickerModule,
+    FullCalendarModule,
     MatSnackBarModule,
-    MatNativeDateModule,
+    MatNativeDateModule
   ],
-  entryComponents: [CreateAppointmentComponent],
   bootstrap: [AppComponent],
+  entryComponents: [CreateAppointmentComponent],
   providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
   ]
 })
 export class AppModule {

@@ -1,12 +1,14 @@
 export interface Appointment {
   id: number;
   title: string;
-  description: string;
-  location: string;
-  type: string;
-  minPeople: number;
-  maxPeople: number;
   beginTime: Date;
   endTime: Date;
+  location: string;
+  description: string;
   organiser: Account;
+  size: number;
+  type: string;
+  peopleCount: number;
+  maxPeople: number;
+  minPeople: number;
 }

@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {Appointment} from '../models/Appointment';
 import {environment} from '../../environments/environment';
 import {AppointmentDto} from '../models/AppointmentDto';
+import {EditAppointmentDto} from '../models/dtos/EditAppointmentDto';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class AppointmentTestService {
     return this.http.get<Appointment>(url);
   }
 
-  updateAppointment(appointment: Appointment): Observable<any> {
+  updateAppointment(appointment: EditAppointmentDto): Observable<any> {
     const url = `${this.appointmentsUrl}/${appointment.id}`;
     return this.http.put(url, appointment, this.httpOptions);
   }

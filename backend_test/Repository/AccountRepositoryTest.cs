@@ -13,139 +13,141 @@ using System.Text;
 
 namespace Repository
 {
-    class AccountRepositoryTest
-    {
-        /// <summary>
-        /// Registers user.
-        /// </summary>
-        [Test]
-        public void Register()
-        {
-            // Arrange
-            var mock = new Mock<IAccountService>();
-            RegisterDto user = new RegisterDto();
-            user.Email = "testemail";
-            user.Name = "testUser";
-            user.Password = "TestPass1";
-            mock.Setup(AccountService => AccountService.Register(user)).Returns(user);
+	class AccountRepositoryTest
+	{
+		/// <summary>
+		/// Registers user.
+		/// </summary>
+		[Test]
+		public void Register()
+		{
+			// Arrange
+			var mock = new Mock<IAccountService>();
+			RegisterDto user = new RegisterDto();
+			user.Email = "testemail";
+			user.Name = "testUser";
+			user.Password = "TestPass1";
+			Registration registration = new Registration(user.Email, user.Name, user.Password);
 
-            // Act
-            RegisterDto result = mock.Object.Register(user);
+			mock.Setup(AccountService => AccountService.Register(user)).Returns(registration);
 
-            // Assert
-            Assert.AreEqual(user.Name, result.Name);
-        }
+			// Act
+			Registration result = mock.Object.Register(user);
 
-        [Test]
-        public void Login()
-        {
-            // Arrange
-            var mock = new Mock<IAccountService>();
-            LoginDto user = new LoginDto();
-            user.Name = "testUser";
-            user.Password = "TestPass1";
-            string token = "token";
-            mock.Setup(AccountService => AccountService.Login(user.Name)).Returns(token);
+			// Assert
+			Assert.AreEqual(user.Name, result.Name);
+		}
 
-            // Act
-            string result = mock.Object.Login(user.Name);
+		[Test]
+		public void Login()
+		{
+			// Arrange
+			var mock = new Mock<IAccountService>();
+			LoginDto user = new LoginDto();
+			user.Name = "testUser";
+			user.Password = "TestPass1";
+			JwtToken token = new JwtToken("token");
+			mock.Setup(AccountService => AccountService.Login(user.Name)).Returns(token);
 
-            // Assert
-            Assert.IsNotNull(result);
-        }
+			// Act
+			JwtToken result = mock.Object.Login(user.Name);
 
-        [Test]
-        public void GetById()
-        {
-            // Arrange
-            var mock = new Mock<IAccountService>();
-            AccountDto user = new AccountDto();
-            user.Id = 1;
-            mock.Setup(AccountService => AccountService.GetById(user.Id)).Returns(user);
+			// Assert
+			Assert.IsNotNull(result);
+		}
 
-            // Act
-            AccountDto result = mock.Object.GetById(user.Id);
+		[Test]
+		public void GetById()
+		{
+			// Arrange
+			var mock = new Mock<IAccountService>();
+			AccountDto user = new AccountDto();
+			user.Id = 1;
+			mock.Setup(AccountService => AccountService.GetById(user.Id)).Returns(user);
 
-            // Assert
-            Assert.AreEqual(user.Id, result.Id);
-        }
+			// Act
+			AccountDto result = mock.Object.GetById(user.Id);
 
-        [Test]
-        public void GetByName()
-        {
-            // Arrange
-            var mock = new Mock<IAccountService>();
-            AccountDto user = new AccountDto();
-            user.Name = "test";
-            mock.Setup(AccountService => AccountService.GetByName(user.Name)).Returns(user);
+			// Assert
+			Assert.AreEqual(user.Id, result.Id);
+		}
 
-            // Act
-            AccountDto result = mock.Object.GetByName(user.Name);
+		[Test]
+		public void GetByName()
+		{
+			// Arrange
+			var mock = new Mock<IAccountService>();
+			AccountDto user = new AccountDto();
+			user.Name = "test";
+			mock.Setup(AccountService => AccountService.GetByName(user.Name)).Returns(user);
 
-            // Assert
-            Assert.AreEqual(user.Name, result.Name);
-        }
+			// Act
+			AccountDto result = mock.Object.GetByName(user.Name);
 
-        [Test]
-        public void CheckNameExists()
-        {
-            // Arrange
-            var mock = new Mock<IAccountService>();
-            string name = "test";
-            mock.Setup(AccountService => AccountService.CheckNameExists(name)).Returns(false);
+			// Assert
+			Assert.AreEqual(user.Name, result.Name);
+		}
 
-            // Act
-            Boolean result = mock.Object.CheckNameExists(name);
+		[Test]
+		public void CheckNameExists()
+		{
+			// Arrange
+			var mock = new Mock<IAccountService>();
+			string name = "test";
+			mock.Setup(AccountService => AccountService.CheckNameExists(name)).Returns(false);
 
-            // Assert
-            Assert.IsFalse(result);
-        }
+			// Act
+			Boolean result = mock.Object.CheckNameExists(name);
 
-        [Test]
-        public void CheckEmailExists()
-        {
-            // Arrange
-            var mock = new Mock<IAccountService>();
-            string email = "test";
-            mock.Setup(AccountService => AccountService.CheckEmailExists(email)).Returns(false);
+			// Assert
+			Assert.IsFalse(result);
+		}
 
-            // Act
-            Boolean result = mock.Object.CheckEmailExists(email);
+		[Test]
+		public void CheckEmailExists()
+		{
+			// Arrange
+			var mock = new Mock<IAccountService>();
+			string email = "test";
+			mock.Setup(AccountService => AccountService.CheckEmailExists(email)).Returns(false);
 
-            // Assert
-            Assert.IsFalse(result);
-        }
+			// Act
+			Boolean result = mock.Object.CheckEmailExists(email);
 
-        [Test]
-        public void GetAll()
-        {
-            // Arrange
-            var mock = new Mock<IAccountService>();
-            mock.Setup(AccountService => AccountService.GetAll());
+			// Assert
+			Assert.IsFalse(result);
+		}
 
-            // Act
-            IEnumerable<AccountDto> accounts = mock.Object.GetAll();
+		[Test]
+		public void GetAll()
+		{
+			// Arrange
+			var mock = new Mock<IAccountService>();
+			mock.Setup(AccountService => AccountService.GetAll());
 
-            // Assert
-            Assert.AreEqual(0, accounts.Count());
-        }
+			// Act
+			IEnumerable<AccountDto> accounts = mock.Object.GetAll();
 
-        [Test]
-        public void Update()
-        {
-            // Arrange
-            var mock = new Mock<IAccountService>();
-            EditAccountDto user = new EditAccountDto();
-            user.Email = "testemail";
-            user.Name = "testUser";
-            user.Password = "TestPass1";
-            mock.Setup(AccountService => AccountService.Update(user)).Returns(user);
+			// Assert
+			Assert.AreEqual(0, accounts.Count());
+		}
 
-            // Act
-            EditAccountDto result = mock.Object.Update(user);
+		[Test]
+		public void Update()
+		{
+			// Arrange
+			var mock = new Mock<IAccountService>();
+			EditAccountDto user = new EditAccountDto();
+			user.Email = "testemail";
+			user.Name = "testUser";
+			user.Password = "TestPass1";
+			mock.Setup(AccountService => AccountService.Update(user)).Returns(user);
 
-            // Assert
-            Assert.AreEqual(user, result);
-        }
-    }
+			// Act
+			EditAccountDto result = mock.Object.Update(user);
+
+			// Assert
+			Assert.AreEqual(user, result);
+		}
+	}
 }
