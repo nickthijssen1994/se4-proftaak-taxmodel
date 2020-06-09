@@ -1,20 +1,37 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      <h2>Appointments</h2>
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-list role="list">
-      <mat-list-item *ngFor="let appointment of appointments">
-        <button mat-button routerLink="/detail/{{appointment.id}}">
-          {{appointment.id}} -
-          {{appointment.title}} -
-          {{appointment.location}} -
-          {{appointment.description}}
+<div *ngIf="appointments.length" class="table-container">
+  <h2>Appointments</h2>
+
+  <table [dataSource]="appointments" mat-table>
+    <ng-container matColumnDef="id">
+      <th *matHeaderCellDef mat-header-cell width="5%">ID</th>
+      <td *matCellDef="let appointment" mat-cell> {{appointment.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th *matHeaderCellDef mat-header-cell width="20%">Title</th>
+      <td *matCellDef="let appointment" mat-cell routerLink="/detail/{{appointment.id}}">{{appointment.title}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="location">
+      <th *matHeaderCellDef mat-header-cell>Location</th>
+      <td *matCellDef="let appointment" mat-cell> {{appointment.location}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th *matHeaderCellDef mat-header-cell>Description</th>
+      <td *matCellDef="let appointment" mat-cell> {{appointment.description }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th *matHeaderCellDef mat-header-cell width="5%">Delete</th>
+      <td *matCellDef="let appointment" mat-cell>
+        <button (click)="delete(appointment)" mat-icon-button>
+          <mat-icon>remove_circle</mat-icon>
         </button>
-        <button mat-button (click)="delete(appointment)">X</button>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-</mat-card>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  </table>
+</div>

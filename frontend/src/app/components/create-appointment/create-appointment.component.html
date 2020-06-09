@@ -1,64 +1,60 @@
 <div class="create-appointment-page-container">
-  <form (ngSubmit)="onFormSubmit()" class="mat-custom-container">
-    <div>
-      <h2 mat-dialog-title class="create-appointment-header"> Create an appointment</h2>
-    </div>
-    <mat-form-field>
-      <mat-label for="title"> Title:</mat-label>
-      <input [(ngModel)]="appointment.title" [minlength]="4" id="appointment-title" matInput name="title" required
-             style="height: 3%"
-             type="input">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label for="location"> Location:</mat-label>
-      <input [(ngModel)]="appointment.location" [minlength]="4" id="appointment-location" matInput name="location"
-             required
-             style="height: 3%" type="input">
-    </mat-form-field>
-    <div class="time-picker-container">
-      <mat-form-field>
-        <mat-label>Date:</mat-label>
-        <input (dateChange)="onChangeDate($event)" [matDatepicker]="picker" [ngModel]="date" matInput name="date">
-        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-
-      <mat-label class="time-picker-text"> From:</mat-label>
-      <div class="ngx-material-timepicker-example__form-group">
-        <input class="time-picker-input" placeholder="12:00AM" aria-label="12hr format"
-               [ngxTimepicker]="defaultPicker" readonly [(ngModel)]="appointment.beginTime" name="begin time">
-        <ngx-material-timepicker #defaultPicker [preventOverlayClick]="true"></ngx-material-timepicker>
-      </div>
-      <mat-label class="time-picker-text"> to </mat-label>
-      <div class="ngx-material-timepicker-example__form-group">
-        <input class="time-picker-input" placeholder="17:00PM" aria-label="12hr format"
-               [ngxTimepicker]="defaultPicker2" readonly [(ngModel)]="appointment.endTime" name="end time">
-        <ngx-material-timepicker #defaultPicker2></ngx-material-timepicker>
-      </div>
-    </div>
-    <div>
-      <mat-form-field>
-        <mat-label> Min amount of people:</mat-label>
-        <input [(ngModel)]="appointment.minPeople" [disabled]="disabled" [max]="999" [min]="2" class="input" id="appointment-min-amount"
-               matInput
-               name="min amount" required type="number">
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label> Max amount of people:</mat-label>
-        <input [(ngModel)]="appointment.maxPeople" [disabled]="disabled" [max]="999" [min]="2" class="input" id="appointment-max-amount"
-               matInput name="max amount" type="number">
-      </mat-form-field>
-      <mat-form-field class="description">
-        <mat-label> Comment: </mat-label>
-        <textarea matInput  cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                  maxlength="250" cdkAutosizeMaxRows="5" class="input" [(ngModel)]="appointment.description" name="description"></textarea>
-      </mat-form-field>
-    </div>
-    <mat-checkbox [(ngModel)]="appointment.type" [disabled]="disabled" color="primary" id="appointment-type"
-                  name="private"> Private meeting
-    </mat-checkbox>
-
-    <button id="submit-button" class="submit-button" mat-raised-button type="submit">Submit</button>
-  </form>
+    <form (ngSubmit)="onFormSubmit()" class="mat-custom-container">
+        <div>
+            <h2 class="create-appointment-header">Create Appointment</h2>
+        </div>
+        <mat-form-field>
+            <mat-label for="title">Title</mat-label>
+            <input [(ngModel)]="appointment.title" [minlength]="4" id="appointment-title" matInput name="title" required type="input">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label for="location">Location</mat-label>
+            <input [(ngModel)]="appointment.location" [minlength]="4" id="appointment-location" matInput name="location"
+                   required type="input">
+        </mat-form-field>
+        <div class="time-picker-container">
+            <mat-form-field>
+                <mat-label>Date</mat-label>
+                <input (dateChange)="onChangeDate($event)" [matDatepicker]="picker" [ngModel]="date" matInput
+                       name="date">
+                <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-label class="time-picker-text">From</mat-label>
+            <div class="ngx-material-timepicker-example__form-group">
+                <input class="time-picker-input" placeholder="12:00AM" aria-label="12hr format"
+                       [ngxTimepicker]="defaultPicker" readonly [(ngModel)]="appointment.beginTime" name="begin time">
+                <ngx-material-timepicker #defaultPicker [preventOverlayClick]="true"></ngx-material-timepicker>
+            </div>
+            <mat-label class="time-picker-text">to</mat-label>
+            <div class="ngx-material-timepicker-example__form-group">
+                <input class="time-picker-input" placeholder="17:00PM" aria-label="12hr format"
+                       [ngxTimepicker]="defaultPicker2" readonly [(ngModel)]="appointment.endTime" name="end time">
+                <ngx-material-timepicker #defaultPicker2></ngx-material-timepicker>
+            </div>
+        </div>
+        <mat-form-field>
+            <mat-label>Min amount of people</mat-label>
+            <input [(ngModel)]="appointment.minPeople" [disabled]="disabled" [max]="999" [min]="2" class="input"
+                   id="appointment-min-amount"
+                   matInput
+                   name="min amount" required type="number">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Max amount of people</mat-label>
+            <input [(ngModel)]="appointment.maxPeople" [disabled]="disabled" [max]="999" [min]="2" class="input"
+                   id="appointment-max-amount"
+                   matInput name="max amount" type="number">
+        </mat-form-field>
+        <mat-form-field class="description">
+            <mat-label>Comment</mat-label>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                      maxlength="250" cdkAutosizeMaxRows="5" class="input" [(ngModel)]="appointment.description"
+                      name="description"></textarea>
+        </mat-form-field>
+        <mat-checkbox [(ngModel)]="appointment.type" [disabled]="disabled" color="primary" id="appointment-type"
+                      name="private"> Private meeting
+        </mat-checkbox>
+        <button  mat-raised-button type="submit">Submit</button>
+    </form>
 </div>

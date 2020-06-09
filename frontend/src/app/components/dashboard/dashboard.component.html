@@ -1,6 +1,20 @@
-<app-appointment-list></app-appointment-list>
+<mat-grid-list cols="3" rowHeight="350px">
+    <mat-grid-tile [colspan]="1" [rowspan]="3">
+        <div class="dashboard-grid-tile">
+            <app-create-appointment></app-create-appointment>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="3">
+        <div class="dashboard-grid-tile">
+            <app-appointment-list></app-appointment-list>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
 
-<app-create-appointment></app-create-appointment>
+
+
+
+
 
 
 
