@@ -4,12 +4,6 @@
   "newProjectRoot": "projects",
   "projects": {
     "frontend": {
-      "i18n": {
-        "sourceLocale": "en",
-        "locales": {
-          "nl": "src/locale/messages.nl.xlf"
-        }
-      },
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -20,8 +14,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "i18nMissingTranslation": "error",
-            "localize": true,
-            "outputPath": "dist/frontend",
+            "outputPath": "dist/frontend/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -71,10 +64,17 @@
                 }
               ]
             },
+            "en": {
+              "i18nFile": "src/locale/messages.en.xlf",
+              "i18nLocale": "en",
+              "outputPath": "dist/frontend/en/",
+              "baseHref": "/en/"
+            },
             "nl": {
-              "localize": [
-                "nl"
-              ]
+              "i18nFile": "src/locale/messages.nl.xlf",
+              "i18nLocale": "nl",
+              "outputPath": "dist/frontend/nl/",
+              "baseHref": "/nl/"
             }
           }
         },
@@ -86,6 +86,9 @@
           "configurations": {
             "production": {
               "browserTarget": "frontend:build:production"
+            },
+            "en": {
+              "browserTarget": "frontend:build:en"
             },
             "nl": {
               "browserTarget": "frontend:build:nl"

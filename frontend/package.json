@@ -5,6 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-locale:en": "ng build --prod --i18n-locale en --i18n-file src/locale/messages.en.xlf --output-path=dist/frontend/en --baseHref /en/",
+    "build-locale:nl": "ng build --prod --i18n-locale nl --i18n-file src/locale/messages.nl.xlf --output-path=dist/frontend/nl --baseHref /nl/",
+    "build-locale": "npm run build-locale:en && npm run build-locale:nl",
     "test": "ng test --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e"
