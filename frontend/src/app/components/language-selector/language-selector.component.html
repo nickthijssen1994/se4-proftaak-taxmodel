@@ -5,8 +5,10 @@
             <span> {{selectedLanguage.value}} </span>
         </mat-select-trigger>
         <mat-option *ngFor="let language of languages" [value]="language">
+            <a href="/{{language.code}}/">
             <img with="10" height="10" [src]="language.viewValue" [alt]="language.value"/>
             <span> {{language.value}} </span>
+            </a>
         </mat-option>
     </mat-select>
 </mat-form-field>
