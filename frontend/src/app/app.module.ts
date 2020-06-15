@@ -39,7 +39,7 @@ import {LoginGuard} from './login.guard';
 import {AuthGuard} from './auth.guard';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {MatMenuModule} from '@angular/material/menu';
-import { LanguageSelectorComponent } from './components/language-selector/language-selector.component';
+import {LanguageSelectorComponent} from './components/language-selector/language-selector.component';
 
 @NgModule({
     declarations: [

@@ -4,6 +4,12 @@
   "newProjectRoot": "projects",
   "projects": {
     "frontend": {
+      "i18n": {
+        "sourceLocale": "en",
+        "locales": {
+          "nl": "src/locale/messages.nl.xlf"
+        }
+      },
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,6 +19,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "i18nMissingTranslation": "error",
+            "localize": true,
             "outputPath": "dist/frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -28,9 +36,11 @@
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
-            "scripts": ["node_modules/jquery/dist/jquery.min.js",
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
               "node_modules/moment/min/moment.min.js",
-              "node_modules/fullcalendar/dist/fullcalendar.min.js"]
+              "node_modules/fullcalendar/dist/fullcalendar.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -61,65 +71,10 @@
                 }
               ]
             },
-            "production-en": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "outputPath": "dist/frontend",
-              "i18nFile": "src/locale/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "i18nMissingTranslation": "error"
-            },
-            "en": {
-              "aot": true,
-              "outputPath": "dist/frontend",
-              "i18nFile": "src/locale/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "i18nMissingTranslation": "error"
-            },
-            "production-nl": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "outputPath": "dist/frontend",
-              "i18nFile": "src/locale/messages.nl.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "nl",
-              "i18nMissingTranslation": "error"
-            },
             "nl": {
-              "aot": true,
-              "outputPath": "dist/frontend",
-              "i18nFile": "src/locale/messages.nl.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "nl",
-              "i18nMissingTranslation": "error"
+              "localize": [
+                "nl"
+              ]
             }
           }
         },
@@ -132,10 +87,7 @@
             "production": {
               "browserTarget": "frontend:build:production"
             },
-            "en":{
-              "browserTarget": "frontend:build:en"
-            },
-            "nl":{
+            "nl": {
               "browserTarget": "frontend:build:nl"
             }
           }
