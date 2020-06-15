@@ -38,6 +38,8 @@ import {AuthService} from './authentication.service';
 import {LoginGuard} from './login.guard';
 import {AuthGuard} from './auth.guard';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import {MatMenuModule} from '@angular/material/menu';
+import { LanguageSelectorComponent } from './components/language-selector/language-selector.component';
 
 @NgModule({
     declarations: [
@@ -52,7 +54,8 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
         CalendarComponent,
         AppointmentViewComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        LanguageSelectorComponent
     ], imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -97,6 +100,7 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
         FullCalendarModule,
         MatSnackBarModule,
         MatNativeDateModule,
+        MatMenuModule,
     ], bootstrap: [AppComponent], providers: [
         AuthService, LoginGuard, AuthGuard, {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
     ]
