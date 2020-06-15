@@ -15,7 +15,7 @@ namespace backend.Services
         private readonly AppointmentRepository _repo;
         private readonly IMapper _mapper;
 
-        static Expression<Func<Appointment, object>>[] includes = new Expression<Func<Appointment, object>>[]
+        static readonly Expression<Func<Appointment, object>>[] includes = new Expression<Func<Appointment, object>>[]
         {
             a => a.AccountsRegistered,
             o => o.Organiser
@@ -86,7 +86,7 @@ namespace backend.Services
 
         public void Delete(AppointmentDto dto)
         {
-            Appointment appointment = _mapper.Map<Appointment>(dto);
+            Appointment appointment = _repo.GetEntities(x => x.Id == dto.Id, includes).FirstOrDefault();
             _repo.DeleteEntity(appointment);
             _repo.Save();
         }
