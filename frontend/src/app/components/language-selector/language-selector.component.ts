@@ -16,8 +16,8 @@ export class LanguageSelectorComponent implements OnInit {
   selectedLanguage: Language;
 
   languages: Language[] = [
-    {value: 'English', viewValue: '../../../assets/EN.png', code: 'en'},
-    {value: 'Dutch', viewValue: '../../../assets/NL.png', code: 'nl'},
+    {value: 'English', viewValue: 'assets/EN.png', code: 'en'},
+    {value: 'Dutch', viewValue: 'assets/NL.png', code: 'nl'},
   ];
 
   constructor(@Inject(LOCALE_ID) protected localeId: string) {}
