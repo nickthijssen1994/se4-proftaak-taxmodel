@@ -43,7 +43,7 @@ namespace backend.Services
 				Account account = repository.GetEntities<Account>(a => a.Name == name).Single();
 				return true;
 			}
-			catch (EntryPointNotFoundException e)
+			catch (InvalidOperationException e)
 			{
 				return false;
 			}
@@ -56,7 +56,7 @@ namespace backend.Services
 				Account account = repository.GetEntities<Account>(a => a.Email == email).Single();
 				return true;
 			}
-			catch (EntryPointNotFoundException e)
+			catch (InvalidOperationException e)
 			{
 				return false;
 			}
