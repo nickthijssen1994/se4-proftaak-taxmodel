@@ -86,7 +86,7 @@ namespace backend.Services
 
         public void Delete(AppointmentDto dto)
         {
-            Appointment appointment = _mapper.Map<Appointment>(dto);
+            Appointment appointment = _repo.GetEntities(x => x.Id == dto.Id, includes).FirstOrDefault();
             _repo.DeleteEntity(appointment);
             _repo.Save();
         }
