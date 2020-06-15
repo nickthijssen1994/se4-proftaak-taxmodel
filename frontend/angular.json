@@ -13,7 +13,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "i18nMissingTranslation": "error",
             "outputPath": "dist/frontend/",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -63,18 +62,6 @@
                   "maximumError": "10kb"
                 }
               ]
-            },
-            "en": {
-              "i18nFile": "src/locale/messages.en.xlf",
-              "i18nLocale": "en",
-              "outputPath": "dist/frontend/en/",
-              "baseHref": "/en/"
-            },
-            "nl": {
-              "i18nFile": "src/locale/messages.nl.xlf",
-              "i18nLocale": "nl",
-              "outputPath": "dist/frontend/nl/",
-              "baseHref": "/nl/"
             }
           }
         },
@@ -86,12 +73,6 @@
           "configurations": {
             "production": {
               "browserTarget": "frontend:build:production"
-            },
-            "en": {
-              "browserTarget": "frontend:build:en"
-            },
-            "nl": {
-              "browserTarget": "frontend:build:nl"
             }
           }
         },
