@@ -44,6 +44,7 @@
           },
           "configurations": {
             "production": {
+              "localize": ["en-US"],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -72,7 +73,7 @@
               ]
             },
             "en": {
-              "localize": ["nl"]
+              "localize": ["en"]
             },
             "nl": {
               "localize": ["nl"]
