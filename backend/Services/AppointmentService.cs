@@ -6,6 +6,7 @@ using AutoMapper;
 using backend.DAL.Repositories;
 using backend.Models;
 using backend.Models.DTOs;
+using Castle.Core.Internal;
 
 namespace backend.Services
 {
@@ -13,6 +14,7 @@ namespace backend.Services
     public class AppointmentService : IAppointmentService
     {
         private readonly AppointmentRepository _repo;
+        private readonly AccountRepository _accountRepository;
         private readonly IMapper _mapper;
 
         static Expression<Func<Appointment, object>>[] includes = new Expression<Func<Appointment, object>>[]
@@ -21,10 +23,11 @@ namespace backend.Services
             o => o.Organiser
         };
 
-        public AppointmentService(AppointmentRepository repo, IMapper mapper)
+        public AppointmentService(AppointmentRepository repo, AccountRepository accountRepository, IMapper mapper)
         {
             _mapper = mapper;
             _repo = repo;
+            _accountRepository = accountRepository;
         }
 
         public AppointmentDto GetById(long id)
@@ -62,11 +65,23 @@ namespace backend.Services
             }
             else
             {
-                appointment.AccountsRegistered.Add(aa);
+                if (!IsOverlapping(dto.AccountId, appointment))
+                {
+                    appointment.AccountsRegistered.Add(aa);
 
-                _repo.UpdateEntity(appointment);
-                _repo.Save();
-                return true;
+                    // Add appointment to account.
+                    Account account = _accountRepository.GetEntities<Account>(a => a.Id == dto.AccountId).Single();
+                    account.Appointments = new List<AppointmentAccount>();
+                    account.Appointments.Add(aa);
+
+                    // Save changes.
+                    _accountRepository.UpdateEntity(account);
+                    _repo.UpdateEntity(appointment);
+                    _repo.Save();
+
+                    return true;
+                }
+                return false;
             }
         }
 
@@ -113,6 +128,33 @@ namespace backend.Services
             }
 
             return appointment.AccountsRegistered.Any(a => a.AccountId == registerForAppointmentDto.AccountId);
+        }
+
+        public bool IsOverlapping(long id, Appointment appointment)
+        {
+            IEnumerable<AppointmentAccount> appointmentIds = _accountRepository.GetAppointments(id);
+            List<AppointmentDto> appointments = new List<AppointmentDto>();
+
+            if (!appointmentIds.IsNullOrEmpty())
+            {
+                foreach (AppointmentAccount app in appointmentIds)
+                {
+                    appointments.Add(GetById(app.AppointmentId));
+                }
+            }
+
+            foreach (AppointmentDto app in appointments)
+            {
+                int result1 = DateTime.Compare(app.BeginTime, appointment.EndTime);
+                int result2 = DateTime.Compare(app.EndTime, appointment.BeginTime);
+
+                if (result1 <= 0 || result2 > 0) // Check result1 to be earlier than new appointment and result2 to be later than old appointment.
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

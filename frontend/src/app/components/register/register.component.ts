@@ -34,8 +34,10 @@ export class RegisterComponent implements OnInit {
       console.log(response);
       this.isSuccessful = true;
       this.isSignUpFailed = false;
-      login(27, response.name, response.token);
-      window.location.reload();
+      this.accountService.getByName(this.account.name).subscribe(a => {
+        login(a.id, this.account.name, response.token);
+        window.location.reload();
+      });
     }, err => {
       this.errorMessage = err.error.message;
       this.isSignUpFailed = true;
