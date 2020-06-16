@@ -9,7 +9,7 @@
             <mat-error *ngIf="f.submitted && email.invalid && email.errors.email" i18n="@@errorEmailInvalid">Email must
                 be a valid email address
             </mat-error>
-            <input class="input" i18n-placeholder=i18n="@@inputEmail" placeholder="Email" #email="ngModel" [(ngModel)]="account.email" email
+            <input class="input" i18n-placeholder="@@inputEmail" placeholder="Email" #email="ngModel" [(ngModel)]="account.email" email
                    name="email"
                    required type="email"/>
 
@@ -24,7 +24,7 @@
                 Username must be at most 20
                 characters
             </mat-error>
-            <input class="input" i18n-placeholder=i18n="@@inputUsername" placeholder="Username" #name="ngModel" [(ngModel)]="account.name" maxlength="32"
+            <input class="input" i18n-placeholder="@@inputUsername" placeholder="Username" #name="ngModel" [(ngModel)]="account.name" maxlength="32"
                    minlength="4" name="name"
                    required type="text"/>
 
@@ -33,7 +33,7 @@
             <mat-error *ngIf="f.submitted && password.invalid && password.errors.minlength" i18n="@@errorPasswordToShort">Password must be at least 6
                 characters
             </mat-error>
-            <input class="input" i18n-placeholder=i18n="@@inputPassword" placeholder="Password" #password="ngModel" [(ngModel)]="account.password"
+            <input class="input" i18n-placeholder="@@inputPassword" placeholder="Password" #password="ngModel" [(ngModel)]="account.password"
                    minlength="4"
                    name="password" required
                    type="password"/>
