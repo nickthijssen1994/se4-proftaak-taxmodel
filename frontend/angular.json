@@ -4,6 +4,13 @@
   "newProjectRoot": "projects",
   "projects": {
     "frontend": {
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "en": "src/locale/messages.en.xlf",
+          "nl": "src/locale/messages.nl.xlf"
+        }
+      },
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,6 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": true,
             "outputPath": "dist/frontend/",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -64,22 +72,10 @@
               ]
             },
             "en": {
-              "aot": true,
-              "outputPath": "dist/en/",
-              "baseHref": "/en/",
-              "i18nFile": "src/locale/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "i18nMissingTranslation": "warning"
+              "localize": ["nl"]
             },
             "nl": {
-              "aot": true,
-              "outputPath": "dist/nl/",
-              "baseHref": "/nl/",
-              "i18nFile": "src/locale/messages.nl.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "nl",
-              "i18nMissingTranslation": "warning"
+              "localize": ["nl"]
             }
           }
         },
@@ -93,10 +89,10 @@
               "browserTarget": "frontend:build:production"
             },
             "en": {
-              "browserTarget": "my-project:build:en"
+              "browserTarget": "frontend:build:en"
             },
             "nl": {
-              "browserTarget": "my-project:build:nl"
+              "browserTarget": "frontend:build:nl"
             }
           }
         },
