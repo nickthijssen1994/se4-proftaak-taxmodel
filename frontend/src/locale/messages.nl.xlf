@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 ">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="buttonDashboard" datatype="html">
@@ -336,7 +337,8 @@
         <source>Start</source>
         <target>Begin</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/appointment-view/appointment-view.component.html</context>
+          <context context-type="sourcefile">src/app/components/appointment-view/appointment-view.component.html
+          </context>
           <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
@@ -344,7 +346,8 @@
         <source>End</source>
         <target>Eind</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/appointment-view/appointment-view.component.html</context>
+          <context context-type="sourcefile">src/app/components/appointment-view/appointment-view.component.html
+          </context>
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>

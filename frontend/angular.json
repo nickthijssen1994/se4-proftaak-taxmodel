@@ -4,23 +4,20 @@
   "newProjectRoot": "projects",
   "projects": {
     "frontend": {
-      "i18n": {
-        "sourceLocale": "en",
-        "locales": {
-          "nl": "src/locale/messages.nl.xlf"
-        }
-      },
       "projectType": "application",
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "locales": {
+          "nl": "src/locale/messages.nl.xlf"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": true,
-            "i18nMissingTranslation": "warning",
             "outputPath": "dist/",
             "index": "src/index.html",
             "main": "src/main.ts",
