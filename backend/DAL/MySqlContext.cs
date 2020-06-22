@@ -31,7 +31,7 @@ namespace backend.DAL
 
 			modelBuilder.Entity<AppointmentAccount>()
 				.HasOne(x => x.Account).WithMany(y => y.Appointments)
-				.HasForeignKey(y => y.AppointmentId);
-		}
+				.HasForeignKey(y => y.AccountId);
+        }
 	}
 }

@@ -13,6 +13,7 @@ namespace backend.Services
     public class AppointmentService : IAppointmentService
     {
         private readonly AppointmentRepository _repo;
+        private readonly AccountRepository _accountRepository;
         private readonly IMapper _mapper;
 
         static Expression<Func<Appointment, object>>[] includes = new Expression<Func<Appointment, object>>[]
@@ -21,10 +22,17 @@ namespace backend.Services
             o => o.Organiser
         };
 
-        public AppointmentService(AppointmentRepository repo, IMapper mapper)
+        static readonly string[] accountStringIncludes = new string[]
+        {
+            "Appointments.Appointment"
+        };
+
+
+        public AppointmentService(AppointmentRepository repo, AccountRepository accountRepository, IMapper mapper)
         {
             _mapper = mapper;
             _repo = repo;
+            this._accountRepository = accountRepository;
         }
 
         public AppointmentDto GetById(long id)
@@ -63,6 +71,9 @@ namespace backend.Services
             else
             {
                 appointment.AccountsRegistered.Add(aa);
+
+                Account account = _accountRepository.GetEntitiesWithStringInclude<Account>(a => a.Id == dto.AccountId, accountStringIncludes)
+                    .FirstOrDefault();
 
                 _repo.UpdateEntity(appointment);
                 _repo.Save();

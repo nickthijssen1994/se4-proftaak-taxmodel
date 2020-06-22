@@ -17,7 +17,12 @@ namespace backend.Services
 		private readonly IMapper mapper;
 		private readonly TokenHandler tokenHandler;
 
-		public AccountService(AccountRepository repository, IMapper mapper, IOptions<AppSettings> appSettings)
+        static readonly string[] stringIncludes = new string[]
+        {
+            "Appointments.Appointment"
+        };
+
+        public AccountService(AccountRepository repository, IMapper mapper, IOptions<AppSettings> appSettings)
 		{
 			this.mapper = mapper;
 			this.repository = repository;
@@ -32,7 +37,7 @@ namespace backend.Services
 
 		public AccountDto GetByName(string name)
 		{
-			Account account = repository.GetEntities<Account>(a => a.Name == name).Single();
+			Account account = repository.GetEntitiesWithStringInclude<Account>(a => a.Name == name, stringIncludes).FirstOrDefault();
 			return mapper.Map<AccountDto>(account);
 		}
 
@@ -40,7 +45,7 @@ namespace backend.Services
 		{
 			try
 			{
-				Account account = repository.GetEntities<Account>(a => a.Name == name).Single();
+				Account account = repository.GetEntities<Account>(a => a.Name == name).FirstOrDefault();
 				return true;
 			}
 			catch (InvalidOperationException e)
