@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using backend.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +12,13 @@ namespace backend.Security.Authorization
 {
     public class IsAppointmentOwnerAuthorizationHandler : AuthorizationHandler<AppointmentOwnerRequirement>
     {
+        readonly IAppointmentService service;
+        readonly IHttpContextAccessor httpContext;
+        public IsAppointmentOwnerAuthorizationHandler(IAppointmentService service, IHttpContextAccessor httpContext)
+        {
+            this.service = service;
+            this.httpContext = httpContext;
+        }
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AppointmentOwnerRequirement requirement)
         {
             if(!context.User.HasClaim(c => c.Type == ClaimTypes.Name))
@@ -16,17 +26,22 @@ namespace backend.Security.Authorization
                 return Task.FromResult(0);
             }
 
+            string name = context.User.FindFirst(c => c.Type == ClaimTypes.Name).Value;
 
-            var name = context.User.FindFirst(c => c.Type == ClaimTypes.Name).Value;
-
-            if (context.Resource is AuthorizationFilterContext mvcContext)
+            if (name != null)
             {
-                // Examine MVC-specific things like routing data.
+                context.Fail();
             }
 
-            if (name == )
-            {
+            long appointmentId = Convert.ToInt64(httpContext.HttpContext.Request.RouteValues["id"]);
 
+            if(service.GetById(appointmentId).Organiser.Name != name)
+            {
+                context.Fail();
+            }
+            else
+            {
+                context.Succeed(requirement);
             }
 
             return Task.FromResult(0);

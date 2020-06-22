@@ -5,8 +5,10 @@ using backend.DAL;
 using backend.DAL.Repositories;
 using backend.Helpers;
 using backend.Models.Mapping;
+using backend.Security.Authorization;
 using backend.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +44,8 @@ namespace backend
 					});
 			});
 
+           
+
 			if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
 				services.AddDbContext<MySqlContext>(options =>
 				{
@@ -74,6 +78,16 @@ namespace backend
 			// Add authentication
 			var appSettings = appSettingsSection.Get<AppSettings>();
 			var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("IsAppointmentOwner", policy =>
+                {
+                    policy.Requirements.Add(new AppointmentOwnerRequirement());
+                    //policy.RequireAssertion(context =>
+                    //context.User.HasClaim(c =>
+                    //   c.Type == "Name"));
+                });
+            });
 			services.AddAuthentication(x =>
 				{
 					x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -91,6 +105,9 @@ namespace backend
 						ValidateAudience = false
 					};
 				});
+
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IAuthorizationHandler, IsAppointmentOwnerAuthorizationHandler>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

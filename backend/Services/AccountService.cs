@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using AutoMapper;
 using backend.DAL.Repositories;
 using backend.Helpers;
@@ -17,7 +18,13 @@ namespace backend.Services
 		private readonly IMapper mapper;
 		private readonly TokenHandler tokenHandler;
 
-		public AccountService(AccountRepository repository, IMapper mapper, IOptions<AppSettings> appSettings)
+        static readonly Expression<Func<Account, object>>[] accountIncludes = new Expression<Func<Account, object>>[]
+      {
+            a => a.Appointments,
+            a => a.OrganizedAppointments
+      };
+
+        public AccountService(AccountRepository repository, IMapper mapper, IOptions<AppSettings> appSettings)
 		{
 			this.mapper = mapper;
 			this.repository = repository;
@@ -32,7 +39,8 @@ namespace backend.Services
 
 		public AccountDto GetByName(string name)
 		{
-			Account account = repository.GetEntities<Account>(a => a.Name == name).Single();
+            repository.Test();
+			Account account = repository.GetEntities(a => a.Name == name, includes:accountIncludes).FirstOrDefault();
 			return mapper.Map<AccountDto>(account);
 		}
 
