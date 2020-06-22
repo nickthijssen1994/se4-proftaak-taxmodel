@@ -1,17 +1,17 @@
 <h1 class="appointment-dialog-title" mat-dialog-title> {{this.title}} </h1>
 <mat-dialog-content >
-  <h4><b>Location:</b> {{this.location}} </h4>
-  <p><b> Start:</b> {{this.beginTime}}</p>
-  <p><b> End:</b> {{this.endTime}}</p>
-  <h4><b>Further description:</b> {{this.description}}</h4>
-  <h4><b>People registered:</b> {{this.peopleCount}} / {{this.maxPeople.toString()}}</h4>
+  <h4 i18n="@@locationLabel"><b>Location</b> {{this.location}} </h4>
+  <p i18n="@@startLabel"><b>Start</b> {{this.beginTime}}</p>
+  <p i18n="@@endLabel"><b>End</b> {{this.endTime}}</p>
+  <h4 i18n="@@descriptionLabel"><b>Description</b> {{this.description}}</h4>
+  <h4 i18n="@@participantsAmountLabel"><b>Participants</b> {{this.peopleCount}} / {{this.maxPeople.toString()}}</h4>
 </mat-dialog-content>
 <div *ngIf="canRegister != null">
   <div class="already-registered-text" *ngIf="!canRegister">
-    <h3 class="already-registered-text"> You're already registered for this appointment!</h3>
+    <h3 class="already-registered-text" i18n="@@appointmentAlreadyJoinedMessage">You already joined this appointment</h3>
   </div>
   <mat-dialog-actions align="center">
-    <button mat-button mat-dialog-close class="dialog-appointment-accept-button" (click)="subscribe()" *ngIf="canRegister">Accept</button>
-    <button mat-button mat-dialog-close class="dialog-appointment-decline-button" (click)="unsubscribe()" *ngIf="!canRegister">Cancel</button>
+    <button mat-button mat-dialog-close class="dialog-appointment-accept-button" (click)="subscribe()" *ngIf="canRegister" i18n="@@buttonAccept">Accept</button>
+    <button mat-button mat-dialog-close class="dialog-appointment-decline-button" (click)="unsubscribe()" *ngIf="!canRegister" i18n="@@buttonCancel">Cancel</button>
   </mat-dialog-actions>
 </div>

@@ -1,24 +1,30 @@
 <div class="container">
   <div class="login-container">
     <form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" name="account" novalidate>
-      <h2> Login To Your Account </h2>
-
-      <mat-error *ngIf="f.submitted && name.invalid && name.errors.required">Username is required</mat-error>
-      <mat-error *ngIf="f.submitted && name.invalid && name.errors.minlength">Username must be at least 6
-        characters
+      <h2 i18n="@@loginTitle">Login To Your Account</h2>
+      <mat-error *ngIf="f.submitted && name.invalid && name.errors.required" i18n="@@errorUsernameRequired">Username is
+        required
       </mat-error>
-      <mat-error *ngIf="f.submitted && name.invalid && name.errors.maxlength"> Username must be at most 20
-        characters
+      <mat-error *ngIf="f.submitted && name.invalid && name.errors.minlength" i18n="@@errorUsernameToShort">Username
+        must be at least 6 characters
       </mat-error>
-      <input class="input" placeholder="Username" #name="ngModel" [(ngModel)]="account.name" maxlength="32"
+      <mat-error *ngIf="f.submitted && name.invalid && name.errors.maxlength" i18n="@@errorUsernameToLong">Username must
+        be at most 20 characters
+      </mat-error>
+      <input class="input" i18n-placeholder="@@inputUsername" placeholder="Username" #name="ngModel"
+             [(ngModel)]="account.name" maxlength="32"
              minlength="4" name="name"
              required type="text"/>
 
-      <mat-error *ngIf="f.submitted && password.invalid && password.errors.required">Password is required</mat-error>
-      <mat-error *ngIf="f.submitted && password.invalid && password.errors.minlength">Password must be at least 6
+      <mat-error *ngIf="f.submitted && password.invalid && password.errors.required" i18n="@@errorPasswordRequired">
+        Password is required
+      </mat-error>
+      <mat-error *ngIf="f.submitted && password.invalid && password.errors.minlength" i18n="@@errorPasswordToShort">
+        Password must be at least 6
         characters
       </mat-error>
-      <input class="input" placeholder="Password" #password="ngModel" [(ngModel)]="account.password"
+      <input class="input" i18n-placeholder="@@inputPassword" placeholder="Password" #password="ngModel"
+             [(ngModel)]="account.password"
              minlength="4"
              name="password" required
              type="password"/>
@@ -26,12 +32,12 @@
       <mat-error *ngIf="f.submitted && isSigninFailed">{{ errorMessage }}
       </mat-error>
       <br>
-      <div *ngIf="isSuccessful">
-        Your login is successful
+      <div *ngIf="isSuccessful" i18n="@@messageLoginSuccessful">
+        Successfully Logged In
       </div>
       <br>
-      <button class="login-button">Login</button>
-      <button class="login-button" routerLink="/register">Go to registration page</button>
+      <button class="login-button" i18n="@@buttonLogin">Login</button>
+      <button class="login-button" i18n="@@buttonGoToRegister" routerLink="/register">Go To Registration</button>
     </form>
   </div>
 </div>
