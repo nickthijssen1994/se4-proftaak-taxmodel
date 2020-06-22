@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="buttonDashboard" datatype="html">
+        <source>Dashboard</source>
+        <target>Dashboard</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buttonAppointments" datatype="html">
+        <source>Appointments</source>
+        <target>Afspraken</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buttonCalendar" datatype="html">
+        <source>Calendar</source>
+        <target>Kalender</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buttonLogin" datatype="html">
+        <source>Login</source>
+        <target>Inloggen</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/login/login.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buttonRegister" datatype="html">
+        <source>Register</source>
+        <target>Registreren</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buttonLogout" datatype="html">
+        <source>Logout</source>
+        <target>Uitloggen</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editAppointmentTitle" datatype="html">
+        <source>Edit Appointment</source>
+        <target>Afspraak Bewerken</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/edit-appointment/edit-appointment.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="titleLabel" datatype="html">
+        <source>Title</source>
+        <target>Titel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/edit-appointment/edit-appointment.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/create-appointment/create-appointment.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/appointment-list/appointment-list.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="descriptionLabel" datatype="html">
+        <source>Description</source>
+        <target>Beschrijving</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/edit-appointment/edit-appointment.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/create-appointment/create-appointment.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/appointment-list/appointment-list.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/appointment-view/appointment-view.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dateLabel" datatype="html">
+        <source>Date</source>
+        <target>Datum</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/edit-appointment/edit-appointment.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/create-appointment/create-appointment.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="startTimeLabel" datatype="html">
+        <source>Start Time</source>
+        <target>Begin Tijd</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/edit-appointment/edit-appointment.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/create-appointment/create-appointment.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="endTimeLabel" datatype="html">
+        <source>End Time</source>
+        <target>Eind Tijd</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/edit-appointment/edit-appointment.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/create-appointment/create-appointment.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="typeLabel" datatype="html">
+        <source>Type</source>
+        <target>Type</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/edit-appointment/edit-appointment.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="privateSelectOption" datatype="html">
+        <source>Private</source>
+        <target>Privé</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/edit-appointment/edit-appointment.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="publicSelectOption" datatype="html">
+        <source>Public</source>
+        <target>Openbaar</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/edit-appointment/edit-appointment.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="locationLabel" datatype="html">
+        <source>Location</source>
+        <target>Locatie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/edit-appointment/edit-appointment.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/create-appointment/create-appointment.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/appointment-list/appointment-list.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/appointment-view/appointment-view.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="minimumPeopleLabel" datatype="html">
+        <source>Minimum Number Of People</source>
+        <target>Minimum Aantal Deelnemers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/edit-appointment/edit-appointment.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/create-appointment/create-appointment.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="maximumPeopleLabel" datatype="html">
+        <source>Maximum Number Of People</source>
+        <target>Maximu Aantal Deelnemers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/edit-appointment/edit-appointment.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/create-appointment/create-appointment.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buttonUpdate" datatype="html">
+        <source>Update</source>
+        <target>Bijwerken</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/edit-appointment/edit-appointment.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="createAppointmentTitle" datatype="html">
+        <source>Create Appointment</source>
+        <target>Afspraak Aanmaken</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/create-appointment/create-appointment.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="checkboxPrivate" datatype="html">
+        <source>Private</source>
+        <target>Privé</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/create-appointment/create-appointment.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buttonSubmit" datatype="html">
+        <source>Submit</source>
+        <target>Bevestigen</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/create-appointment/create-appointment.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deleteAppointmentConfirmMessage" datatype="html">
+        <source>Are you sure you want to delete this appointment?</source>
+        <target>Weet je zeker dat je deze afspraak wilt verwijderen?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/delete-appointment-modal/delete-appointment-modal.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deleteAppointmentWarningMessage" datatype="html">
+        <source>This action cannot be undone!</source>
+        <target>Deze actie kan niet ongedaan gemaakt worden!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/delete-appointment-modal/delete-appointment-modal.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="delete" datatype="html">
+        <source>
+      Delete
+    </source>
+        <target>Verwijderen</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/delete-appointment-modal/delete-appointment-modal.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/delete-appointment-modal/delete-appointment-modal.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appointmentsTitle" datatype="html">
+        <source>Appointments</source>
+        <target>Afspraken</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/appointment-list/appointment-list.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="idLabel" datatype="html">
+        <source>ID</source>
+        <target>ID</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/appointment-list/appointment-list.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deleteLabel" datatype="html">
+        <source>Delete</source>
+        <target>Verwijderen</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/appointment-list/appointment-list.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="startLabel" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Start<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> <x id="INTERPOLATION" equiv-text="{{this.beginTime}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/appointment-view/appointment-view.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="endLabel" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>End<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> <x id="INTERPOLATION" equiv-text="{{this.endTime}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/appointment-view/appointment-view.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="participantsAmountLabel" datatype="html">
+        <source>Participants</source>
+        <target>Deelnemers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/appointment-view/appointment-view.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="appointmentAlreadyJoinedMessage" datatype="html">
+        <source>You already joined this appointment</source>
+        <target>Je bent al ingeschreven voor deze afspraak</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/appointment-view/appointment-view.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buttonAccept" datatype="html">
+        <source>Accept</source>
+        <target>Accepteren</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/appointment-view/appointment-view.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buttonCancel" datatype="html">
+        <source>Cancel</source>
+        <target>Annuleren</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/appointment-view/appointment-view.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="loginTitle" datatype="html">
+        <source>Login To Your Account</source>
+        <target>Log In Op Jouw Account</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/login/login.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="errorUsernameRequired" datatype="html">
+        <source>Username is
+        required
+      </source>
+        <target>Gebruikersnaam is verplicht</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/login/login.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="errorUsernameToShort" datatype="html">
+        <source>Username
+        must be at least 6 characters
+      </source>
+        <target>Gebruikersnaam moet minimaal 6 tekens bevatten</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/login/login.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="errorUsernameToLong" datatype="html">
+        <source>Username must
+        be at most 20 characters
+      </source>
+        <target>Gebruikersnaam mag maximaal 20 tekens bevatten</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/login/login.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="inputUsername" datatype="html">
+        <source>Username</source>
+        <target>Gebruikersnaam</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/login/login.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="errorPasswordRequired" datatype="html">
+        <source>
+        Password is required
+      </source>
+        <target>Wachtwoord is verplicht</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/login/login.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="errorPasswordToShort" datatype="html">
+        <source>
+        Password must be at least 6
+        characters
+      </source>
+        <target>Wachtwoord moet minimaal 6 tekens bevatten</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/login/login.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="inputPassword" datatype="html">
+        <source>Password</source>
+        <target>Wachtwoord</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/login/login.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageLoginSuccessful" datatype="html">
+        <source>
+        Successfully Logged In
+      </source>
+        <target>Succesvol Ingelogd</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/login/login.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buttonGoToRegister" datatype="html">
+        <source>Go To Registration</source>
+        <target>Ga Naar Registratie Pagina</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/login/login.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="registerTitle" datatype="html">
+        <source>Register your account</source>
+        <target>Registreer nieuw account</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="errorEmailRequired" datatype="html">
+        <source>Email
+                is required
+            </source>
+        <target>E-mailadres is verplicht</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="errorEmailInvalid" datatype="html">
+        <source>Email must
+                be a valid email address
+            </source>
+        <target>E-mailadres moet een geldig e-mailadres zijn</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="inputEmail" datatype="html">
+        <source>Email</source>
+        <target>Email</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageRegistrationSuccessful" datatype="html">
+        <source>Your registration is successful</source>
+        <target>Succesvol geregistreerd</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buttonGoToLogin" datatype="html">
+        <source>Go To Login</source>
+        <target>Ga Naar Inlog Pagina</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
