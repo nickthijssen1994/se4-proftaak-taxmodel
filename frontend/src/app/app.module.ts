@@ -41,6 +41,11 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { DeleteAppointmentModalComponent } from './components/delete-appointment-modal/delete-appointment-modal.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { LanguageSelectorComponent } from './components/language-selector/language-selector.component';
+import { registerLocaleData } from '@angular/common';
+import localeNl from '@angular/common/locales/nl';
+import localeNlExtra from '@angular/common/locales/extra/nl';
+
+registerLocaleData(localeNl, 'nl', localeNlExtra);
 
 @NgModule({
   declarations: [

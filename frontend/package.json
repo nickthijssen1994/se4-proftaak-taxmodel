@@ -3,14 +3,15 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --configuration=en",
-    "build": "ng build --prod --localize",
-    "build-i18n:en": "ng build --output-path=dist/en --aot --prod --base-href /en/ --i18n-file=src/locale/messages.en.xlf --i18n-locale=en",
-    "build-i18n:nl": "ng build --output-path=dist/nl --aot --prod --base-href /nl/ --i18n-file=src/locale/messages.nl.xlf --i18n-locale=nl",
-    "build-i18n": "npm run build-i18n:en && npm run build-i18n:nl",
+    "start": "ng serve",
+    "build": "ng build",
+    "build-en": "ng build --configuration=production",
+    "build-nl": "ng build --configuration=production-nl",
+    "build-all": "npm run build-en && npm run build-nl",
     "test": "ng test --watch=false",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "int:extract": "ng xi18n --output-path src/locale"
   },
   "private": true,
   "dependencies": {
@@ -47,12 +48,12 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.8",
-    "@angular/cli": "~9.1.8",
+    "@angular/cli": "^9.1.9",
     "@angular/compiler-cli": "~9.1.11",
     "@angular/language-service": "~9.1.11",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
