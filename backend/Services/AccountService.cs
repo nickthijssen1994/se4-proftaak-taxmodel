@@ -11,98 +11,98 @@ using Microsoft.Extensions.Options;
 
 namespace backend.Services
 {
-	public class AccountService : IAccountService
-	{
-		private readonly AccountRepository repository;
-		private readonly IMapper mapper;
-		private readonly TokenHandler tokenHandler;
+    public class AccountService : IAccountService
+    {
+        private readonly IMapper mapper;
+        private readonly AccountRepository repository;
+        private readonly TokenHandler tokenHandler;
 
-		public AccountService(AccountRepository repository, IMapper mapper, IOptions<AppSettings> appSettings)
-		{
-			this.mapper = mapper;
-			this.repository = repository;
-			tokenHandler = new TokenHandler(appSettings);
-		}
+        public AccountService(AccountRepository repository, IMapper mapper, IOptions<AppSettings> appSettings)
+        {
+            this.mapper = mapper;
+            this.repository = repository;
+            tokenHandler = new TokenHandler(appSettings);
+        }
 
-		public AccountDto GetById(long id)
-		{
-			Account account = repository.GetEntityById(id);
-			return mapper.Map<AccountDto>(account);
-		}
+        public AccountDto GetById(long id)
+        {
+            var account = repository.GetEntityById(id);
+            return mapper.Map<AccountDto>(account);
+        }
 
-		public AccountDto GetByName(string name)
-		{
-			Account account = repository.GetEntities<Account>(a => a.Name == name).Single();
-			return mapper.Map<AccountDto>(account);
-		}
+        public AccountDto GetByName(string name)
+        {
+            var account = repository.GetEntities<Account>(a => a.Name == name).Single();
+            return mapper.Map<AccountDto>(account);
+        }
 
-		public bool CheckNameExists(string name)
-		{
-			try
-			{
-				Account account = repository.GetEntities<Account>(a => a.Name == name).Single();
-				return true;
-			}
-			catch (EntryPointNotFoundException e)
-			{
-				return false;
-			}
-		}
+        public bool CheckNameExists(string name)
+        {
+            try
+            {
+                var account = repository.GetEntities<Account>(a => a.Name == name).Single();
+                return true;
+            }
+            catch (EntryPointNotFoundException e)
+            {
+                return false;
+            }
+        }
 
-		public bool CheckEmailExists(string email)
-		{
-			try
-			{
-				Account account = repository.GetEntities<Account>(a => a.Email == email).Single();
-				return true;
-			}
-			catch (EntryPointNotFoundException e)
-			{
-				return false;
-			}
-		}
+        public bool CheckEmailExists(string email)
+        {
+            try
+            {
+                var account = repository.GetEntities<Account>(a => a.Email == email).Single();
+                return true;
+            }
+            catch (EntryPointNotFoundException e)
+            {
+                return false;
+            }
+        }
 
-		public Registration Register(RegisterDto registerDto)
-		{
-			// Generate jwt.
-			string token = tokenHandler.GenerateToken(registerDto.Name);
+        public Registration Register(RegisterDto registerDto)
+        {
+            // Generate jwt.
+            var token = tokenHandler.GenerateToken(registerDto.Name);
 
-			PasswordHasher hasher = new PasswordHasher();
-			registerDto.Password = hasher.GenerateHash(registerDto.Password); // Hash password before registration.
+            var hasher = new PasswordHasher();
+            registerDto.Password = hasher.GenerateHash(registerDto.Password); // Hash password before registration.
 
-			// Save to storage.
-			Account account = mapper.Map<Account>(registerDto);
-			repository.InsertEntity(account);
-			repository.Save();
+            // Save to storage.
+            var account = mapper.Map<Account>(registerDto);
+            repository.InsertEntity(account);
+            repository.Save();
 
-			return new Registration(registerDto.Email, registerDto.Name, token);
-		}
+            return new Registration(registerDto.Email, registerDto.Name, token);
+        }
 
-		public JwtToken Login(string name)
-		{
-			// Generate jwt.
-			return new JwtToken(tokenHandler.GenerateToken(name));
-		}
+        public JwtToken Login(string name)
+        {
+            // Generate jwt.
+            return new JwtToken(tokenHandler.GenerateToken(name));
+        }
 
-		public void Delete(AccountDto accountDto)
-		{
-			Account account = mapper.Map<Account>(accountDto);
-			repository.DeleteEntity(account);
-			repository.Save();
-		}
+        public void Delete(AccountDto accountDto)
+        {
+            var account = mapper.Map<Account>(accountDto);
+            repository.DeleteEntity(account);
+            repository.Save();
+        }
 
-		public IEnumerable<AccountDto> GetAll()
-		{
-			IEnumerable<Account> accounts = repository.GetEntities<Account>();
-			return mapper.Map<IEnumerable<AccountDto>>(accounts);
-		}
+        public IEnumerable<AccountDto> GetAll()
+        {
+            var accounts = repository.GetEntities<Account>();
+            return mapper.Map<IEnumerable<AccountDto>>(accounts);
+        }
 
-		public EditAccountDto Update(EditAccountDto editAccountDto)
-		{
-			Account account = mapper.Map<Account>(editAccountDto);
-			repository.UpdateEntity(account);
-			repository.Save();
-			return editAccountDto;
-		}
-	}
+        public EditAccountDto Update(EditAccountDto editAccountDto)
+        {
+            var account = mapper.Map<Account>(editAccountDto);
+            repository.UpdateEntity(account);
+            repository.Save();
+            return editAccountDto;
+        }
+    }
 }

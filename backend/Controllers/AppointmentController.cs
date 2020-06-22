@@ -1,21 +1,25 @@
 using System.Collections.Generic;
 using System.Linq;
-using backend.DAL.Repositories;
+using backend.Helpers;
 using backend.Models.DTOs;
 using backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
-	[ApiController]
+    [ApiController]
     [Route("taxbreak/api/[controller]")]
     public class AppointmentController : ControllerBase
     {
+        private readonly IAccountService _aService;
+        private readonly MailHelper _mailHelper;
         private readonly IAppointmentService _service;
 
-        public AppointmentController(IAppointmentService service)
+        public AppointmentController(IAppointmentService service, IAccountService aservice, MailHelper mailHelper)
         {
             _service = service;
+            _aService = aservice;
+            _mailHelper = mailHelper;
         }
 
         [HttpGet]
@@ -30,10 +34,7 @@ namespace backend.Controllers
         {
             var appointment = _service.GetById(id);
 
-            if (appointment == null)
-            {
-                return NotFound();
-            }
+            if (appointment == null) return NotFound();
 
             return appointment;
         }
@@ -67,7 +68,10 @@ namespace backend.Controllers
         {
             if (!ModelState.IsValid) return BadRequest();
 
+            var appointment = _service.GetById(dto.AppointmentId);
+            var account = _aService.GetById(dto.AccountId);
             _service.RegisterForAppointment(dto);
+            _mailHelper.SendSignupMail(account.Email, appointment.BeginTime, appointment.Location);
 
             return dto;
         }
@@ -104,17 +108,17 @@ namespace backend.Controllers
         }
 
         [HttpGet("isRegisteredForAppointment/{accountId}/{appointmentId}")]
-		public ActionResult<bool> IsRegisteredForAppointment(long accountId, long appointmentId)
-		{
-			if (!ModelState.IsValid) return BadRequest();
+        public ActionResult<bool> IsRegisteredForAppointment(long accountId, long appointmentId)
+        {
+            if (!ModelState.IsValid) return BadRequest();
 
-            RegisterForAppointmentDto dto = new RegisterForAppointmentDto
+            var dto = new RegisterForAppointmentDto
             {
                 AccountId = accountId,
                 AppointmentId = appointmentId
             };
 
             return _service.IsRegisteredForAppointment(dto);
-		}
+        }
     }
 }
