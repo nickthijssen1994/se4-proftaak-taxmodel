@@ -5,9 +5,8 @@
   "projects": {
     "frontend": {
       "i18n": {
-        "sourceLocale": "en-US",
+        "sourceLocale": "en",
         "locales": {
-          "en": "src/locale/messages.en.xlf",
           "nl": "src/locale/messages.nl.xlf"
         }
       },
@@ -21,6 +20,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "localize": true,
+            "i18nMissingTranslation": "warning",
             "outputPath": "dist/",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -44,7 +44,6 @@
           },
           "configurations": {
             "production": {
-              "localize": ["en-US"],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -72,9 +71,6 @@
                 }
               ]
             },
-            "en": {
-              "localize": ["en"]
-            },
             "nl": {
               "localize": ["nl"]
             }
@@ -88,9 +84,6 @@
           "configurations": {
             "production": {
               "browserTarget": "frontend:build:production"
-            },
-            "en": {
-              "browserTarget": "frontend:build:en"
             },
             "nl": {
               "browserTarget": "frontend:build:nl"

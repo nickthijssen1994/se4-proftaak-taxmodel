@@ -3,11 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --configuration=en",
+    "start": "ng serve",
     "build": "ng build --prod --localize",
-    "build-i18n:en": "ng build --output-path=dist/en --aot --prod --base-href /en/ --i18n-file=src/locale/messages.en.xlf --i18n-locale=en",
-    "build-i18n:nl": "ng build --output-path=dist/nl --aot --prod --base-href /nl/ --i18n-file=src/locale/messages.nl.xlf --i18n-locale=nl",
-    "build-i18n": "npm run build-i18n:en && npm run build-i18n:nl",
     "test": "ng test --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e"

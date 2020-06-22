@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="buttonDashboard" datatype="html">
         <source>Dashboard</source>
@@ -333,24 +333,18 @@
         </context-group>
       </trans-unit>
       <trans-unit id="startLabel" datatype="html">
-        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Start
-          <x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>
-          <x id="INTERPOLATION" equiv-text="{{this.beginTime}}"/>
-        </source>
+        <source>Start</source>
+        <target>Begin</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/appointment-view/appointment-view.component.html
-          </context>
+          <context context-type="sourcefile">src/app/components/appointment-view/appointment-view.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="endLabel" datatype="html">
-        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>End
-          <x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>
-          <x id="INTERPOLATION" equiv-text="{{this.endTime}}"/>
-        </source>
+        <source>End</source>
+        <target>Eind</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/appointment-view/appointment-view.component.html
-          </context>
+          <context context-type="sourcefile">src/app/components/appointment-view/appointment-view.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
