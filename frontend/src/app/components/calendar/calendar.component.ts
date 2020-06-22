@@ -6,7 +6,6 @@ import {CalendarEvent} from '../../models/calendar-event';
 import {MatDialog} from '@angular/material/dialog';
 import {AppointmentViewComponent} from '../appointment-view/appointment-view.component';
 import {environment} from '../../../environments/environment';
-import {getId} from '../../storage/user-storage';
 
 declare var $: any;
 

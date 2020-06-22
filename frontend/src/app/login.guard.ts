@@ -1,4 +1,4 @@
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, UrlSegment } from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {AuthService} from './authentication.service';
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
