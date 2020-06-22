@@ -43,6 +43,25 @@ namespace backend.DAL.Repositories
             return query.ToList();
         }
 
+        public virtual IEnumerable<TEntity> GetEntitiesWithStringInclude<TProperty>(
+          Expression<Func<TEntity, bool>> filter = null,
+          string[] includes = null)
+        {
+            IQueryable<TEntity> query = SetEntity;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (includes != null)
+            {
+                return includes.Aggregate(query, (current, include) => current.Include(include));
+            }
+
+            return query.ToList();
+        }
+
         public virtual TEntity GetEntityById(object id)
         {
             return SetEntity.Find(id);

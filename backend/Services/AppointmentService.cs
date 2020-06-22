@@ -23,11 +23,16 @@ namespace backend.Services
             o => o.Organiser
         };
 
+        static readonly string[] accountStringIncludes = new string[]
+        {
+            "Appointments.Appointment"
+        };
+
         public AppointmentService(AppointmentRepository repo, AccountRepository accountRepository, IMapper mapper)
         {
             _mapper = mapper;
             _repo = repo;
-            _accountRepository = accountRepository;
+            this._accountRepository = accountRepository;
         }
 
         public AppointmentDto GetById(long id)
@@ -70,7 +75,7 @@ namespace backend.Services
                     appointment.AccountsRegistered.Add(aa);
 
                     // Add appointment to account.
-                    Account account = _accountRepository.GetEntities<Account>(a => a.Id == dto.AccountId).Single();
+                    Account account = _accountRepository.GetEntitiesWithStringInclude<Account>(a => a.Id == dto.AccountId, accountStringIncludes).FirstOrDefault();
                     if(account.Appointments == null)
                     {
                         account.Appointments = new List<AppointmentAccount>();

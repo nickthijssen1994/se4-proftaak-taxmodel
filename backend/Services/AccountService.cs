@@ -17,12 +17,17 @@ namespace backend.Services
         private readonly IMapper mapper;
         private readonly TokenHandler tokenHandler;
 
-        public AccountService(AccountRepository repository, IMapper mapper, IOptions<AppSettings> appSettings)
+        static readonly string[] stringIncludes = new string[]
         {
-            this.mapper = mapper;
-            this.repository = repository;
-            tokenHandler = new TokenHandler(appSettings);
-        }
+            "Appointments.Appointment"
+        };
+
+        public AccountService(AccountRepository repository, IMapper mapper, IOptions<AppSettings> appSettings)
+		{
+			this.mapper = mapper;
+			this.repository = repository;
+			tokenHandler = new TokenHandler(appSettings);
+		}
 
         public AccountDto GetById(long id)
         {
@@ -30,24 +35,24 @@ namespace backend.Services
             return mapper.Map<AccountDto>(account);
         }
 
-        public AccountDto GetByName(string name)
-        {
-            Account account = repository.GetEntities<Account>(a => a.Name == name).Single();
-            return mapper.Map<AccountDto>(account);
-        }
+		public AccountDto GetByName(string name)
+		{
+			Account account = repository.GetEntitiesWithStringInclude<Account>(a => a.Name == name, stringIncludes).FirstOrDefault();
+			return mapper.Map<AccountDto>(account);
+		}
 
-        public bool CheckNameExists(string name)
-        {
-            try
-            {
-                Account account = repository.GetEntities<Account>(a => a.Name == name).Single();
-                return true;
-            }
-            catch (InvalidOperationException e)
-            {
-                return false;
-            }
-        }
+		public bool CheckNameExists(string name)
+		{
+			try
+			{
+				Account account = repository.GetEntities<Account>(a => a.Name == name).FirstOrDefault();
+				return true;
+			}
+			catch (InvalidOperationException e)
+			{
+				return false;
+			}
+		}
 
         public bool CheckEmailExists(string email)
         {
