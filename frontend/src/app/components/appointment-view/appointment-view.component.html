@@ -4,7 +4,7 @@
   <p i18n="@@startLabel"><b>Start</b> {{this.beginTime}}</p>
   <p i18n="@@endLabel"><b>End</b> {{this.endTime}}</p>
   <h4 i18n="@@descriptionLabel"><b>Description</b> {{this.description}}</h4>
-  <h4 i18n="@@participantsAmountLabel"><b>Participants</b> {{this.peopleCount}} / {{this.maxPeople.toString()}}</h4>
+  <h4><b i18n="@@participantsAmountLabel">Participants</b> {{this.peopleCount}} / {{this.maxPeople.toString()}}</h4>
 </mat-dialog-content>
 <div *ngIf="canRegister != null">
   <div class="already-registered-text" *ngIf="!canRegister">

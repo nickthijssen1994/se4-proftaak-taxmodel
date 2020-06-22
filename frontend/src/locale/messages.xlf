@@ -279,7 +279,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="participantsAmountLabel" datatype="html">
-        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Participants<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> <x id="INTERPOLATION" equiv-text="{{this.peopleCount}}"/> / <x id="INTERPOLATION_1" equiv-text="{{this.maxPeople.toString()}}"/></source>
+        <source>Participants</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/appointment-view/appointment-view.component.html</context>
           <context context-type="linenumber">7</context>
