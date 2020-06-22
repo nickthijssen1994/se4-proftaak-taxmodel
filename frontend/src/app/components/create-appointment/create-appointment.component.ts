@@ -128,7 +128,12 @@ export class CreateAppointmentComponent implements OnInit {
         duration: 5000,
       });
       return false;
-    } else if (this.appointment.description !== '') {
+    } else if (this.date.getTime() < new Date().getTime()) {
+      this.notificationService.open('Date of appointment can`t be in the past', null, {
+        duration: 5000,
+      });
+      return false;
+    }  else if (this.appointment.description !== '') {
       if (this.appointment.description.length <= 4) {
         this.notificationService.open('Description has to be greater than 4 characters', null, {
           duration: 5000,

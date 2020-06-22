@@ -5,9 +5,9 @@ namespace Logic
 {
     public class HashTest
     {
+        private string password;
         private string hash;
         private PasswordHasher hasher;
-        private string password;
 
         [SetUp]
         public void Setup()
@@ -28,6 +28,13 @@ namespace Logic
         {
             hash = hasher.GenerateHash(password);
             Assert.IsTrue(hasher.VerifyHash(password, hash));
+        }
+
+        [Test]
+        public void VerifyNoAcces()
+        {
+            hash = hasher.GenerateHash(password);
+            Assert.IsFalse(hasher.VerifyHash("test", hash));
         }
     }
 }

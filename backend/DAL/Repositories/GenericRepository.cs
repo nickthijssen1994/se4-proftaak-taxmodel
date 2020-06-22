@@ -18,15 +18,27 @@ namespace backend.DAL.Repositories
 
         public DbSet<TEntity> SetEntity { get; set; }
 
+        public virtual IEnumerable<TEntity> GetEntities<TProperty>()
+        {
+            IQueryable<TEntity> query = SetEntity;
+            return query.ToList();
+        }
+
         public virtual IEnumerable<TEntity> GetEntities<TProperty>(
             Expression<Func<TEntity, bool>> filter = null,
             Expression<Func<TEntity, TProperty>>[] includes = null)
         {
             IQueryable<TEntity> query = SetEntity;
 
-            if (filter != null) query = query.Where(filter);
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
 
-            if (includes != null) return includes.Aggregate(query, (current, include) => current.Include(include));
+            if (includes != null)
+            {
+                return includes.Aggregate(query, (current, include) => current.Include(include));
+            }
 
             return query.ToList();
         }
@@ -49,7 +61,11 @@ namespace backend.DAL.Repositories
 
         public virtual void DeleteEntity(TEntity entityToDelete)
         {
-            if (_context.Entry(entityToDelete).State == EntityState.Detached) SetEntity.Attach(entityToDelete);
+            if (_context.Entry(entityToDelete).State == EntityState.Detached)
+            {
+                SetEntity.Attach(entityToDelete);
+            }
+
             SetEntity.Remove(entityToDelete);
         }
 
@@ -62,12 +78,6 @@ namespace backend.DAL.Repositories
         public void Save()
         {
             _context.SaveChanges();
-        }
-
-        public virtual IEnumerable<TEntity> GetEntities<TProperty>()
-        {
-            IQueryable<TEntity> query = SetEntity;
-            return query.ToList();
         }
     }
 }
