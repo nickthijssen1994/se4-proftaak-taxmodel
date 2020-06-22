@@ -38,7 +38,9 @@ import {AuthService} from './authentication.service';
 import {LoginGuard} from './login.guard';
 import {AuthGuard} from './auth.guard';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
-import {DeleteAppointmentModalComponent} from './components/delete-appointment-modal/delete-appointment-modal.component';
+import { DeleteAppointmentModalComponent } from './components/delete-appointment-modal/delete-appointment-modal.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { LanguageSelectorComponent } from './components/language-selector/language-selector.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import {DeleteAppointmentModalComponent} from './components/delete-appointment-m
     AppointmentViewComponent,
     LoginComponent,
     RegisterComponent,
-    DeleteAppointmentModalComponent
+    DeleteAppointmentModalComponent,
+    LanguageSelectorComponent
   ], imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -99,6 +102,7 @@ import {DeleteAppointmentModalComponent} from './components/delete-appointment-m
     FullCalendarModule,
     MatSnackBarModule,
     MatNativeDateModule,
+    MatMenuModule,
   ], bootstrap: [AppComponent], providers: [
     AuthService, LoginGuard, AuthGuard, {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
   ]

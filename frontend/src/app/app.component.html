@@ -5,18 +5,19 @@
       <span>
         <button mat-button routerLink="/"><h1>{{title}}</h1></button>
       </span>
-            <button mat-button routerLink="/dashboard">Dashboard</button>
-            <button mat-button routerLink="/appointments">Appointments</button>
-            <button mat-button routerLink="/calendar">Calendar</button>
+            <button mat-button routerLink="/dashboard" i18n="@@buttonDashboard">Dashboard</button>
+            <button mat-button routerLink="/appointments" i18n="@@buttonAppointments">Appointments</button>
+            <button mat-button routerLink="/calendar" i18n="@@buttonCalendar">Calendar</button>
             <span class="fill-remaining-space"></span>
             <div *ngIf="isLoggedIn == false">
-                <button mat-button routerLink="/login">Login</button>
-                <button mat-button routerLink="/register">Register</button>
+                <button mat-button routerLink="/login" i18n="@@buttonLogin">Login</button>
+                <button mat-button routerLink="/register" i18n="@@buttonRegister">Register</button>
             </div>
             <div *ngIf="isLoggedIn == true">
                 <button mat-button routerLink="/dashboard">{{username}}</button>
-                <button (click)="logout()" mat-button>Logout</button>
+                <button (click)="logout()" mat-button i18n="@@buttonLogout">Logout</button>
             </div>
+            <app-language-selector></app-language-selector>
         </mat-toolbar>
 
         <router-outlet></router-outlet>

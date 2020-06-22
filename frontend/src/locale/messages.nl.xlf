@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 ">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="f65253954b66e929a8b4d5ecaf61f9129f8cec64" datatype="html">
+        <source>Dashboard</source>
+        <target>Dashboard</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <note priority="1" from="description">link dashboard</note>
+      </trans-unit>
+      <trans-unit id="733d5bb18aef85182d50e748a6dea57674a6abea" datatype="html">
+        <source>Appointments</source>
+        <target>Afspraken</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <note priority="1" from="description">link appointments</note>
+      </trans-unit>
+      <trans-unit id="33629999fd41361c48d5a60a5783dfdbd09276b7" datatype="html">
+        <source>Calendar</source>
+        <target>Kalender</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <note priority="1" from="description">link calendar</note>
+      </trans-unit>
+      <trans-unit id="6765b4c916060f6bc42d9bb69e80377dbcb5e4e9" datatype="html">
+        <source>Login</source>
+        <target>Inloggen</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <note priority="1" from="description">link login</note>
+      </trans-unit>
+      <trans-unit id="cfc2f436ec2beffb042e7511a73c89c372e86a6c" datatype="html">
+        <source>Register</source>
+        <target>Registreren</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <note priority="1" from="description">link register</note>
+      </trans-unit>
+      <trans-unit id="bb694b49d408265c91c62799c2b3a7e3151c824d" datatype="html">
+        <source>Logout</source>
+        <target>Uitloggen</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <note priority="1" from="description">link logout</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="buttonDashboard" datatype="html">
+        <source>Dashboard</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buttonAppointments" datatype="html">
+        <source>Appointments</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buttonCalendar" datatype="html">
+        <source>Calendar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buttonLogin" datatype="html">
+        <source>Login</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buttonRegister" datatype="html">
+        <source>Register</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buttonLogout" datatype="html">
+        <source>Logout</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deleteAppointmentConfirmMessage" datatype="html">
+        <source>Are you sure you want to delete this appointment?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/delete-appointment-modal/delete-appointment-modal.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deleteAppointmentWarningMessage" datatype="html">
+        <source>This action cannot be undone!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/delete-appointment-modal/delete-appointment-modal.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="delete" datatype="html">
+        <source>
+      Delete
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/delete-appointment-modal/delete-appointment-modal.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/delete-appointment-modal/delete-appointment-modal.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="registerTitle" datatype="html">
+        <source> Register your account </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="errorEmailRequired" datatype="html">
+        <source>Email
+                is required
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="errorEmailInvalid" datatype="html">
+        <source>Email must
+                be a valid email address
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="inputEmail" datatype="html">
+        <source>Email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="errorUsernameRequired" datatype="html">
+        <source>
+                Username is required
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="errorUsernameToShort" datatype="html">
+        <source>
+                Username must be at least 6
+                characters
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="errorUsernameToLong" datatype="html">
+        <source>
+                Username must be at most 20
+                characters
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="inputUsername" datatype="html">
+        <source>Username</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="errorPasswordRequired" datatype="html">
+        <source>Password is required
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="errorPasswordToShort" datatype="html">
+        <source>Password must be at least 6
+                characters
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="inputPassword" datatype="html">
+        <source>Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageRegistrationSuccessful" datatype="html">
+        <source>Your registration is successful</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buttonGoToLogin" datatype="html">
+        <source>Go To Login</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/register/register.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
