@@ -7,6 +7,7 @@ using backend.DAL.Repositories;
 using backend.Models;
 using backend.Models.DTOs;
 using Castle.Core.Internal;
+using MySqlX.XDevAPI.Common;
 
 namespace backend.Services
 {
@@ -70,13 +71,13 @@ namespace backend.Services
             }
             else
             {
-                if (!IsOverlapping(dto.AccountId, appointment))
+                Account account = _accountRepository.GetEntitiesWithStringInclude<Account>(a => a.Id == dto.AccountId, accountStringIncludes).FirstOrDefault();
+                if (!IsOverlapping(account, appointment))
                 {
                     appointment.AccountsRegistered.Add(aa);
 
                     // Add appointment to account.
-                    Account account = _accountRepository.GetEntitiesWithStringInclude<Account>(a => a.Id == dto.AccountId, accountStringIncludes).FirstOrDefault();
-                    if(account.Appointments == null)
+                    if (account.Appointments == null)
                     {
                         account.Appointments = new List<AppointmentAccount>();
                     }
@@ -139,36 +140,24 @@ namespace backend.Services
             return appointment.AccountsRegistered.Any(a => a.AccountId == registerForAppointmentDto.AccountId);
         }
 
-        public bool IsOverlapping(long id, Appointment appointment)
+        public bool IsOverlapping(Account account, Appointment appointment)
         {
-            List<AppointmentAccount> ids;
+            List<AppointmentAccount> appointmentAccounts = account.Appointments.ToList();
             List<AppointmentDto> appointments = new List<AppointmentDto>();
 
-            try
+            foreach (AppointmentAccount app in appointmentAccounts)
             {
-                Account account = _accountRepository.GetEntityById(id);
-                ids = _accountRepository.GetEntityById(id).Appointments.ToList();
-            }
-            catch
-            {
-                ids = new List<AppointmentAccount>();
-            }
-
-
-            if (!ids.IsNullOrEmpty())
-            {
-                foreach (AppointmentAccount app in ids)
-                {
-                    appointments.Add(GetById(app.AppointmentId));
-                }
+                appointments.Add(GetById(app.AppointmentId));
             }
 
             foreach (AppointmentDto app in appointments)
             {
                 int result1 = DateTime.Compare(app.BeginTime, appointment.EndTime);
                 int result2 = DateTime.Compare(app.EndTime, appointment.BeginTime);
+                int result3 = DateTime.Compare(app.BeginTime, appointment.BeginTime);
+                int result4 = DateTime.Compare(app.EndTime, appointment.EndTime);
 
-                if (result1 <= 0 || result2 > 0) // Check result1 to be earlier than new appointment and result2 to be later than old appointment.
+                if (result1 <= 0 && result2 >= 0) // Check result1 to be earlier than new appointment and result2 to be later than old appointment.
                 {
                     return true;
                 }
