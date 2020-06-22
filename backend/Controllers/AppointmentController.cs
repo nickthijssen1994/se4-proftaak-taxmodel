@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using backend.Helpers;
 using backend.Models.DTOs;
 using backend.Services;
@@ -65,14 +66,14 @@ namespace backend.Controllers
         }
 
         [HttpPost("register")]
-        public ActionResult<RegisterForAppointmentDto> RegisterForAppointment(RegisterForAppointmentDto dto)
+        public async Task<ActionResult<RegisterForAppointmentDto>> RegisterForAppointment(RegisterForAppointmentDto dto)
         {
             if (!ModelState.IsValid) return BadRequest();
 
             var appointment = _service.GetById(dto.AppointmentId);
             var account = _aService.GetById(dto.AccountId);
             _service.RegisterForAppointment(dto);
-            _mailHelper.SendSignupMail(account.Email, appointment.BeginTime, appointment.Location);
+            await _mailHelper.SendSignupMail(account.Email, appointment.BeginTime, appointment.Location).ConfigureAwait(true);
 
             return dto;
         }
