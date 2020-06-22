@@ -71,13 +71,17 @@ namespace backend.Services
 
                     // Add appointment to account.
                     Account account = _accountRepository.GetEntities<Account>(a => a.Id == dto.AccountId).Single();
-                    account.Appointments = new List<AppointmentAccount>();
+                    if(account.Appointments == null)
+                    {
+                        account.Appointments = new List<AppointmentAccount>();
+                    }
                     account.Appointments.Add(aa);
 
                     // Save changes.
-                    _accountRepository.UpdateEntity(account);
                     _repo.UpdateEntity(appointment);
+                    _accountRepository.UpdateEntity(account);
                     _repo.Save();
+                    _accountRepository.Save();
 
                     return true;
                 }
@@ -132,12 +136,23 @@ namespace backend.Services
 
         public bool IsOverlapping(long id, Appointment appointment)
         {
-            IEnumerable<AppointmentAccount> appointmentIds = _accountRepository.GetAppointments(id);
+            List<AppointmentAccount> ids;
             List<AppointmentDto> appointments = new List<AppointmentDto>();
 
-            if (!appointmentIds.IsNullOrEmpty())
+            try
             {
-                foreach (AppointmentAccount app in appointmentIds)
+                Account account = _accountRepository.GetEntityById(id);
+                ids = _accountRepository.GetEntityById(id).Appointments.ToList();
+            }
+            catch
+            {
+                ids = new List<AppointmentAccount>();
+            }
+
+
+            if (!ids.IsNullOrEmpty())
+            {
+                foreach (AppointmentAccount app in ids)
                 {
                     appointments.Add(GetById(app.AppointmentId));
                 }
