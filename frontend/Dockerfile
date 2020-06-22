@@ -5,7 +5,7 @@ RUN npm ci && mkdir /frontend && mv ./node_modules ./frontend
 WORKDIR /frontend
 COPY . .
 
-RUN npm run build-i18n
+RUN npm run build-all
 
 FROM nginx:alpine
 COPY --from=builder /frontend/dist /usr/share/nginx/html

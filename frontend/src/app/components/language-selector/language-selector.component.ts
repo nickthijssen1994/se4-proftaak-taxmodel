@@ -17,13 +17,13 @@ export class LanguageSelectorComponent implements OnInit {
 
   languages: Language[] = [
     {value: 'English', viewValue: 'assets/EN.png', code: 'en'},
-    {value: 'Dutch', viewValue: 'assets/NL.png', code: 'nl'},
+    {value: 'Nederlands', viewValue: 'assets/NL.png', code: 'nl'},
   ];
 
   constructor(@Inject(LOCALE_ID) protected localeId: string) {}
 
   ngOnInit(): void {
-    this.selectedLanguage = this.languages[0];
+    this.selectedLanguage = this.languages.find(language => language.code === this.localeId);
   }
 
 }
