@@ -72,8 +72,12 @@ namespace backend.Controllers
 
             var appointment = _service.GetById(dto.AppointmentId);
             var account = _aService.GetById(dto.AccountId);
-            _service.RegisterForAppointment(dto);
-            await _mailHelper.SendSignupMail(account.Email, appointment.BeginTime, appointment.Location).ConfigureAwait(true);
+            bool success = _service.RegisterForAppointment(dto);
+
+            if (success == false)
+            {
+                await _mailHelper.SetUpRegisterReminderMail(account.Email, appointment.BeginTime, appointment.Location).ConfigureAwait(true);
+            }
 
             return dto;
         }
