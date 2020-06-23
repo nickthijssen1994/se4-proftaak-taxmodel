@@ -1,5 +1,5 @@
 import {registerLocaleData} from '@angular/common';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import localeNlExtra from '@angular/common/locales/extra/nl';
 import localeNl from '@angular/common/locales/nl';
 import {NgModule} from '@angular/core';
@@ -44,6 +44,7 @@ import {LoginComponent} from './components/login/login.component';
 import {OrderComponent} from './components/order/order.component';
 import {RegisterComponent} from './components/register/register.component';
 import {LoginGuard} from './services/login.guard';
+import {AuthenticationInterceptor} from './services/authentication-interceptor';
 
 registerLocaleData(localeNl, 'nl', localeNlExtra);
 
@@ -89,7 +90,11 @@ registerLocaleData(localeNl, 'nl', localeNlExtra);
     FullCalendarModule,
     MatMenuModule,
   ], bootstrap: [AppComponent], providers: [
-    AuthService, LoginGuard, AuthGuard, {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
+    AuthService,
+    LoginGuard,
+    AuthGuard,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
   ]
 })
 export class AppModule {
