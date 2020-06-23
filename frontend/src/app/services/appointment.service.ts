@@ -9,7 +9,7 @@ import {EditAppointmentDto} from '../models/dtos/edit-appointment-dto';
 @Injectable({
   providedIn: 'root'
 })
-export class AppointmentTestService {
+export class AppointmentService {
 
   private headers = new HttpHeaders();
 
