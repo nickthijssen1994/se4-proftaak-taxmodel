@@ -1,64 +1,64 @@
 <div class="container">
   <mat-card class="edit-appointment-form" *ngIf="appointment">
     <mat-card-header>
-      <mat-card-title>Edit appointment</mat-card-title>
+      <mat-card-title i18n="@@editAppointmentTitle">Edit Appointment</mat-card-title>
       <mat-card-subtitle>{{appointment.title}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <form>
         <mat-form-field class="edit-appointment-form-full-width">
-          <mat-label>Title</mat-label>
+          <mat-label i18n="@@titleLabel">Title</mat-label>
           <input matInput [(ngModel)]="appointment.title" value="{{appointment.title}}" class="form-control"
                  [ngModelOptions]="{standalone: true}">
         </mat-form-field>
         <mat-form-field class="edit-appointment-form-full-width">
-          <mat-label>Description</mat-label>
+          <mat-label i18n="@@descriptionLabel">Description</mat-label>
           <input matInput [(ngModel)]="appointment.description" value="{{appointment.description}}"
                  [ngModelOptions]="{standalone: true}">
         </mat-form-field>
         <mat-form-field class="edit-appointment-form-full-width">
-          <mat-label>Begin Date</mat-label>
+          <mat-label i18n="@@dateLabel">Date</mat-label>
           <input matInput [matDatepicker]="picker" [ngModel]="appointment.beginTime" (dateChange)="onDateChange($event)" name="date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <div class="time-pickers-container">
-          <mat-label> Start time</mat-label>
+          <mat-label i18n="@@startTimeLabel">Start Time</mat-label>
             <input class="time-picker-input" matInput placeholder="12:00" [format]="24" required
                    [ngxTimepicker]="defaultPicker" min="10:00" max="17:00" [(ngModel)]="beginTime" name="begin time" required (error)="defaultPicker.appendToInput">
           <ngx-material-timepicker #defaultPicker [preventOverlayClick]="true"></ngx-material-timepicker>
-          <mat-label> End time</mat-label>
+          <mat-label i18n="@@endTimeLabel">End Time</mat-label>
           <input class="time-picker-input" matInput placeholder="17:00" [format]="24"
                    [ngxTimepicker]="defaultPicker2" min="10:00" max="17:00" [(ngModel)]="endTime" name="end time" required>
           <ngx-material-timepicker #defaultPicker2></ngx-material-timepicker>
 
         </div>
         <mat-form-field class="edit-appointment-form-full-width">
-          <mat-label>Type</mat-label>
+          <mat-label i18n="@@typeLabel">Type</mat-label>
           <mat-select matNativeControl required (selectionChange)="onTypeChange($event)" [(value)]="appointment.type">
-            <mat-option value="Private">Private</mat-option>
-            <mat-option value="Public">Public</mat-option>
+            <mat-option value="Private" i18n="@@privateSelectOption">Private</mat-option>
+            <mat-option value="Public" i18n="@@publicSelectOption">Public</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="edit-appointment-form-full-width">
-          <mat-label>Location</mat-label>
+          <mat-label i18n="@@locationLabel">Location</mat-label>
           <input matInput [(ngModel)]="appointment.location" value="{{appointment.location}}"
                  [ngModelOptions]="{standalone: true}">
         </mat-form-field>
         <mat-form-field class="edit-appointment-form-full-width">
-          <mat-label>Minimum Number Of People</mat-label>
+          <mat-label i18n="@@minimumPeopleLabel">Minimum Number Of People</mat-label>
           <input type="number" matInput [(ngModel)]="appointment.minPeople" value="{{appointment.minPeople}}"
                  [ngModelOptions]="{standalone: true}"> <br>
         </mat-form-field>
         <mat-form-field class="edit-appointment-form-full-width">
-          <mat-label>Maximum Number Of People</mat-label>
+          <mat-label i18n="@@maximumPeopleLabel">Maximum Number Of People</mat-label>
           <input type="number" matInput [(ngModel)]="appointment.maxPeople" value="{{appointment.maxPeople}}"
                  [ngModelOptions]="{standalone: true}"><br>
         </mat-form-field>
       </form>
     </mat-card-content>
     <mat-card-actions class="card-actions">
-      <button class="update-button" mat-button (click)="update()">Update</button>
+      <button i18n="@@buttonUpdate" class="update-button" mat-button (click)="update()">Update</button>
     </mat-card-actions>
   </mat-card>
 </div>

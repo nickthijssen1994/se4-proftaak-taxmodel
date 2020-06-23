@@ -6,6 +6,8 @@ using AutoMapper;
 using backend.DAL.Repositories;
 using backend.Models;
 using backend.Models.DTOs;
+using Castle.Core.Internal;
+using MySqlX.XDevAPI.Common;
 
 namespace backend.Services
 {
@@ -13,7 +15,7 @@ namespace backend.Services
     public class AppointmentService : IAppointmentService
     {
         private readonly AppointmentRepository _repo;
-        private readonly AccountRepository accountRepo;
+        private readonly AccountRepository _accountRepository;
         private readonly IMapper _mapper;
 
         static readonly Expression<Func<Appointment, object>>[] appointmentIncludes = new Expression<Func<Appointment, object>>[]
@@ -22,17 +24,23 @@ namespace backend.Services
             o => o.Organiser
         };
 
+        static readonly string[] accountStringIncludes = new string[]
+        {
+            "Appointments.Appointment",
+            "OrganizedAppointments"
+        };
+        
         static readonly Expression<Func<Account, object>>[] accountIncludes = new Expression<Func<Account, object>>[]
         {
             a => a.Appointments,
             o => o.OrganizedAppointments
         };
 
-        public AppointmentService(AppointmentRepository repo, AccountRepository accountRepo, IMapper mapper)
+        public AppointmentService(AppointmentRepository repo, AccountRepository accountRepository, IMapper mapper)
         {
             _mapper = mapper;
             _repo = repo;
-            this.accountRepo = accountRepo;
+            this._accountRepository = accountRepository;
         }
 
         public AppointmentDto GetById(long id)
@@ -70,17 +78,33 @@ namespace backend.Services
             }
             else
             {
-                appointment.AccountsRegistered.Add(aa);
+                Account account = _accountRepository.GetEntitiesWithStringInclude<Account>(a => a.Id == dto.AccountId, accountStringIncludes).FirstOrDefault();
+                if (!IsOverlapping(account, appointment))
+                {
+                    appointment.AccountsRegistered.Add(aa);
 
-                _repo.UpdateEntity(appointment);
-                _repo.Save();
-                return true;
+                    // Add appointment to account.
+                    if (account.Appointments == null)
+                    {
+                        account.Appointments = new List<AppointmentAccount>();
+                    }
+                    account.Appointments.Add(aa);
+
+                    // Save changes.
+                    _repo.UpdateEntity(appointment);
+                    _accountRepository.UpdateEntity(account);
+                    _repo.Save();
+                    _accountRepository.Save();
+
+                    return true;
+                }
+                return false;
             }
         }
 
         public void Create(CreateAppointmentDto dto)
         {
-            Account organiser = accountRepo.GetEntities(x => x.Id == dto.Organiser.Id, includes:accountIncludes).FirstOrDefault();
+            Account organiser = _accountRepository.GetEntities(x => x.Id == dto.Organiser.Id, includes:accountIncludes).FirstOrDefault();
             Appointment appointment = _mapper.Map<Appointment>(dto);
             appointment.Organiser = organiser;
             _repo.InsertEntity(appointment);
@@ -123,6 +147,30 @@ namespace backend.Services
             }
 
             return appointment.AccountsRegistered.Any(a => a.AccountId == registerForAppointmentDto.AccountId);
+        }
+
+        public bool IsOverlapping(Account account, Appointment appointment)
+        {
+            List<AppointmentAccount> appointmentAccounts = account.Appointments.ToList();
+            List<AppointmentDto> appointments = new List<AppointmentDto>();
+
+            foreach (AppointmentAccount app in appointmentAccounts)
+            {
+                appointments.Add(GetById(app.AppointmentId));
+            }
+
+            foreach (AppointmentDto app in appointments)
+            {
+                int result1 = DateTime.Compare(app.BeginTime, appointment.EndTime);
+                int result2 = DateTime.Compare(app.EndTime, appointment.BeginTime);
+
+                if (result1 <= 0 && result2 >= 0) // Check result1 to be earlier than new appointment and result2 to be later than old appointment.
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

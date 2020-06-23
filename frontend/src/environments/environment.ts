@@ -7,3 +7,5 @@ export const environment = {
   environmentName: 'Development',
   apiUrl: 'http://localhost:5000/taxbreak/api'
 };
+
+import 'zone.js/dist/zone-error';

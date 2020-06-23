@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {LoginDto} from '../../models/dtos/login-dto';
 import {AccountService} from '../../services/account.service';
 import {Router} from '@angular/router';
-import {login} from '../../storage/user-storage';
+import {login} from '../../services/user-storage';
 
 @Component({
     selector: 'app-login', templateUrl: './login.component.html', styleUrls: ['./login.component.css']

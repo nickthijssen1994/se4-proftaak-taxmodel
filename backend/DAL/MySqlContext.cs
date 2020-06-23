@@ -32,12 +32,9 @@ namespace backend.DAL
 			modelBuilder.Entity<AppointmentAccount>()
 				.HasOne(x => x.Account).WithMany(y => y.Appointments)
 				.HasForeignKey(y => y.AccountId);
-
-           // modelBuilder.Entity<Account>().HasMany(aa => aa.Appointments).WithOne(a => a.Account);
-
-            modelBuilder.Entity<Account>().HasMany(a => a.OrganizedAppointments).WithOne(o => o.Organiser);
-            modelBuilder.Entity<Appointment>().HasOne(a => a.Organiser).WithMany(o => o.OrganizedAppointments);
-
-        }
+        
+      modelBuilder.Entity<Account>().HasMany(a => a.OrganizedAppointments).WithOne(o => o.Organiser);
+      modelBuilder.Entity<Appointment>().HasOne(a => a.Organiser).WithMany(o => o.OrganizedAppointments);
+     }
 	}
 }

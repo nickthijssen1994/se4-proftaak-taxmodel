@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AppointmentTestService} from '../../services/appointment-test.service';
+import {AppointmentService} from '../../services/appointment.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -27,7 +27,7 @@ export class CreateAppointmentComponent implements OnInit {
 
   date: Date;
   disabled = false;
-  constructor(private router: Router, private route: ActivatedRoute, private appointmentTestService: AppointmentTestService,
+  constructor(private router: Router, private route: ActivatedRoute, private appointmentTestService: AppointmentService,
               private location: Location, private notificationService: MatSnackBar) {
   }
 
@@ -128,7 +128,12 @@ export class CreateAppointmentComponent implements OnInit {
         duration: 5000,
       });
       return false;
-    } else if (this.appointment.description !== '') {
+    } else if (this.date.getTime() < new Date().getTime()) {
+      this.notificationService.open('Date of appointment can`t be in the past', null, {
+        duration: 5000,
+      });
+      return false;
+    }  else if (this.appointment.description !== '') {
       if (this.appointment.description.length <= 4) {
         this.notificationService.open('Description has to be greater than 4 characters', null, {
           duration: 5000,

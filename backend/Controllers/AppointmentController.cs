@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using backend.DAL.Repositories;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
+    [Authorize]
 	[ApiController]
     [Route("taxbreak/api/[controller]")]
     public class AppointmentController : ControllerBase
@@ -56,7 +58,7 @@ namespace backend.Controllers
         [HttpPut("{id}")]
         public ActionResult<UpdateAppointmentDto> PutAppointment(long id, UpdateAppointmentDto appointment)
         {
-            if (!ModelState.IsValid || appointment == null || id != appointment.Id) return BadRequest();
+            if (!ModelState.IsValid || appointment == null || id != appointment.Id || appointment.BeginTime > DateTime.Now) return BadRequest();
 
             _service.Update(appointment);
 

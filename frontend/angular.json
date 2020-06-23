@@ -13,7 +13,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/frontend",
+            "outputPath": "dist/en",
+            "i18nLocale": "en",
+            "deployUrl": "/en/",
+            "baseHref": "/en/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,12 +31,54 @@
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
-            "scripts": ["node_modules/jquery/dist/jquery.min.js",
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
               "node_modules/moment/min/moment.min.js",
-              "node_modules/fullcalendar/dist/fullcalendar.min.js"]
+              "node_modules/fullcalendar/dist/fullcalendar.min.js"
+            ]
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "nl": {
+              "baseHref": "/nl/",
+              "deployUrl": "/nl/",
+              "outputPath": "dist/nl",
+              "i18nFile": "src/locale/messages.nl.xlf",
+              "i18nLocale": "nl"
+            },
+            "production-nl": {
+              "baseHref": "/nl/",
+              "deployUrl": "/nl/",
+              "outputPath": "dist/nl",
+              "i18nFile": "src/locale/messages.nl.xlf",
+              "i18nLocale": "nl",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -71,12 +116,21 @@
           "configurations": {
             "production": {
               "browserTarget": "frontend:build:production"
+            },
+            "nl": {
+              "browserTarget": "frontend:build:nl",
+              "servePath": "/nl/"
+            },
+            "production-nl": {
+              "browserTarget": "frontend:build:production-nl",
+              "servePath": "/nl/"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
+            "outputPath": "src/locale",
             "browserTarget": "frontend:build"
           }
         },

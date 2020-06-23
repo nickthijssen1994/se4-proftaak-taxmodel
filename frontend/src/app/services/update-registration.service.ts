@@ -1,7 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {Appointment} from '../models/appointment';
+import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {UpdateRegistrationDto} from '../models/dtos/update-registration-dto';
 

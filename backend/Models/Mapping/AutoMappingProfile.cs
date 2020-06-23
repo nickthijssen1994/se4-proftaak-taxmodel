@@ -10,7 +10,7 @@ namespace backend.Models.Mapping
 		{
             CreateMap<Appointment, AppointmentDto>()
                 .ForMember(a => a.PeopleCount, pc => pc.MapFrom(a => a.AccountsRegistered.Count));
-
+                
             CreateMap<CreateAppointmentDto, Appointment>();
             CreateMap<UpdateAppointmentDto, Appointment>();
             CreateMap<AppointmentDto, Appointment>();

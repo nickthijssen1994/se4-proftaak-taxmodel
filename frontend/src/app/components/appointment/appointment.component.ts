@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Appointment} from '../../models/appointment';
 import {ActivatedRoute} from '@angular/router';
-import {AppointmentTestService} from '../../services/appointment-test.service';
+import {AppointmentService} from '../../services/appointment.service';
 import {Location} from '@angular/common';
 
 @Component({
@@ -13,7 +13,7 @@ export class AppointmentComponent implements OnInit {
 
   @Input() appointment: Appointment;
 
-  constructor(private route: ActivatedRoute, private appointmentTestService: AppointmentTestService, private location: Location) {
+  constructor(private route: ActivatedRoute, private appointmentTestService: AppointmentService, private location: Location) {
   }
 
   ngOnInit(): void {
