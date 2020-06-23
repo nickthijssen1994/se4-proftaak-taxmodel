@@ -6,7 +6,7 @@ import {Appointment} from '../../models/appointment';
 import {environment} from '../../../environments/environment';
 import {UpdateRegistrationService} from '../../services/update-registration.service';
 import {UpdateRegistrationDto} from '../../models/dtos/update-registration-dto';
-import {getId} from '../../storage/user-storage';
+import {getId} from '../../services/user-storage';
 
 @Component({
     selector: 'app-appointment-view', templateUrl: './appointment-view.component.html', styleUrls: ['./appointment-view.component.css']

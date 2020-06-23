@@ -28,8 +28,8 @@ import {FullCalendarModule} from '@fullcalendar/angular';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {AuthGuard} from './auth.guard';
-import {AuthService} from './authentication.service';
+import {AuthGuard} from './services/auth.guard';
+import {AuthService} from './services/authentication.service';
 import {AccountComponent} from './components/account/account.component';
 import {AppointmentListComponent} from './components/appointment-list/appointment-list.component';
 import {AppointmentViewComponent} from './components/appointment-view/appointment-view.component';
@@ -43,7 +43,7 @@ import {LanguageSelectorComponent} from './components/language-selector/language
 import {LoginComponent} from './components/login/login.component';
 import {OrderComponent} from './components/order/order.component';
 import {RegisterComponent} from './components/register/register.component';
-import {LoginGuard} from './login.guard';
+import {LoginGuard} from './services/login.guard';
 
 registerLocaleData(localeNl, 'nl', localeNlExtra);
 

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {getName, isLoggedIn, logout} from './storage/user-storage';
+import {getName, isLoggedIn, logout} from './services/user-storage';
 
 @Component({
   selector: 'app-root',
