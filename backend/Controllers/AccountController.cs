@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace backend.Controllers
 {
-	//[Authorize]
+	[Authorize]
 	[ApiController]
 	[Route("taxbreak/api/[controller]")]
 	public class AccountController : ControllerBase
@@ -30,6 +30,7 @@ namespace backend.Controllers
 			return service.GetAll().ToList();
 		}
 
+		[AllowAnonymous]
         [HttpGet("{name}")]
         public ActionResult<AccountDto> GetAccountByName(string name)
         {
