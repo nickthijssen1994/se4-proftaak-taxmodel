@@ -18,7 +18,7 @@ namespace backend.Services
         private readonly AccountRepository _accountRepository;
         private readonly IMapper _mapper;
 
-        static Expression<Func<Appointment, object>>[] includes = new Expression<Func<Appointment, object>>[]
+        static readonly Expression<Func<Appointment, object>>[] appointmentIncludes = new Expression<Func<Appointment, object>>[]
         {
             a => a.AccountsRegistered,
             o => o.Organiser
@@ -26,7 +26,14 @@ namespace backend.Services
 
         static readonly string[] accountStringIncludes = new string[]
         {
-            "Appointments.Appointment"
+            "Appointments.Appointment",
+            "OrganizedAppointments"
+        };
+        
+        static readonly Expression<Func<Account, object>>[] accountIncludes = new Expression<Func<Account, object>>[]
+        {
+            a => a.Appointments,
+            o => o.OrganizedAppointments
         };
 
         public AppointmentService(AppointmentRepository repo, AccountRepository accountRepository, IMapper mapper)
@@ -38,13 +45,13 @@ namespace backend.Services
 
         public AppointmentDto GetById(long id)
         {
-            Appointment appointment = _repo.GetEntities(x => x.Id == id, includes).FirstOrDefault();
+            Appointment appointment = _repo.GetEntities(x => x.Id == id, appointmentIncludes).FirstOrDefault();
             return _mapper.Map<AppointmentDto>(appointment);
         }
 
         public IEnumerable<AppointmentDto> GetAll()
         {
-            IEnumerable<Appointment> appointments = _repo.GetEntities(includes: includes);
+            IEnumerable<Appointment> appointments = _repo.GetEntities(includes: appointmentIncludes);
 
             return _mapper.Map<IEnumerable<AppointmentDto>>(appointments);
         }
@@ -60,7 +67,7 @@ namespace backend.Services
 
         public bool RegisterForAppointment(RegisterForAppointmentDto dto)
         {
-            Appointment appointment = _repo.GetEntities(x => x.Id == dto.AppointmentId, includes).FirstOrDefault();
+            Appointment appointment = _repo.GetEntities(x => x.Id == dto.AppointmentId, appointmentIncludes).FirstOrDefault();
 
             AppointmentAccount aa = _mapper.Map<AppointmentAccount>(dto);
 
@@ -97,7 +104,9 @@ namespace backend.Services
 
         public void Create(CreateAppointmentDto dto)
         {
+            Account organiser = _accountRepository.GetEntities(x => x.Id == dto.Organiser.Id, includes:accountIncludes).FirstOrDefault();
             Appointment appointment = _mapper.Map<Appointment>(dto);
+            appointment.Organiser = organiser;
             _repo.InsertEntity(appointment);
             _repo.Save();
         }
@@ -111,14 +120,14 @@ namespace backend.Services
 
         public void Delete(AppointmentDto dto)
         {
-            Appointment appointment = _repo.GetEntities(x => x.Id == dto.Id, includes).FirstOrDefault();
+            Appointment appointment = _repo.GetEntities(x => x.Id == dto.Id, appointmentIncludes).FirstOrDefault();
             _repo.DeleteEntity(appointment);
             _repo.Save();
         }
 
         public void Unsubscribe(RegisterForAppointmentDto dto)
         {
-            Appointment appointment = _repo.GetEntities(x => x.Id == dto.AppointmentId, includes).FirstOrDefault();
+            Appointment appointment = _repo.GetEntities(x => x.Id == dto.AppointmentId, appointmentIncludes).FirstOrDefault();
 
             appointment.AccountsRegistered.Remove(appointment.AccountsRegistered.FirstOrDefault(
                 x => x.AccountId == dto.AccountId && x.AppointmentId == dto.AppointmentId
@@ -130,7 +139,7 @@ namespace backend.Services
 
         public bool IsRegisteredForAppointment(RegisterForAppointmentDto registerForAppointmentDto)
         {
-            Appointment appointment = _repo.GetEntities(a => a.Id == registerForAppointmentDto.AppointmentId, includes).FirstOrDefault();
+            Appointment appointment = _repo.GetEntities(a => a.Id == registerForAppointmentDto.AppointmentId, appointmentIncludes).FirstOrDefault();
 
             if (appointment == null)
             {

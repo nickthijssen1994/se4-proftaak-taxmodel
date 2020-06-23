@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using AutoMapper;
 using backend.DAL.Repositories;
 using backend.Helpers;
@@ -17,17 +18,26 @@ namespace backend.Services
         private readonly IMapper mapper;
         private readonly TokenHandler tokenHandler;
 
-        static readonly string[] stringIncludes = new string[]
+
+        static readonly Expression<Func<Account, object>>[] accountIncludes = new Expression<Func<Account, object>>[]
         {
-            "Appointments.Appointment"
+            a => a.Appointments,
+            a => a.OrganizedAppointments
         };
 
+        static readonly string[] stringIncludes = new string[]
+        {
+            "Appointments.Appointment",
+            "OrganizedAppointments"
+        };
+
+
         public AccountService(AccountRepository repository, IMapper mapper, IOptions<AppSettings> appSettings)
-		{
-			this.mapper = mapper;
-			this.repository = repository;
-			tokenHandler = new TokenHandler(appSettings);
-		}
+        {
+          this.mapper = mapper;
+          this.repository = repository;
+          tokenHandler = new TokenHandler(appSettings);
+        }
 
         public AccountDto GetById(long id)
         {
@@ -35,37 +45,37 @@ namespace backend.Services
             return mapper.Map<AccountDto>(account);
         }
 
-		public AccountDto GetByName(string name)
-		{
-			Account account = repository.GetEntitiesWithStringInclude<Account>(a => a.Name == name, stringIncludes).FirstOrDefault();
-			return mapper.Map<AccountDto>(account);
-		}
-
-		public bool CheckNameExists(string name)
-		{
-			try
-			{
-				Account account = repository.GetEntities<Account>(a => a.Name == name).FirstOrDefault();
-				return true;
-			}
-			catch (InvalidOperationException e)
-			{
-				return false;
-			}
-		}
-
-        public bool CheckEmailExists(string email)
+        public AccountDto GetByName(string name)
         {
-            try
-            {
-                Account account = repository.GetEntities<Account>(a => a.Email == email).Single();
-                return true;
-            }
-            catch (InvalidOperationException e)
-            {
-                return false;
-            }
+          Account account = repository.GetEntitiesWithStringInclude<Account>(a => a.Name == name, stringIncludes).FirstOrDefault();
+          return mapper.Map<AccountDto>(account);
         }
+
+        public bool CheckNameExists(string name)
+        {
+          try
+          {
+            Account account = repository.GetEntities<Account>(a => a.Name == name).FirstOrDefault();
+            return true;
+          }
+          catch (InvalidOperationException e)
+          {
+            return false;
+          }
+        }
+
+            public bool CheckEmailExists(string email)
+            {
+                try
+                {
+                    Account account = repository.GetEntities<Account>(a => a.Email == email).Single();
+                    return true;
+                }
+                catch (InvalidOperationException e)
+                {
+                    return false;
+                }
+            }
 
         public Registration Register(RegisterDto registerDto)
         {

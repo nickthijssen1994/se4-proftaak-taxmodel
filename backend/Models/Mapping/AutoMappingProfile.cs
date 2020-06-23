@@ -8,18 +8,18 @@ namespace backend.Models.Mapping
 	{
 		public AutoMappingProfile()
 		{
-			CreateMap<Appointment, AppointmentDto>()
-				.ForMember(a => a.PeopleCount, pc => pc.MapFrom(a => a.AccountsRegistered.Count));
+            CreateMap<Appointment, AppointmentDto>()
+                .ForMember(a => a.PeopleCount, pc => pc.MapFrom(a => a.AccountsRegistered.Count));
+                
+            CreateMap<CreateAppointmentDto, Appointment>();
+            CreateMap<UpdateAppointmentDto, Appointment>();
+            CreateMap<AppointmentDto, Appointment>();
 
-			CreateMap<CreateAppointmentDto, Appointment>();
-			CreateMap<UpdateAppointmentDto, Appointment>();
-			CreateMap<AppointmentDto, Appointment>();
+            CreateMap<RegisterForAppointmentDto, AppointmentAccount>();
 
-			CreateMap<RegisterForAppointmentDto, AppointmentAccount>();
-
-			CreateMap<Account, AccountDto>();
-			CreateMap<RegisterDto, Account>();
-			CreateMap<LoginDto, Account>();
-		}
+            CreateMap<Account, AccountDto>();
+            CreateMap<RegisterDto, Account>();
+            CreateMap<LoginDto, Account>();
+        }
 	}
 }

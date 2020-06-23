@@ -85,6 +85,7 @@ namespace backend.Controllers
             return appointment;
         }
 
+        [Authorize(Policy = "IsAppointmentOwner")]
         [HttpDelete("{id}")]
         public ActionResult<AppointmentDto> DeleteAppointment(long id)
         {

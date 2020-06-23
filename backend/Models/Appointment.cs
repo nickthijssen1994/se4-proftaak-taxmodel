@@ -14,6 +14,7 @@ namespace backend.Models
 		public string Location { get; set; }
 		public int MaxPeople { get; set; }
 		public int MinPeople { get; set; }
+        [Column("OrganiserId")]
 		public Account Organiser { get; set; }
 		public ICollection<Order> Orders { get; set; }
 		public ICollection<AppointmentAccount> AccountsRegistered { get; set; }
