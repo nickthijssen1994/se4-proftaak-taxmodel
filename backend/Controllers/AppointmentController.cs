@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using backend.DAL.Repositories;
+using System.Threading.Tasks;
+using backend.Helpers;
 using backend.Models.DTOs;
 using backend.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -10,15 +11,19 @@ using Microsoft.AspNetCore.Mvc;
 namespace backend.Controllers
 {
     [Authorize]
-	[ApiController]
+	  [ApiController]
     [Route("taxbreak/api/[controller]")]
     public class AppointmentController : ControllerBase
     {
+        private readonly IAccountService _aService;
+        private readonly MailHelper _mailHelper;
         private readonly IAppointmentService _service;
 
-        public AppointmentController(IAppointmentService service)
+        public AppointmentController(IAppointmentService service, IAccountService aservice, MailHelper mailHelper)
         {
             _service = service;
+            _aService = aservice;
+            _mailHelper = mailHelper;
         }
 
         [HttpGet]
@@ -33,10 +38,7 @@ namespace backend.Controllers
         {
             var appointment = _service.GetById(id);
 
-            if (appointment == null)
-            {
-                return NotFound();
-            }
+            if (appointment == null) return NotFound();
 
             return appointment;
         }
@@ -66,23 +68,37 @@ namespace backend.Controllers
         }
 
         [HttpPost("register")]
-        public ActionResult<RegisterForAppointmentDto> RegisterForAppointment(RegisterForAppointmentDto dto)
+        public async Task<ActionResult<RegisterForAppointmentDto>> RegisterForAppointment(RegisterForAppointmentDto dto)
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            _service.RegisterForAppointment(dto);
+            var appointment = _service.GetById(dto.AppointmentId);
+            var account = _aService.GetById(dto.AccountId);
+            bool success = _service.RegisterForAppointment(dto);
+
+            if (success)
+            {
+                await _mailHelper.SetUpRegisterReminderMail(account.Email, appointment.BeginTime, appointment.Location)
+                    .ConfigureAwait(true);
+            }
 
             return dto;
         }
 
         [HttpPost]
-        public ActionResult<CreateAppointmentDto> PostAppointment(CreateAppointmentDto appointment)
+        public async Task<ActionResult<CreateAppointmentDto>> PostAppointment(CreateAppointmentDto dto)
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            _service.Create(appointment);
+            _service.Create(dto);
 
-            return appointment;
+            var account = _aService.GetById(dto.Organiser);
+            await _mailHelper.SetUpReservationReminderMail(account.Email, dto.BeginTime, dto.Location)
+                .ConfigureAwait(true);
+            
+ 
+            return dto;
+            
         }
 
         [Authorize(Policy = "IsAppointmentOwner")]
@@ -108,17 +124,17 @@ namespace backend.Controllers
         }
 
         [HttpGet("isRegisteredForAppointment/{accountId}/{appointmentId}")]
-		public ActionResult<bool> IsRegisteredForAppointment(long accountId, long appointmentId)
-		{
-			if (!ModelState.IsValid) return BadRequest();
+        public ActionResult<bool> IsRegisteredForAppointment(long accountId, long appointmentId)
+        {
+            if (!ModelState.IsValid) return BadRequest();
 
-            RegisterForAppointmentDto dto = new RegisterForAppointmentDto
+            var dto = new RegisterForAppointmentDto
             {
                 AccountId = accountId,
                 AppointmentId = appointmentId
             };
 
             return _service.IsRegisteredForAppointment(dto);
-		}
+        }
     }
 }

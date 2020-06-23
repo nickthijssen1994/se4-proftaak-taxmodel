@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AppointmentDto} from '../../models/dtos/appointment-dto';
+import {getId} from "../../storage/user-storage";
 
 @Component({
   selector: 'app-create-appointment',
@@ -37,8 +38,7 @@ export class CreateAppointmentComponent implements OnInit {
   onFormSubmit(): void {
     if (this.validate()) {
       this.addTimeToDate();
-      console.log(this.appointment);
-      console.log(this.date);
+      this.appointment.organiser = getId();
       this.appointmentTestService.addAppointment(this.appointment).subscribe();
       this.notificationService.open('Appointment created', null, {
         duration: 5000,

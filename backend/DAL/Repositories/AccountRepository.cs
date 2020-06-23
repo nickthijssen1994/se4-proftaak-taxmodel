@@ -9,7 +9,8 @@ namespace backend.DAL.Repositories
     public class AccountRepository : GenericRepository<Account>
     {
         public AccountRepository(MySqlContext context) : base(context)
-        { }
+        {
+        }
 
         public IEnumerable<AppointmentAccount> GetAppointments(long id)
         {

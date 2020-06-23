@@ -22,3 +22,4 @@ namespace backend.Models
 		public string Type { get; set; }
 	}
 }
+

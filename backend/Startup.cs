@@ -66,6 +66,7 @@ namespace backend
 
 			services.AddTransient<IAccountService, AccountService>();
 			services.AddTransient<AccountRepository>();
+      services.AddSingleton<IMailHelper, MailHelper>();
 			services.AddControllers();
 
 			/*
