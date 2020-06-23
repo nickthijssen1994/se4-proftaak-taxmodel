@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {AppointmentTestService} from '../../services/appointment-test.service';
+import {AppointmentService} from '../../services/appointment.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
@@ -10,7 +10,7 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 export class DeleteAppointmentModalComponent implements OnInit {
   appointmentId: number;
 
-  constructor(private appointmentTestService: AppointmentTestService, @Inject(MAT_DIALOG_DATA) data) {
+  constructor(private appointmentTestService: AppointmentService, @Inject(MAT_DIALOG_DATA) data) {
     this.appointmentId = data.appointmentId;
   }
 

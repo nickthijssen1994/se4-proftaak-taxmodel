@@ -1,5 +1,5 @@
 import {registerLocaleData} from '@angular/common';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import localeNlExtra from '@angular/common/locales/extra/nl';
 import localeNl from '@angular/common/locales/nl';
 import {NgModule} from '@angular/core';
@@ -28,8 +28,8 @@ import {FullCalendarModule} from '@fullcalendar/angular';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {AuthGuard} from './auth.guard';
-import {AuthService} from './authentication.service';
+import {AuthGuard} from './services/auth.guard';
+import {AuthService} from './services/authentication.service';
 import {AccountComponent} from './components/account/account.component';
 import {AppointmentListComponent} from './components/appointment-list/appointment-list.component';
 import {AppointmentViewComponent} from './components/appointment-view/appointment-view.component';
@@ -43,7 +43,8 @@ import {LanguageSelectorComponent} from './components/language-selector/language
 import {LoginComponent} from './components/login/login.component';
 import {OrderComponent} from './components/order/order.component';
 import {RegisterComponent} from './components/register/register.component';
-import {LoginGuard} from './login.guard';
+import {LoginGuard} from './services/login.guard';
+import {AuthenticationInterceptor} from './services/authentication-interceptor';
 
 registerLocaleData(localeNl, 'nl', localeNlExtra);
 
@@ -89,7 +90,11 @@ registerLocaleData(localeNl, 'nl', localeNlExtra);
     FullCalendarModule,
     MatMenuModule,
   ], bootstrap: [AppComponent], providers: [
-    AuthService, LoginGuard, AuthGuard, {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
+    AuthService,
+    LoginGuard,
+    AuthGuard,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
   ]
 })
 export class AppModule {

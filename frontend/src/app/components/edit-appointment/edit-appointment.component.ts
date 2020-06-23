@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Appointment} from '../../models/appointment';
-import {AppointmentTestService} from '../../services/appointment-test.service';
+import {AppointmentService} from '../../services/appointment.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {EditAppointmentDto} from '../../models/dtos/edit-appointment-dto';
@@ -16,7 +16,7 @@ export class EditAppointmentComponent implements OnInit {
   beginTime: any;
   endTime: any;
 
-  constructor(private route: ActivatedRoute, private appointmentTestService: AppointmentTestService,
+  constructor(private route: ActivatedRoute, private appointmentTestService: AppointmentService,
               private location: Location) { }
 
   ngOnInit(): void {
