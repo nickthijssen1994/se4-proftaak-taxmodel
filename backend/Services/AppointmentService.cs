@@ -154,8 +154,6 @@ namespace backend.Services
             {
                 int result1 = DateTime.Compare(app.BeginTime, appointment.EndTime);
                 int result2 = DateTime.Compare(app.EndTime, appointment.BeginTime);
-                int result3 = DateTime.Compare(app.BeginTime, appointment.BeginTime);
-                int result4 = DateTime.Compare(app.EndTime, appointment.EndTime);
 
                 if (result1 <= 0 && result2 >= 0) // Check result1 to be earlier than new appointment and result2 to be later than old appointment.
                 {
