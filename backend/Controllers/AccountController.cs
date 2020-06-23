@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("taxbreak/api/[controller]")]
     public class AccountController : ControllerBase
@@ -20,16 +20,17 @@ namespace backend.Controllers
         //Inject UserService
         public AccountController(IAccountService service)
         {
-            hasher = new PasswordHasher();
-            this.service = service;
+          hasher = new PasswordHasher();
+          this.service = service;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<AccountDto>> GetAccounts()
         {
-            return service.GetAll().ToList();
+          return service.GetAll().ToList();
         }
 
+		    [AllowAnonymous]
         [HttpGet("{name}")]
         public ActionResult<AccountDto> GetAccountByName(string name)
         {

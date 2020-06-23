@@ -8,8 +8,8 @@ import {CalendarComponent} from './components/calendar/calendar.component';
 import {AppointmentViewComponent} from './components/appointment-view/appointment-view.component';
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
-import {AuthGuard} from './auth.guard';
-import {LoginGuard} from './login.guard';
+import {AuthGuard} from './services/auth.guard';
+import {LoginGuard} from './services/login.guard';
 
 const routes: Routes = [
     {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},

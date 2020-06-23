@@ -15,5 +15,7 @@ namespace backend.Services
         JwtToken Login(string name);
         EditAccountDto Update(EditAccountDto editAccountDto);
         void Delete(AccountDto accountDto);
+        IEnumerable<AppointmentAccount> GetAppointments(long id);
     }
 }
+

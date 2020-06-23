@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using backend.Helpers;
 using backend.Models.DTOs;
 using backend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
-    [ApiController]
+    [Authorize]
+	  [ApiController]
     [Route("taxbreak/api/[controller]")]
     public class AppointmentController : ControllerBase
     {
@@ -99,6 +101,7 @@ namespace backend.Controllers
             
         }
 
+        [Authorize(Policy = "IsAppointmentOwner")]
         [HttpDelete("{id}")]
         public ActionResult<AppointmentDto> DeleteAppointment(long id)
         {

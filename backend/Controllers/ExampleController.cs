@@ -2,15 +2,18 @@ using System.Collections.Generic;
 using System.Linq;
 using backend.DAL.Repositories;
 using backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
-    [ApiController]
-    [Route("taxbreak/api/[controller]")]
-    public class ExampleController : ControllerBase
-    {
-        private readonly ExampleRepository _repo;
+
+	[Authorize]
+	[ApiController]
+	[Route("taxbreak/api/[controller]")]
+	public class ExampleController : ControllerBase
+	{
+		private readonly ExampleRepository _repo;
 
         public ExampleController(ExampleRepository repo)
         {
@@ -45,13 +48,13 @@ namespace backend.Controllers
             return example;
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult<Example> Delete(int id)
-        {
-            var example = _repo.GetEntityById(id);
-            _repo.DeleteEntity(example);
-            _repo.Save();
-            return example;
-        }
-    }
+		[HttpDelete("{id}")]
+		public ActionResult<Example> Delete(int id)
+		{
+			var example = _repo.GetEntityById(id);
+			_repo.DeleteEntity(example);
+			_repo.Save();
+			return example;
+		}
+	}
 }

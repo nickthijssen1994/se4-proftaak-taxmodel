@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AppointmentListComponent } from './appointment-list.component';
+import {AppointmentListComponent} from './appointment-list.component';
 
 describe('AppointmentListComponent', () => {
   let component: AppointmentListComponent;

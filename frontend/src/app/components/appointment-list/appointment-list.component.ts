@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Appointment} from '../../models/appointment';
-import {AppointmentTestService} from '../../services/appointment-test.service';
+import {AppointmentService} from '../../services/appointment.service';
 import {DeleteAppointmentModalComponent} from '../delete-appointment-modal/delete-appointment-modal.component';
 import {MatDialog} from '@angular/material/dialog';
 import {HttpClient} from '@angular/common/http';
@@ -16,7 +16,7 @@ export class AppointmentListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'title', 'location', 'description', 'delete'];
   appointments: Appointment[] = [];
 
-  constructor(private appointmentTestService: AppointmentTestService, private http: HttpClient, public matDialog: MatDialog) {
+  constructor(private appointmentTestService: AppointmentService, private http: HttpClient, public matDialog: MatDialog) {
   }
 
   ngOnInit(): void {
