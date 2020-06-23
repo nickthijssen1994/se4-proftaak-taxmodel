@@ -8,5 +8,6 @@ namespace backend.Helpers
     public interface IMailHelper
     {
         Task SetUpRegisterReminderMail(string reciever, DateTime? appointmentDate, string location);
+        Task SetUpReservationReminderMail(string organiser, DateTime? appointmentDate, string location);
     }
 }

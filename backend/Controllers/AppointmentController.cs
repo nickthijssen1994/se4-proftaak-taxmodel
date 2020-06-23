@@ -74,22 +74,29 @@ namespace backend.Controllers
             var account = _aService.GetById(dto.AccountId);
             bool success = _service.RegisterForAppointment(dto);
 
-            if (success == false)
+            if (success)
             {
-                await _mailHelper.SetUpRegisterReminderMail(account.Email, appointment.BeginTime, appointment.Location).ConfigureAwait(true);
+                await _mailHelper.SetUpRegisterReminderMail(account.Email, appointment.BeginTime, appointment.Location)
+                    .ConfigureAwait(true);
             }
 
             return dto;
         }
 
         [HttpPost]
-        public ActionResult<CreateAppointmentDto> PostAppointment(CreateAppointmentDto appointment)
+        public async Task<ActionResult<CreateAppointmentDto>> PostAppointment(CreateAppointmentDto dto)
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            _service.Create(appointment);
+            _service.Create(dto);
 
-            return appointment;
+            var account = _aService.GetById(dto.Organiser);
+            await _mailHelper.SetUpReservationReminderMail(account.Email, dto.BeginTime, dto.Location)
+                .ConfigureAwait(true);
+            
+ 
+            return dto;
+            
         }
 
         [HttpDelete("{id}")]

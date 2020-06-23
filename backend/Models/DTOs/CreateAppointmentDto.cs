@@ -20,7 +20,7 @@ namespace backend.Models.DTOs
         [Required] public int MinPeople { get; set; }
         [Required] public int MaxPeople { get; set; }
 
-        // public long Organiser { get; set; }
+         public long Organiser { get; set; }
 
         [MaxLength(500, ErrorMessage = "Description must be 500 characters or less.")]
         public string Description { get; set; }

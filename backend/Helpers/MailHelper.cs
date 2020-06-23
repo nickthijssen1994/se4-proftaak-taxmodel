@@ -14,15 +14,15 @@ namespace backend.Helpers
         {
             config = configuration;
         }
-        public async Task SetUpRegisterReminderMail(string reciever, DateTime? appointmentDate, string location)
+        public async Task SetUpRegisterReminderMail(string recieverEmail, DateTime? appointmentDate, string location)
         {
             int minutesBeforeMailSent = 59;
             string apiKey = config.GetValue<string>("SENDGRID_APIKEY");
-            DateTimeOffset dateTimeOff = new DateTimeOffset(DateTime.Now).Subtract(new TimeSpan(0, minutesBeforeMailSent, 0));
+            DateTimeOffset dateTimeOff = new DateTimeOffset(appointmentDate.Value).Subtract(TimeSpan.FromMinutes(minutesBeforeMailSent));
             long timeToSend = dateTimeOff.ToUnixTimeSeconds();
             
             SendGridClient client = new SendGridClient(apiKey);
-            var msg = new SendGridMessage
+            SendGridMessage msg = new SendGridMessage
             {
                 From = new EmailAddress("TaxModel@noreply.com", "TaxModel"),
                 Subject = "Reminder: appointment at" + location,
@@ -30,20 +30,20 @@ namespace backend.Helpers
                                    appointmentDate,
                 SendAt = timeToSend
             };
-            msg.AddTo(new EmailAddress(reciever));
+            msg.AddTo(new EmailAddress(recieverEmail));
 
             var response = await client.SendEmailAsync(msg);
         }
 
-        public async Task SetUpReservationReminderMail(string reciever, DateTime? appointmentDate, string location)
+        public async Task SetUpReservationReminderMail(string organiserEmail, DateTime? appointmentDate, string location)
         {
             int daysBeforeMailSent = 1;
             string apiKey = config.GetValue<string>("SENDGRID_APIKEY");
-            DateTimeOffset ef = new DateTimeOffset(appointmentDate.Value).Subtract(new TimeSpan(1, 1, 1));
+            DateTimeOffset ef = new DateTimeOffset(appointmentDate.Value).Subtract(TimeSpan.FromDays(daysBeforeMailSent));
             long timeToSend = ef.ToUnixTimeSeconds();
 
             SendGridClient client = new SendGridClient(apiKey);
-            var msg = new SendGridMessage
+            SendGridMessage msg = new SendGridMessage
             {
                 From = new EmailAddress("TaxModel@noreply.com", "TaxModel"),
                 Subject = "Reminder: appointment at" + location,
@@ -51,7 +51,7 @@ namespace backend.Helpers
                                    appointmentDate,
                 SendAt = timeToSend
             };
-            msg.AddTo(new EmailAddress(reciever));
+            msg.AddTo(new EmailAddress(organiserEmail));
 
             var response = await client.SendEmailAsync(msg);
         }
