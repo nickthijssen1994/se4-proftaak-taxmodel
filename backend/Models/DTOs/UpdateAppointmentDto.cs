@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace backend.Models.DTOs
 {
-    public class UpdateAppointmentDto
+    public class UpdateAppointmentDto : IValidatableObject
     {
         public long Id { get; set; }
 
@@ -32,5 +32,45 @@ namespace backend.Models.DTOs
         public string Description { get; set; }
 
         public string Type { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            List<ValidationResult> results = new List<ValidationResult>();
+
+            int beginHour = BeginTime.Value.Hour;
+            int endHour = EndTime.Value.Hour;
+
+            if (beginHour < 12 || beginHour > 17)
+            {
+                results.Add(new ValidationResult("Begin time must be between 12:00 and 17:00", new[] { "BeginTime" }));
+            }
+            if (endHour > 17)
+            {
+                results.Add(new ValidationResult("End time must be between 12:00 and 17:00", new[] { "EndTime" }));
+            }
+
+            if (BeginTime < DateTime.Now)
+            {
+                results.Add(new ValidationResult("Selected time must be in the future", new[] { "BeginTime" }));
+            }
+
+            if (EndTime <= BeginTime)
+            {
+                results.Add(new ValidationResult("End time must be greater that start time", new[] { "EndTime" }));
+            }
+
+            TimeSpan differenceCurrentAndBegin = BeginTime.Value.Subtract(DateTime.Now);
+
+            if (differenceCurrentAndBegin.Days <= 0 && differenceCurrentAndBegin.TotalMinutes <= 60)
+            {
+                results.Add(new ValidationResult("The current time must be farther than an hour away from the begin time", new[] { "BeginTime" }));
+            }
+            if (differenceCurrentAndBegin.TotalDays > 60)
+            {
+                results.Add(new ValidationResult("The time must be less than 60 days from the now", new[] { "BeginTime" }));
+            }
+
+            return results;
+        }
     }
 }

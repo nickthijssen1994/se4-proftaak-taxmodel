@@ -88,7 +88,7 @@ namespace backend.Controllers
         [HttpPut("{id}")]
         public ActionResult<UpdateAppointmentDto> PutAppointment(long id, UpdateAppointmentDto appointment)
         {
-            if (!ModelState.IsValid || id != appointment.Id || appointment.BeginTime > DateTime.Now)
+            if (!ModelState.IsValid || id != appointment.Id)
             {
                 return BadRequest();
             }
