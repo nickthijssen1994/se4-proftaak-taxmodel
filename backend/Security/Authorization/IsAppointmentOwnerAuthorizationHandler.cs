@@ -30,7 +30,7 @@ namespace backend.Security.Authorization
 
             string name = context.User.FindFirst(c => c.Type == ClaimTypes.Name).Value;
 
-            if (name != null)
+            if (name == null)
             {
                 context.Fail();
             }
