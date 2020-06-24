@@ -40,7 +40,7 @@ namespace backend.Services
         {
             _mapper = mapper;
             _repo = repo;
-            this._accountRepository = accountRepository;
+            _accountRepository = accountRepository;
         }
 
         public AppointmentDto GetById(long id)
@@ -73,6 +73,7 @@ namespace backend.Services
 
             if (IsRegisteredForAppointment(dto) || appointment == null ||
                 appointment.AccountsRegistered.Count + 1 > appointment.MaxPeople)
+            {
                 return false;
             }
             else
@@ -103,7 +104,7 @@ namespace backend.Services
 
         public void Create(CreateAppointmentDto dto)
         {
-            Account organiser = _accountRepository.GetEntities(x => x.Id == dto.Organiser.Id, includes:accountIncludes).FirstOrDefault();
+            Account organiser = _accountRepository.GetEntities(x => x.Id == dto.Organiser, includes:accountIncludes).FirstOrDefault();
             Appointment appointment = _mapper.Map<Appointment>(dto);
             appointment.Organiser = organiser;
             _repo.InsertEntity(appointment);

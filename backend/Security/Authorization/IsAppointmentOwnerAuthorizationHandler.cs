@@ -1,4 +1,6 @@
-﻿using backend.Services;
+﻿using backend.Models;
+using backend.Models.DTOs.Accounts;
+using backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -34,8 +36,9 @@ namespace backend.Security.Authorization
             }
 
             long appointmentId = Convert.ToInt64(httpContext.HttpContext.Request.RouteValues["id"]);
+            AccountDto organiser = service.GetById(appointmentId).Organiser;
 
-            if(service.GetById(appointmentId).Organiser.Name != name)
+            if (organiser == null || organiser.Name != name)
             {
                 context.Fail();
             }

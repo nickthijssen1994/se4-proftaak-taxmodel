@@ -10,16 +10,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
-    [Authorize]
-	  [ApiController]
+    //[Authorize]
+	[ApiController]
     [Route("taxbreak/api/[controller]")]
     public class AppointmentController : ControllerBase
     {
         private readonly IAccountService _aService;
-        private readonly MailHelper _mailHelper;
+        private readonly IMailHelper _mailHelper;
         private readonly IAppointmentService _service;
 
-        public AppointmentController(IAppointmentService service, IAccountService aservice, MailHelper mailHelper)
+        public AppointmentController(IAppointmentService service, IAccountService aservice, IMailHelper mailHelper)
         {
             _service = service;
             _aService = aservice;

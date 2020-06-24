@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AppointmentDto} from '../../models/dtos/appointment-dto';
-import {getId} from "../../storage/user-storage";
+import {getId} from '../../services/user-storage';
 
 @Component({
   selector: 'app-create-appointment',
