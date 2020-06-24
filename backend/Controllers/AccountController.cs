@@ -30,7 +30,7 @@ namespace backend.Controllers
           return service.GetAll().ToList();
         }
 
-		    [AllowAnonymous]
+		[AllowAnonymous]
         [HttpGet("{name}")]
         public ActionResult<AccountDto> GetAccountByName(string name)
         {

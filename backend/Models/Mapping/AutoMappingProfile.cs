@@ -22,6 +22,8 @@ namespace backend.Models.Mapping
 
             CreateMap<RegisterForAppointmentDto, AppointmentAccount>();
 
+            CreateMap<OrganiserDto, Account>();
+            CreateMap<Account, OrganiserDto>();
             CreateMap<Account, AccountDto>();
             CreateMap<RegisterDto, Account>();
             CreateMap<LoginDto, Account>();

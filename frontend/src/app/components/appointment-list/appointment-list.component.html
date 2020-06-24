@@ -37,7 +37,7 @@
   </table>
 </mat-card>
 
-<mat-card *ngIf="appointments.length" class="table-container">
+<mat-card *ngIf="upcomingAppointments.length" class="table-container">
   <h2 i18n="@@upcomingAppointmentsTitle" mat-dialog-title class="appointments-header">Your upcoming appointments:</h2>
 
   <table [dataSource]="upcomingAppointments" mat-table>

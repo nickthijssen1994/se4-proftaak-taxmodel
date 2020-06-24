@@ -9,7 +9,6 @@ using backend.Models.DTOs;
 
 namespace backend.Services
 {
-    //TODO: Look at automatically loading the foreign properties instead of using the convoluted include
     public class AppointmentService : IAppointmentService
     {
         private readonly AppointmentRepository _repo;
@@ -26,12 +25,6 @@ namespace backend.Services
         {
             "Appointments.Appointment",
             "OrganizedAppointments"
-        };
-        
-        static readonly Expression<Func<Account, object>>[] accountIncludes = new Expression<Func<Account, object>>[]
-        {
-            a => a.Appointments,
-            o => o.OrganizedAppointments
         };
 
         public AppointmentService(AppointmentRepository repo, AccountRepository accountRepository, IMapper mapper)
@@ -102,9 +95,10 @@ namespace backend.Services
 
         public void Create(CreateAppointmentDto dto)
         {
-            Account organiser = _accountRepository.GetEntities(x => x.Id == dto.Organiser, includes:accountIncludes).FirstOrDefault();
+            Account organiser = _accountRepository.GetEntitiesWithStringInclude<Account>(x => x.Id == dto.Organiser, includes:accountStringIncludes).FirstOrDefault();
             Appointment appointment = _mapper.Map<Appointment>(dto);
             appointment.Organiser = organiser;
+
             _repo.InsertEntity(appointment);
             _repo.Save();
         }

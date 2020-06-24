@@ -15,7 +15,7 @@ namespace backend.Models.DTOs
         public int MaxPeople { get; set; }
         public int MinPeople { get; set; }
         public int PeopleCount { get; set; }
-        public AccountDto Organiser { get; set; }
+        public OrganiserDto Organiser { get; set; }
         public ICollection<Order> Orders { get; }
         public string Description { get; set; }
     }
