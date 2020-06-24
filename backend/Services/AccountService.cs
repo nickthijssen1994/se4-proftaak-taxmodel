@@ -58,6 +58,10 @@ namespace backend.Services
           try
           {
             Account account = repository.GetEntities<Account>(a => a.Name == name).FirstOrDefault();
+            if(account == null)
+            {
+                return false;
+            }
             return true;
           }
           catch (InvalidOperationException e)
