@@ -4,6 +4,7 @@ import {AppointmentService} from '../../services/appointment.service';
 import {DeleteAppointmentModalComponent} from '../delete-appointment-modal/delete-appointment-modal.component';
 import {MatDialog} from '@angular/material/dialog';
 import {HttpClient} from '@angular/common/http';
+import {getId} from "../../services/user-storage";
 
 @Component({
   selector: 'app-appointment-list',
@@ -14,7 +15,9 @@ import {HttpClient} from '@angular/common/http';
 export class AppointmentListComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'title', 'location', 'description', 'delete'];
+  upcomingDisplayedColumns: string[] = ['title', 'location', 'description'];
   appointments: Appointment[] = [];
+  upcomingAppointments: Appointment[] = [];
 
   constructor(private appointmentTestService: AppointmentService, private http: HttpClient, public matDialog: MatDialog) {
   }
@@ -24,8 +27,13 @@ export class AppointmentListComponent implements OnInit {
   }
 
   getAppointments(): void {
-    this.appointmentTestService.getAppointments().subscribe(appointments => {
+    this.appointmentTestService.getAppointmentsOrganizedByUser(getId()).subscribe(appointments => {
       this.appointments = appointments;
+    });
+
+    this.appointmentTestService.getUserUpcomingAppointments(getId()).subscribe(appointments => {
+      console.log(appointments);
+      this.upcomingAppointments = appointments;
     });
   }
 

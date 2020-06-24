@@ -12,3 +12,7 @@
 table {
     width: 100%;
 }
+
+.table-header{
+  margin-top: 15px;
+}

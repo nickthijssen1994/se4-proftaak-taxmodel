@@ -6,8 +6,6 @@ using AutoMapper;
 using backend.DAL.Repositories;
 using backend.Models;
 using backend.Models.DTOs;
-using Castle.Core.Internal;
-using MySqlX.XDevAPI.Common;
 
 namespace backend.Services
 {
@@ -168,6 +166,29 @@ namespace backend.Services
             }
 
             return false;
+        }
+
+        public IEnumerable<AppointmentDto> GetUserRegisteredFor(long userId)
+        {
+            Account account = _accountRepository.GetEntitiesWithStringInclude<Account>(a => a.Id == userId, includes: accountStringIncludes).FirstOrDefault();
+
+
+            var app = account.Appointments.Where(a => DateTime.Compare(a.Appointment.BeginTime, DateTime.Now) > 0);
+
+            var appointments = app.Select(b => b.Appointment);
+            return _mapper.Map<IEnumerable<AppointmentDto>>(appointments);
+        }
+
+        public IEnumerable<AppointmentDto> GetUserOrganized(long userId)
+        {
+            Account account = _accountRepository.GetEntitiesWithStringInclude<Account>(a => a.Id == userId, includes: accountStringIncludes).FirstOrDefault();
+
+            if (account != null)
+            {
+                return _mapper.Map<IEnumerable<AppointmentDto>>(account.OrganizedAppointments);
+            }
+
+            return null;
         }
     }
 }
