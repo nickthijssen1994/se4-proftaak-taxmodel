@@ -84,7 +84,7 @@ namespace backend.Controllers
         }
 
 
-        //[Authorize(Policy = "IsAppointmentOwner")]
+        [Authorize(Policy = "IsAppointmentOwner")]
         [HttpPut("{id}")]
         public ActionResult<UpdateAppointmentDto> PutAppointment(long id, UpdateAppointmentDto appointment)
         {
@@ -132,7 +132,7 @@ namespace backend.Controllers
             
         }
 
-        //[Authorize(Policy = "IsAppointmentOwner")]
+        [Authorize(Policy = "IsAppointmentOwner")]
         [HttpDelete("{id}")]
         public ActionResult<AppointmentDto> DeleteAppointment(long id)
         {
