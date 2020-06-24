@@ -4,6 +4,12 @@
 
 .sidenav-container {
   height: 100%;
+  background-image: url("../assets/background.png");
+  background-color: #7f88ba;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-blend-mode: overlay;
 }
 
 .sidenav .mat-toolbar {
