@@ -1,5 +1,12 @@
 .table-container {
-    overflow: auto;
+  overflow: auto;
+  background-color: #ffffff;
+  padding-top: 20px;
+}
+
+.appointments-header{
+  text-align: center;
+  font-weight: bold;
 }
 
 table {

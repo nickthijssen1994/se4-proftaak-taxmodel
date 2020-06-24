@@ -1,5 +1,5 @@
 <div *ngIf="appointments.length" class="table-container">
-  <h2 i18n="@@appointmentsTitle">Appointments</h2>
+  <h2 mat-dialog-title class="appointments-header" i18n="@@appointmentsTitle">Appointments</h2>
 
   <table [dataSource]="appointments" mat-table>
     <ng-container matColumnDef="id">
