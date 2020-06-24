@@ -11,8 +11,8 @@ namespace backend.Models
         public string Name { get; set; }
         public string Password { get; set; }
         public ICollection<Appointment> OrganizedAppointments { get; set; }
-		    public ICollection<AppointmentAccount> Appointments { get; set; }
-		    public ICollection<Order> Orders { get; }
+	    public ICollection<AppointmentAccount> Appointments { get; set; }
+		public ICollection<Order> Orders { get; }
 	  }
 }
 

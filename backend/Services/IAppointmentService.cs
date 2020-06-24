@@ -7,6 +7,8 @@ namespace backend.Services
     {
         AppointmentDto GetById(long id);
         IEnumerable<AppointmentDto> GetAll();
+        IEnumerable<AppointmentDto> GetUserRegisteredFor(long userId);
+        IEnumerable<AppointmentDto> GetUserOrganized(long userId);
         IEnumerable<AppointmentDto> GetWithinTimeSpan(AppointmentsWithinTimespanDto dto);
         bool IsRegisteredForAppointment(RegisterForAppointmentDto dto);
         bool RegisterForAppointment(RegisterForAppointmentDto dto);

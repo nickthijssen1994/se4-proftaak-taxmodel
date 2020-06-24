@@ -36,6 +36,7 @@ namespace backend.Security.Authorization
             }
 
             long appointmentId = Convert.ToInt64(httpContext.HttpContext.Request.RouteValues["id"]);
+ 
             AccountDto organiser = service.GetById(appointmentId).Organiser;
 
             if (organiser == null || organiser.Name != name)
@@ -47,7 +48,7 @@ namespace backend.Security.Authorization
                 context.Succeed(requirement);
             }
 
-            return Task.FromResult(0);
+            return Task.CompletedTask;
         }
     }
 }

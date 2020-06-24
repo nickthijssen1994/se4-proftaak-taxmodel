@@ -1,5 +1,5 @@
 <div *ngIf="appointments.length" class="table-container">
-  <h2 i18n="@@appointmentsTitle">Appointments</h2>
+  <h2 i18n="@@appointmentsTitle">Your organized appointments:</h2>
 
   <table [dataSource]="appointments" mat-table>
     <ng-container matColumnDef="id">
@@ -33,5 +33,33 @@
 
     <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
     <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  </table>
+</div>
+<div *ngIf="appointments.length" class="table-container">
+  <h2 i18n="@@appointmentsTitle" class="table-header">Your upcoming appointments:</h2>
+
+  <table [dataSource]="upcomingAppointments" mat-table>
+    <ng-container matColumnDef="id">
+      <th *matHeaderCellDef mat-header-cell width="5%" i18n="@@idLabel">ID</th>
+      <td *matCellDef="let appointment" mat-cell> {{appointment.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th *matHeaderCellDef mat-header-cell width="20%" i18n="@@titleLabel">Title</th>
+      <td *matCellDef="let appointment" mat-cell>{{appointment.title}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="location">
+      <th *matHeaderCellDef mat-header-cell i18n="@@locationLabel">Location</th>
+      <td *matCellDef="let appointment" mat-cell> {{appointment.location}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th *matHeaderCellDef mat-header-cell i18n="@@descriptionLabel">Description</th>
+      <td *matCellDef="let appointment" mat-cell> {{appointment.description }} </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="upcomingDisplayedColumns; sticky: true" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: upcomingDisplayedColumns;" mat-row></tr>
   </table>
 </div>

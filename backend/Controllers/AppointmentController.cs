@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
-    //[Authorize]
+    [Authorize]
 	[ApiController]
     [Route("taxbreak/api/[controller]")]
     public class AppointmentController : ControllerBase
@@ -43,6 +43,33 @@ namespace backend.Controllers
             return appointment;
         }
 
+        [HttpGet("upcoming/{userId}")]
+        public ActionResult<IEnumerable<AppointmentDto>> GetUsersUpcomingAppointments(long userId)
+        {
+            var appointments = _service.GetUserRegisteredFor(userId).ToList();
+
+            if (appointments == null)
+            {
+                return NotFound();
+            }
+
+            return appointments;
+        }
+
+        [HttpGet("organized/{userId}")]
+        public ActionResult<IEnumerable<AppointmentDto>> GetAppointmentsUserOrganized(long userId)
+        {
+            var appointments = _service.GetUserOrganized(userId).ToList();
+
+            if (appointments == null)
+            {
+                return NotFound();
+            }
+
+            return appointments;
+        }
+
+
 
         [HttpGet("getInTimeSpan")]
         public ActionResult<IEnumerable<AppointmentDto>> GetAppointmentsInTimeSpan(AppointmentsWithinTimespanDto dto)
@@ -57,10 +84,14 @@ namespace backend.Controllers
         }
 
 
+        //[Authorize(Policy = "IsAppointmentOwner")]
         [HttpPut("{id}")]
         public ActionResult<UpdateAppointmentDto> PutAppointment(long id, UpdateAppointmentDto appointment)
         {
-            if (!ModelState.IsValid || appointment == null || id != appointment.Id || appointment.BeginTime > DateTime.Now) return BadRequest();
+            if (!ModelState.IsValid || id != appointment.Id || appointment.BeginTime > DateTime.Now)
+            {
+                return BadRequest();
+            }
 
             _service.Update(appointment);
 
@@ -101,7 +132,7 @@ namespace backend.Controllers
             
         }
 
-        [Authorize(Policy = "IsAppointmentOwner")]
+        //[Authorize(Policy = "IsAppointmentOwner")]
         [HttpDelete("{id}")]
         public ActionResult<AppointmentDto> DeleteAppointment(long id)
         {

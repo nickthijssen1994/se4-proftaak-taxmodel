@@ -66,7 +66,7 @@ namespace backend
 
 			services.AddTransient<IAccountService, AccountService>();
 			services.AddTransient<AccountRepository>();
-      services.AddSingleton<IMailHelper, MailHelper>();
+            services.AddSingleton<IMailHelper, MailHelper>();
 			services.AddControllers();
 
 			/*
@@ -89,7 +89,7 @@ namespace backend
                     //   c.Type == "Name"));
                 });
             });
-			services.AddAuthentication(x =>
+            services.AddAuthentication(x =>
 				{
 					x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
 					x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;

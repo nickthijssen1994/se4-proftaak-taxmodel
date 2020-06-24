@@ -41,12 +41,14 @@ namespace backend.Services
 
         public AccountDto GetById(long id)
         {
+            
             Account account = repository.GetEntityById(id);
             return mapper.Map<AccountDto>(account);
         }
 
         public AccountDto GetByName(string name)
         {
+
           Account account = repository.GetEntitiesWithStringInclude<Account>(a => a.Name == name, stringIncludes).FirstOrDefault();
           return mapper.Map<AccountDto>(account);
         }
@@ -108,6 +110,9 @@ namespace backend.Services
 
         public IEnumerable<AccountDto> GetAll()
         {
+            //var ac = repository.GetEntitiesWithStringInclude<Account>(a => a.Id == (long)33, stringIncludes).FirstOrDefault();
+            //repository.DeleteEntity(ac);
+            //repository.Save();
             IEnumerable<Account> accounts = repository.GetEntities<Account>();
             return mapper.Map<IEnumerable<AccountDto>>(accounts);
         }
