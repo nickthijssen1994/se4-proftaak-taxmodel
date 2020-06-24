@@ -1,4 +1,4 @@
-<div class="create-appointment-page-container">
+<mat-card class="create-appointment-page-container">
   <form (ngSubmit)="onFormSubmit()" class="mat-custom-container">
     <div>
       <h2 mat-dialog-title class="create-appointment-header" i18n="@@createAppointmentTitle">Create Appointment</h2>
@@ -15,14 +15,15 @@
              required
              style="height: 3%" type="input">
     </mat-form-field>
-    <div class="time-picker-container">
+
       <mat-form-field>
-        <mat-label i18n="@@dateLabel">Date</mat-label>
+        <mat-label for="date" i18n="@@dateLabel">Date</mat-label>
         <input matInput [matDatepicker]="picker" [ngModel]="date" name="date" (dateChange)="onChangeDate($event)">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
+    <div class="time-picker-container">
       <mat-label class="time-picker-text" i18n="@@startTimeLabel">Start Time</mat-label>
       <div class="ngx-material-timepicker-example__form-group">
         <input class="time-picker-input" placeholder="12:00" [format]="24" aria-label="24hr format" required
@@ -60,4 +61,4 @@
 
     <button id="submit-button" class="submit-button" mat-raised-button type="submit" i18n="@@buttonSubmit">Submit</button>
   </form>
-</div>
+</mat-card>

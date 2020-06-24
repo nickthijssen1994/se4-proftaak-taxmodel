@@ -1,4 +1,4 @@
-<div *ngIf="appointments.length" class="table-container">
+<mat-card *ngIf="appointments.length" class="table-container">
 
   <h2 mat-dialog-title class="appointments-header" i18n="@@organizedAppointmentsTitle">Your organized appointments:</h2>
 
@@ -35,9 +35,9 @@
     <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
     <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
   </table>
-</div>
+</mat-card>
 
-<div *ngIf="appointments.length" class="table-container">
+<mat-card *ngIf="appointments.length" class="table-container">
   <h2 i18n="@@upcomingAppointmentsTitle" mat-dialog-title class="appointments-header">Your upcoming appointments:</h2>
 
   <table [dataSource]="upcomingAppointments" mat-table>
@@ -64,4 +64,4 @@
     <tr *matHeaderRowDef="upcomingDisplayedColumns; sticky: true" mat-header-row></tr>
     <tr *matRowDef="let row; columns: upcomingDisplayedColumns;" mat-row></tr>
   </table>
-</div>
+</mat-card>
