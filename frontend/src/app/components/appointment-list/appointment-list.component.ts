@@ -15,7 +15,7 @@ import {getId} from "../../services/user-storage";
 export class AppointmentListComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'title', 'location', 'description', 'delete'];
-  upcomingDisplayedColumns: string[] = ['title', 'location', 'description'];
+  upcomingDisplayedColumns: string[] = ['id', 'title', 'location', 'description'];
   appointments: Appointment[] = [];
   upcomingAppointments: Appointment[] = [];
 

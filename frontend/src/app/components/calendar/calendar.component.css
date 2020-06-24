@@ -1,7 +1,11 @@
 .dashboard-grid-tile {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+}
+
+.calendar {
+  background-color: #ffffff;
 }

@@ -1,6 +1,6 @@
 <div *ngIf="appointments.length" class="table-container">
 
-  <h2 mat-dialog-title class="appointments-header" i18n="@@appointmentsTitle">Your organized appointments:</h2>
+  <h2 mat-dialog-title class="appointments-header" i18n="@@organizedAppointmentsTitle">Your organized appointments:</h2>
 
   <table [dataSource]="appointments" mat-table>
     <ng-container matColumnDef="id">
@@ -36,8 +36,9 @@
     <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
   </table>
 </div>
+
 <div *ngIf="appointments.length" class="table-container">
-  <h2 i18n="@@appointmentsTitle" class="table-header">Your upcoming appointments:</h2>
+  <h2 i18n="@@upcomingAppointmentsTitle" mat-dialog-title class="appointments-header">Your upcoming appointments:</h2>
 
   <table [dataSource]="upcomingAppointments" mat-table>
     <ng-container matColumnDef="id">

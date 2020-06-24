@@ -13,8 +13,6 @@ import {LoginGuard} from './services/login.guard';
 
 const routes: Routes = [
     {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-    {path: 'appointments', component: AppointmentListComponent, canActivate: [AuthGuard]},
-    {path: 'create', component: CreateAppointmentComponent, canActivate: [AuthGuard]},
     {path: 'detail/:id', component: EditAppointmentComponent, canActivate: [AuthGuard]},
     {path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard]},
     {path: 'show', component: AppointmentViewComponent, canActivate: [AuthGuard]},
