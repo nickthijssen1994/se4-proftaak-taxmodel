@@ -45,6 +45,7 @@ import {OrderComponent} from './components/order/order.component';
 import {RegisterComponent} from './components/register/register.component';
 import {LoginGuard} from './services/login.guard';
 import {AuthenticationInterceptor} from './services/authentication-interceptor';
+import { HomeComponent } from './components/home/home.component';
 
 registerLocaleData(localeNl, 'nl', localeNlExtra);
 
@@ -63,7 +64,8 @@ registerLocaleData(localeNl, 'nl', localeNlExtra);
     LoginComponent,
     RegisterComponent,
     DeleteAppointmentModalComponent,
-    LanguageSelectorComponent
+    LanguageSelectorComponent,
+    HomeComponent
   ], imports: [
     BrowserModule,
     BrowserAnimationsModule,
